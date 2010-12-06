@@ -1,0 +1,51 @@
+@charset "UTF-8";
+/**
+ * @author Michael Haschke, http://eye48.com/
+ *
+ */
+
+@media screen, projection
+{
+
+.to-from
+{
+    padding-left:20px;
+    background-repeat:no-repeat;
+    background-position:left top;
+    min-height:16px;
+    background-image:url(./komodo-icon-extensions/unknown_16.png);
+}
+
+.big-icons .to-from
+{
+    padding-left:36px;
+    background-repeat:no-repeat;
+    background-position:left top;
+    min-height:32px;
+    background-image:url(./../../libraries/komodo/rss_32.png);
+}
+
+.to-facebook_com, .from-facebook_com { background-image:url(./../../libraries/komodo/facebook_16.png); }
+
+.to-delicious_com, .from-delicious_com { background-image:url(./../../libraries/komodo/delicious_16.png); }
+.big-icons .to-delicious_com, .big-icons .from-delicious_com { background-image:url(./../../libraries/komodo/delicious_32.png); }
+
+.to-google_com, .from-google_com { background-image:url(./../../libraries/komodo/google_16.png); }
+.big-icons .to-google_com, .big-icons .from-google_com { background-image:url(./../../libraries/komodo/google_32.png); }
+
+.to-identi_ca, .from-identi_ca { background-image:url(./komodo-icon-extensions/identica_16.png); }
+.big-icons .to-identi_ca, .big-icons .from-identi_ca { background-image:url(./komodo-icon-extensions/identica_32.png); }
+
+.to-twitter_com, .from-twitter_com { background-image:url(./../../libraries/komodo/twitter_16.png); }
+.big-icons .to-twitter_com, .big-icons .from-twitter_com { background-image:url(./../../libraries/komodo/twitter_32.png); }
+
+.to-linkedin_com, .from-linkedin_com { background-image:url(./../../libraries/komodo/linkedin_16.png); }
+.big-icons .to-linkedin_com, .big-icons .from-linkedin_com { background-image:url(./../../libraries/komodo/linkedin_32.png); }
+
+.to-xing_com, .from-xing_com { background-image:url(./../../libraries/komodo/xing_16.png); }
+.big-icons .to-xing_com, .big-icons .from-xing_com { background-image:url(./../../libraries/komodo/xing_32.png); }
+
+.to-lomography_com, .from-lomography_com { background-image:url(./komodo-icon-extensions/lomography_16.png); }
+.big-icons .to-lomography_com, .big-icons .from-lomography_com { background-image:url(./komodo-icon-extensions/lomography_32.png); }
+
+}

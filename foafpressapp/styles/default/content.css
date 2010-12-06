@@ -1,0 +1,128 @@
+@charset "UTF-8";
+/**
+ * @author Michael Haschke, http://eye48.com/
+ *
+ */
+
+@media screen, projection
+{
+    /*------------------------------------------------------------------------*/
+    /* CONTENT                                                                */
+    /*------------------------------------------------------------------------*/
+    
+    #interests ul,
+    #projects ul
+    {
+        list-style:none;
+        margin-left:0; margin-right:0;
+    }
+    
+    /* network */
+    
+    #network ul
+    {
+        list-style:none;
+        margin-left:0; margin-right:0;
+        overflow:hidden;
+    }
+    
+    #network ul li
+    {
+        padding-left:0;
+        float:left;
+        width:14.75em;
+        height:4.3em;
+        padding:0;
+        margin:0 0.45em 0.45em 0;
+        white-space:nowrap;
+    }
+    
+    #network ul li img
+    {
+        height:1em;
+    }
+
+    #network ul li div
+    {
+        padding:0.25em 0.25em 0.25em 4.1em;
+        position:relative;
+        margin:1px;
+        overflow:hidden;
+        color:#000;
+        background-color:#f6f6f6;
+        margin:0;
+        border:solid 1px #e6e6e6;
+    }
+    
+    #network ul li div span.depiction,
+    #network ul li div span.nodepiction
+    {
+        position:absolute;
+        top:0.25em; left:0.25em;
+        height:3.6em; width:3.6em;
+    }
+
+    #network ul li div span.nodepiction
+    {
+        background:url(./images/person-depiction-unknown.png) no-repeat top center transparent;
+    }
+    
+    #network ul li div span.depiction img
+    {
+        display:block;
+        margin:auto;
+        height:auto;
+        max-height:100%;
+        max-width:100%;
+    }
+    
+    /* Profiles */
+    
+    #profiles ul
+    {
+        margin-left:0; margin-right:0;
+        list-style:none;
+    }
+    
+    #profiles ul li
+    {
+        display:inline;
+        white-space:nowrap;
+        margin-right:1em;
+    }
+    
+    #activity ul
+    {
+        margin-left:0; margin-right:0;
+        list-style:none;
+    }
+    
+    #activity ul li
+    {
+        margin:0;
+        padding-top:0.4em;
+        padding-bottom:0.4em;
+        border-bottom:dotted 1px #eee;
+        background-position:left 0.5em;
+    }
+    
+    /* using CSS3 multicolumns does not make any sense as long break-inside
+       attribute is not supported (Readability)
+       @see http://www.w3.org/TR/css3-multicol/#column-breaks*/
+    /*
+    #interests ul, #projects ul, #activity ul
+    {
+        -moz-column-count: 2;
+        -moz-column-gap: 2em;
+        -moz-column-rule: 1px dotted #eee;
+        orphans:4;
+    }
+
+    #interests ul li, #projects ul li, #activity ul li
+    {
+        -moz-break-inside:avoid;
+        break-inside:avoid;
+    }
+    */
+    
+}
