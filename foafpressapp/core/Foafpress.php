@@ -63,7 +63,7 @@ class Foafpress extends SandboxPlugin
         $this->pm->subscribe('sandbox_parse_end', $this, 'LoadResourceFromFile'); // parameters: event name, class name or instance, event handler method
         
         // load ARC2
-        $this->pm->need('./arc/ARC2');
+        $this->pm->need('./arc2/ARC2');
         
         // load ARC2 Template Object
         $this->pm->need('./rdfto/rdfto.arc2');
