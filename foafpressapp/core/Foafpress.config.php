@@ -42,6 +42,11 @@ $c['typefallback'] = 'application/xhtml+xml';
 
 $c['extensiontoexport'] = true;
 
+// -- DirectoryIndex -----------------------------------------------------------
+
+/* Apache's DirextoryIndex only works with existing files, so we have to fake it */
+$c['DirectoryIndex'] = 'index'; // extension will be added from supported file types
+
 // -- Linked Data --------------------------------------------------------------
 
 $c['LinkedData']['cachetime'] = 7 * 24 * 60 * 60; // 7 days

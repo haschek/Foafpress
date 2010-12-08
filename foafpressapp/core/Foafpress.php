@@ -83,6 +83,30 @@ class Foafpress extends SandboxPlugin
     public function FindResource($file)
     {
         $extensions = $this->config['types'];
+
+        if (is_dir($file) && isset($this->config['DirectoryIndex']) && $this->config['DirectoryIndex'])
+        {
+            $possible_index_files = explode(' ', $this->config['DirectoryIndex']);
+
+            foreach ($possible_index_files as $index_file)
+            {
+                foreach ($extensions as $type=>$ext)
+                {
+                    $filename_to_test = realpath($file).DIRECTORY_SEPARATOR.$index_file.$ext;
+                    if (file_exists($filename_to_test) && is_file($filename_to_test))
+                    {
+                        $file_new_name = realpath($file).DIRECTORY_SEPARATOR.$index_file; // without extension
+                        break;
+                    }
+                }
+
+                if (isset($file_new_name))
+                {
+                    $file = $file_new_name;
+                    break;
+                }
+            }
+        }
         
         $this->URI_Request = 'http://'.$_SERVER['SERVER_NAME'].str_replace(BASEDIR, BASEURL, $file);
         

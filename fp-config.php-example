@@ -26,6 +26,7 @@
 # $c['plugin']['load'][] = './subfolder/My2ndPlugin';
 
 // Overwrite Foafpress standard configuration
+# $c['Foafpress']['DirectoryIndex'] = 'index resource'; // extension will be added from supported file types
 # $c['Foafpress']['LinkedData']['cachetime'] = -1; // one time cache, no invalidation, default: 7 days
 # $c['Foafpress']['Activity']['cachetime'] = 2 * 60 * 60;  // 2 hours, default: 6 hours
 # $c['Foafpress']['LinkedData']['useBnodes'] = true; // default: false
