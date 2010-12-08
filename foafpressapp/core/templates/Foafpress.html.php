@@ -3,7 +3,7 @@
 <head>
     <?php
         // add some folder uris
-        $this->content->FPTPLURL = str_replace(BASEDIR, BASEURL, dirname(__FILE__));
+        $this->content->FPTPLURL = str_replace(BASEDIR, BASEURL, realpath(dirname(__FILE__)).'/../../styles');
 
     ?>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -22,8 +22,8 @@
     <!-- link rel="shortcut icon" href="<?php echo BASEURL; ?>favicon.ico" / -->
 
     <link href="<?php echo $this->content->FPLIBURL; ?>/yaml/core/slim_base.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="<?php echo $this->content->FPTPLURL; ?>/_css/screen.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="<?php echo $this->content->FPLIBURL; ?>/komodo/icons.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="<?php echo $this->content->FPTPLURL; ?>/default/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="<?php echo $this->content->FPTPLURL; ?>/default/icons.css" rel="stylesheet" type="text/css" media="all" />
 
     <!--[if lte IE 7]>
         <link href="<?php echo BASEURL; ?>app/layout/patches/ie7.css" rel="stylesheet" type="text/css" media="all" />
