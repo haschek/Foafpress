@@ -1,3 +1,1 @@
 foafpressapp/libraries/spcms = https://sandbox-publisher-cms.googlecode.com/hg/
-foafpressapp/libraries/arc2 = git://github.com/semsol/arc2.git
-foafpressapp/libraries/rdfto = git://github.com/haschek/RDF-Template-Object.git
