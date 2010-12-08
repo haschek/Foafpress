@@ -1,0 +1,48 @@
+# Sandbox Publisher
+# .htaccess
+#
+# @author Michael Haschke @ eye48.com
+# @version $Id$
+
+# please replace '/path/to/index.php' by
+# the location of index.php bootstrap on your server (base url)
+
+<IfModule mod_negotiation.c>
+    # prevents Apache's automatic file negotiation
+    Options -MultiViews
+</IfModule>
+
+<IfModule mod_dir.c>
+    # forces slashes to directory uris (set this to off, if your resource uri do no have an ending slash)
+    DirectorySlash On
+    # DirectoryIndex index.rdf
+    # DirectoryIndex /path/to/index.php
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /path/to/
+
+    ### Redirect all other stuff the Sandbox
+
+    # for real rdf files
+    RewriteCond %{REQUEST_URI} \.(rdf|tt|nt)$ [NC]
+    RewriteCond %{REQUEST_FILENAME} -F
+    RewriteRule . /path/to/index.php [L,QSA]
+
+    # and for virtual files
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /path/to/index.php [L,QSA]
+
+    # and for existing directories
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule . /path/to/index.php [L,QSA]
+
+    # Redirect to Sandbox Publisher
+    # Fallback for PHP running as CGI
+    # RewriteRule . /path/to/index.php?request=%{REQUEST_URI} [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L,QSA]
+
+</IfModule>
+

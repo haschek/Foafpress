@@ -44,8 +44,8 @@ $c['extensiontoexport'] = true;
 
 // -- Linked Data --------------------------------------------------------------
 
-$c['LinkedData']['cachetime'] = -1; //7 * 24 * 60 * 60; // 7 days
-$c['LinkedData']['timeout'] = 3; // 3 sec per feed
+$c['LinkedData']['cachetime'] = 7 * 24 * 60 * 60; // 7 days
+$c['LinkedData']['timeout'] = 10; // 3 sec per feed
 $c['LinkedData']['maxlevel'] = 1; // maximum of how deep should we follow resource uris
 $c['LinkedData']['maxrequests'] = 50; // maximum of how many uris should be requested
 $c['LinkedData']['useBnodes'] = false;
@@ -57,8 +57,8 @@ $c['LinkedData']['followSameas'] = true;
 
 // -- Activity Streams ---------------------------------------------------------
 
-$c['Activity']['cachetime'] = -1; //6 * 60 * 60;  // 6 hours
-$c['Activity']['timeout'] = 3; // 3 sec per feed
+$c['Activity']['cachetime'] = 6 * 60 * 60; // 6 hours
+$c['Activity']['timeout'] = 2; // 3 sec per feed
 
 // -- TODO: Future Plans -------------------------------------------------------
 

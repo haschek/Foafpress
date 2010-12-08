@@ -73,7 +73,7 @@ class Foafpress extends SandboxPlugin
         $this->pm->need(dirname(__FILE__).'/store-adapters/Foafpress.Arc2File');
         
         // libaries folder for templates
-        $this->content->FPLIBURL = str_replace(BASEDIR, BASEURL, realpath($this->config['arcbase'].'../'));
+        $this->content->FPLIBURL = str_replace(BASEDIR, BASEURL, dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'libraries');
         
         
         return;

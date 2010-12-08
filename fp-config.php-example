@@ -1,0 +1,40 @@
+<?php
+
+// Is Foafpress in production use?
+# $production = true; // default: false
+
+// add my template folders
+// absolute directory names or relative to sandbox.php path
+# $c['template']['folder'][] = dirname(__FILE__).'/mytemplates/';
+
+// set my global layout
+# $c['template']['layout'] = 'MyLayout.tpl'; // must be in your mytemplates folder
+
+// cache configuration
+# if ($production) $c['cache']['age'] = 60 * 60; // overwrite cache invalidation time, default: 60*60 (1h)
+# $c['cache']['displacement'] = 0.25; // overwrite randomized timeshift factor, default: 0.5 (0.5h to 1.5h)
+# $c['cache']['folder'] = dirname(__FILE__).'/mycache/'; // overwrite standard cache folder
+
+
+// add plugin folders
+// absolute directory names or relative to sandbox.php path
+# $c['plugin']['folder'][] = dirname(__FILE__).'/mytemplates1/';
+# $c['plugin']['folder'][] = dirname(__FILE__).'/mytemplates2/';
+
+// load plugins at start
+# $c['plugin']['load'][] = './MyPlugin';
+# $c['plugin']['load'][] = './subfolder/My2ndPlugin';
+
+// Overwrite Foafpress standard configuration
+# $c['Foafpress']['LinkedData']['cachetime'] = -1; // one time cache, no invalidation, default: 7 days
+# $c['Foafpress']['Activity']['cachetime'] = 2 * 60 * 60;  // 2 hours, default: 6 hours
+# $c['Foafpress']['LinkedData']['useBnodes'] = true; // default: false
+# $c['Foafpress']['LinkedData']['ignoreResources'] = array(
+#                                                         'http://example.org/user/name',
+#                                                         'http://example.org/projects/name'
+#                                                        );
+
+// Overwrite standard configuration of I18N LanguageChecker plugin
+# $c['LanguageChecker']['enabled'] = array('en', 'de');
+
+?>
