@@ -1,2 +1,3 @@
 foafpressapp/libraries/spcms = https://sandbox-publisher-cms.googlecode.com/hg/
 foafpressapp/libraries/rdfto =  http://bitbucket.org/haschek/rdf-template-object
+foafpressapp/libraries/arc2 =  http://bitbucket.org/haschek/arc2
