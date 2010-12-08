@@ -1,0 +1,57 @@
+License conditions
+==================
+
+Current and future releases
+---------------------------
+YAML has been licensed under a Creative Commons Attribution 2.0 License (CC-A 2.0) since version 2.2. For commercial
+use, two alternative license models are available (see below).
+
+Older releases
+--------------
+Older releases before version 2.2 were published exclusively under a Creative Commons Attribution 2.0 License (CC-A 2.0).
+
+
+General Information
+-------------------
+The Creative Commons license permits both the non-commercial and the commercial use of the framework on the condition
+that a backlink to the project homepage remains in the layout (see the next section).
+
+Freelancers and web agencies, however, cannot always conform to the terms of use of the Creative Commons license, as
+customers seldom desire copyright notices of third party projects on their sites. In order to make the use of YAML possible
+in these cases, two license models for commercial use have been developed, alternative to the Creative Commons license.
+Both models are set up as single payments and include the use of any future releases.
+
+
+YAML under Creative Commons License (CC-A 2.0)
+==============================================
+
+The YAML framework is published under the Creative Commons Attribution 2.0 License, which permits both private and
+commercial use. For the free use of the YAML framework, a backlink to the YAML homepage (http://www.yaml.de) in a
+suitable place (e.g.: footer of the website or in the imprint) is required.
+
+A small thank you
+-----------------
+In general it would be nice to get a short note when new YAML-based projects are released. 
+If you are highly pleased with YAML and the forum support, perhaps you would like to take a look at my Amazon wish list?
+https://www.amazon.de/gp/registry/wishlist/108Q0YYJ49UC2/
+
+
+YAML under Commercial License (YAML-C)
+======================================
+
+Two alternative license models are available for using the framework without the otherwise required backlink.
+Commercial licenses can be orderd at https://shop.yaml.de/.
+
+Project Related License, 59.50 EUR (incl. 19% taxes)
+----------------------------------------------------
+The purchaser receives the right to use the YAML framework without naming the author or linking back to the YAML page
+within one project, named by the purchaser. The license includes the use of any future releases.
+
+Reproduction and redistribution or providing the code for downloading is only allowed with written permission of the author.
+
+General License, 119.00 EUR (incl. 19% taxes)
+---------------------------------------------
+The purchaser receives the general right to use the YAML framework without naming the author or linking back to the
+YAML page. This right is independent of any project and is permanent. The license includes the use of any future releases.
+
+Reproduction and redistribution or providing the code for downloading is only allowed with written permission of the author.
