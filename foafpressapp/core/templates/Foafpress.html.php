@@ -59,7 +59,7 @@
         </div>
     </div> <!-- /#footer -->
             <?php
-            if (true) // TODO: debug mode
+            if (!defined('IS_PRODUCTION_INSTANCE')) // TODO: debug mode
             {
                 echo '<div id="FP_debug"><strong>DEBUGINFO</strong>'.PHP_EOL;
                 echo('<pre>'.print_r($this->content->debug_log, true).'</pre>').PHP_EOL;
