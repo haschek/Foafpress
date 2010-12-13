@@ -26,10 +26,10 @@
     <link href="<?php echo $this->content->FPTPLURL; ?>/default/icons.css" rel="stylesheet" type="text/css" media="all" />
 
     <!--[if lte IE 7]>
-        <link href="<?php echo BASEURL; ?>app/layout/patches/ie7.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="<?php echo $this->content->FPTPLURL; ?>/default/patches/ie7.css" rel="stylesheet" type="text/css" media="all" />
     <![endif]-->
     <!--[if lte IE 6]>
-        <link href="<?php echo BASEURL; ?>app/layout/patches/ie6.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="<?php echo $this->content->FPTPLURL; ?>/default/patches/ie6.css" rel="stylesheet" type="text/css" media="all" />
     <![endif]-->
 
     <!-- link rel="alternate" type="application/rss+xml" title="ttt" href="#" / -->
@@ -37,6 +37,7 @@
     <!-- script type="text/javascript" src="<?php echo $this->content->FPLIBURL; ?>/jquery/jquery-1.4.min.js"></script -->
     <!-- script type="text/javascript" src="<?php echo BASEURL; ?>app/libs/jquery/index.js"></script -->
 
+    <?php $this->pm->publish('sandbox_end_of_template_header'); // let this here (e.g. for DebugLog plugin) ?>
 </head>
 <body class="<?php echo $this->content->body_css_class; ?>">
     <?php
@@ -58,13 +59,7 @@
             and <a href="http://www.komodomedia.com/download/#social-network-icon-pack">Komodo SNIP</a>.</p>
         </div>
     </div> <!-- /#footer -->
-            <?php
-            if (!defined('IS_PRODUCTION_INSTANCE')) // TODO: debug mode
-            {
-                echo '<div id="FP_debug"><strong>DEBUGINFO</strong>'.PHP_EOL;
-                echo('<pre>'.print_r($this->content->debug_log, true).'</pre>').PHP_EOL;
-                echo '</div>'.PHP_EOL;
-            }
-            ?>
+
+<?php $this->pm->publish('sandbox_end_of_template_body'); // let this here (e.g. for DebugLog plugin) ?>
 </body>
 </html>

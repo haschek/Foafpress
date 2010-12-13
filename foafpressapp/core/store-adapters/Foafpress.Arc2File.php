@@ -11,6 +11,7 @@ class Foafpress_Resource_Arc2File extends ARC2File_Template_Object
     public $spcms_pm = null;
     public $spcms_cache = null;
     public $FP_config = array();
+    public $logUsage = array();
 
     public $templateImage = '<img src="##URL##" alt="##DESC##"/>';
     
@@ -160,6 +161,15 @@ class Foafpress_Resource_Arc2File extends ARC2File_Template_Object
         return str_replace('.', '_', implode('.', array_slice(explode('.', parse_url($uri, PHP_URL_HOST)), -2)));
     }
 
+    /* Write message to log
+     *
+     * you may implement it for debugging reasons
+     */
+    protected function addLogMessage($msg)
+    {
+        $this->spcms_pm->publish('sandbox_add_log_message', $msg);
+        return true;
+    }
     /**
      * Get Resource Type
      *
