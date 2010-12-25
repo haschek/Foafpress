@@ -33,7 +33,7 @@ if (count($projects) > 1)
     echo '<ul class="inline">'.PHP_EOL;
     foreach ($projects as $project)
     {
-        if (count($project) > 1)
+        if (count($project) > 1 && isset($project['description']))
         {
             echo '<li class="inline"><a href="#'.md5($project['label']).'">'.$project['label'].'</a></li>'.PHP_EOL;
         }

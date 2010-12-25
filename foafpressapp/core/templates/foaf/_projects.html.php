@@ -5,7 +5,7 @@
     echo '<ul>'.PHP_EOL;
     foreach ($projects as $project)
     {
-        if (count($project) > 0)
+        if (count($project) > 0 && isset($project['description']))
         {
             echo '<li id="'.md5($project['label']).'">'.PHP_EOL;
             echo '<h3>'.$project['label'].'</h3>'.PHP_EOL;
