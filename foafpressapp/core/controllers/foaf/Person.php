@@ -251,7 +251,11 @@ class Foaf_Person_Controller extends Foafpress_Controller
                     if ($locality = $adr_object->getLiteral(array('vcard_locality'))) $adrparts[] = $locality;
                     if ($region = $adr_object->getLiteral(array('vcard_region'))) $adrparts[] = $region;
                     if ($country = $adr_object->getLiteral(array('vcard_country-name'))) $adrparts[] = $country;
-                    $list_of_contacts[$VCard_place]['Address'][] = implode(', ', $adrparts);
+
+                    if (count($adrparts) > 0)
+                    {
+                        $list_of_contacts[$VCard_place]['Address'][] = implode(', ', $adrparts);
+                    }
                 }
                 
                 unset($adr_object);
