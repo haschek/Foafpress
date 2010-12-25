@@ -10,13 +10,13 @@ if (count($interests) > 1)
     echo '<ul class="inline">'.PHP_EOL;
     foreach ($interests as $interest)
     {
-        if (count($interest) > 1)
+        if (count($interest) > 1 && isset($interest['description']))
         {
             echo '<li class="inline"><a href="#'.md5($interest['label']).'">'.$interest['label'].'</a></li>'.PHP_EOL;
         }
         else
         {
-            echo '<li>'.$interest['label'].'</li>'.PHP_EOL;
+            echo '<li class="inline">'.$interest['label'].'</li>'.PHP_EOL;
         }
 
         unset($interest);

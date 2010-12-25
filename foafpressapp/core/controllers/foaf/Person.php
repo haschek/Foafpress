@@ -57,13 +57,13 @@ class Foaf_Person_Controller extends Foafpress_Controller
         
         foreach ($list_of_interest_objects as $interest_object)
         {
-            if (is_object($interest_object) && $interest_label = $interest_object->getLiteral(array('dc_title', 'rdfs_label')))
+            if (is_object($interest_object) && $interest_label = $interest_object->getLiteral(array('dc_title', 'rdfs_label'), array(), true))
             {
                 $interest_details = array();
                 
                 $interest_details['label'] = $interest_label;
                 
-                if ($description = $interest_object->getLiteral(array('dc_description', 'rdfs_comment')))
+                if ($description = $interest_object->getLiteral(array('dc_description', 'rdfs_comment'), array(), true))
                 {
                     $interest_details['description'] = $description;
                 }

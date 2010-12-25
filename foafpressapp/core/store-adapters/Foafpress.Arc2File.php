@@ -126,7 +126,7 @@ class Foafpress_Resource_Arc2File extends ARC2File_Template_Object
         return $activity;
     }
     
-    public function getLiteral(Array $predicates = array(), Array $languages = array())
+    public function getLiteral(Array $predicates = array(), Array $languages = array(), $strict = false)
     {
         if (count($languages) == 0 && isset($this->languages))
         {
@@ -143,7 +143,7 @@ class Foafpress_Resource_Arc2File extends ARC2File_Template_Object
                          );
         }
         
-        return parent::getLiteral($predicates, $languages);
+        return parent::getLiteral($predicates, $languages, $strict);
     }
     
     public function getImage(Array $predicates = array(), $useThumbnail = null)

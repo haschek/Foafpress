@@ -5,7 +5,7 @@
     echo '<ul>'.PHP_EOL;
     foreach ($interests as $interest)
     {
-        if (count($interest) > 0)
+        if (count($interest) > 0 && isset($interest['description']))
         {
             echo '<li id="'.md5($interest['label']).'">'.PHP_EOL;
             echo '<h3>'.$interest['label'].'</h3>'.PHP_EOL;
