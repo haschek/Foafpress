@@ -91,7 +91,7 @@ class Foaf_Person_Controller extends Foafpress_Controller
                 
                 unset($interest_details);
             }
-            elseif (!is_object($interest_object))
+            elseif (!is_object($interest_object) && @parse_url($interest_object) === false)
             {
                 $list_of_interests[] = array(
                     'label' => $interest_object
@@ -144,7 +144,7 @@ class Foaf_Person_Controller extends Foafpress_Controller
                 
                 unset($project_details);
             }
-            elseif (!is_object($project_object))
+            elseif (!is_object($project_object) && @parse_url($project_object) === false)
             {
                 $list_of_projects[] = array(
                     'label' => $project_object
