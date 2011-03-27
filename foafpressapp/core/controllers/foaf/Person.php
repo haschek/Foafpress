@@ -69,9 +69,17 @@ class Foaf_Person_Controller extends Foafpress_Controller
                 }
                 unset($description);
                 
-                if ($homepage = array_merge($interest_object->foaf_homepage, $interest_object->foaf_page, $interest_object->foaf_primaryTopic) && isset($homepage[0]) && is_object($homepage[0]))
+                if ($homepage = array_merge($interest_object->foaf_homepage, $interest_object->foaf_page, $interest_object->foaf_primaryTopic))
                 {
-                    $interest_details['link'] = $homepage[0]->uri;
+                    if (isset($homepage[0])) $homepage = $homepage[0];
+                    if (is_object($homepage))
+                    {
+                        $interest_details['link'] = $homepage->uri;
+                    }
+                    else
+                    {
+                        $interest_details['link'] = $homepage;
+                    }
                 }
                 elseif (substr($interest_object->uri, 0, 1) != '_')
                 {
@@ -114,9 +122,17 @@ class Foaf_Person_Controller extends Foafpress_Controller
                 }
                 unset($description);
                 
-                if ($homepage = array_merge($project_object->doap_homepage, $project_object->foaf_homepage/* ERROR wegen '-' TODO, $project_object->rdfohloh_ohloh-page*/) && isset($homepage[0]) && is_object($homepage[0]))
+                if ($homepage = array_merge($project_object->doap_homepage, $project_object->foaf_homepage/* ERROR wegen '-' TODO, $project_object->rdfohloh_ohloh-page*/))
                 {
-                    $project_details['link'] = $homepage[0]->uri;
+                    if (isset($homepage[0])) $homepage = $homepage[0];
+                    if (is_object($homepage))
+                    {
+                        $project_details['link'] = $homepage->uri;
+                    }
+                    else
+                    {
+                        $project_details['link'] = $homepage;
+                    }
                 }
                 elseif (substr($project_object->uri, 0, 1) != '_')
                 {
