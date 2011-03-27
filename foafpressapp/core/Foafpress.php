@@ -24,8 +24,8 @@ class Foafpress extends SandboxPlugin
 
     protected function init()
     {
-        error_reporting(E_ALL); // set_time_limit(0);
-
+        // error_reporting(E_ALL); // set_time_limit(0);
+        
         // check user configuration of namespaces
         if (!isset($this->config['ns']))
         {
@@ -59,6 +59,8 @@ class Foafpress extends SandboxPlugin
         $this->sandbox->pm->addFolder($this->path.'controllers/');
         
         // Foafpress event handlers for SPCMS
+        $this->pm->subscribe('sandbox_parse_failed', $this, 'CheckCache');
+        $this->pm->subscribe('sandbox_parse_end', $this, 'CheckCache');
         $this->pm->subscribe('sandbox_parse_failed', $this, 'FindResource'); // parameters: event name, class name or instance, event handler method
         $this->pm->subscribe('sandbox_parse_end', $this, 'LoadResourceFromFile'); // parameters: event name, class name or instance, event handler method
         
@@ -74,10 +76,34 @@ class Foafpress extends SandboxPlugin
         
         // libaries folder for templates
         $this->content->FPLIBURL = str_replace(BASEDIR, BASEURL, dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'libraries');
-        
+
         
         return;
         
+    }
+    
+    public function CheckCache()
+    {
+        // get preferenced laguage stack from LanguageChecker plugin
+        if ($this->pm->isActive('LanguageChecker'))
+        {
+            $this->languageStackPreferences = array_unique(
+                            array_merge(
+                                $this->pm->LanguageChecker->getLanguageStack(),
+                                $this->pm->LanguageChecker->getUserPreferences()
+                            )
+                         );
+        }
+        else
+        {
+            $this->languageStackPreferences = null;
+        }
+
+        // check cache before doing anything
+        if ($this->cache->getOutput($this->sandbox->file.serialize($this->languageStackPreferences)))
+        {
+            die();
+        }
     }
     
     public function FindResource($file)

@@ -1,4 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<?php
+
+if (!$this->cache->getOutput($this->file.serialize($this->pm->Foafpress->languageStackPreferences))):
+
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
 <head>
     <?php
@@ -40,15 +44,7 @@
     <?php $this->pm->publish('sandbox_end_of_template_header'); // let this here (e.g. for DebugLog plugin) ?>
 </head>
 <body class="<?php echo $this->content->body_css_class; ?>">
-    <?php
-
-    if (!$this->cache->getOutput($this->file))
-    {
-        $this->output();
-        $this->cache->saveOutput($this->file);
-    }
-
-    ?>
+    <?php $this->output(); ?>
     <div id="footer">
         <div class="page_margins">
             <p><strong>powered by <a href="http://foafpress.org/">Foafpress</a></strong>,
@@ -63,3 +59,9 @@
 <?php $this->pm->publish('sandbox_end_of_template_body'); // let this here (e.g. for DebugLog plugin) ?>
 </body>
 </html>
+<?php
+
+$this->cache->saveOutput($this->file.serialize($this->pm->Foafpress->languageStackPreferences));
+endif;
+
+?>
