@@ -35,6 +35,7 @@ $c['plugin']['folder'][] = './../../../core/';
 // load plugins at start
 $c['plugin']['load'][] = './Foafpress';
 $c['plugin']['load'][] = './hooks/ActivityIdentica';
+$c['plugin']['load'][] = './hooks/ActivityTwitter';
 $c['plugin']['load'][] = './hooks/ActivityGoogle';
 $c['plugin']['load'][] = './i18n/LanguageChecker';
 $c['plugin']['load'][] = './debug/DebugLog';
