@@ -48,4 +48,7 @@
 .to-lomography_com, .from-lomography_com { background-image:url(./komodo-icon-extensions/lomography_16.png); }
 .big-icons .to-lomography_com, .big-icons .from-lomography_com { background-image:url(./komodo-icon-extensions/lomography_32.png); }
 
+.to-flickr_com, .from-flickr_com { background-image:url(./../../libraries/komodo/flickr_16.png); }
+.big-icons .to-flickry_com, .big-icons .from-flickr_com { background-image:url(./../../libraries/komodo/flickr_32.png); }
+
 }

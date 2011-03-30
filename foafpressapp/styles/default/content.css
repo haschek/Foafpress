@@ -91,6 +91,8 @@
         margin-right:1em;
     }
     
+    /* Activity stream */
+    
     #activity ul
     {
         margin-left:0; margin-right:0;
@@ -104,6 +106,22 @@
         padding-bottom:0.4em;
         border-bottom:dotted 1px #eee;
         background-position:left 0.5em;
+        overflow:hidden;
+    }
+    
+    #activity img.mediathumb
+    {
+        display:block;
+        float:left;
+        margin-right:0.5em;
+        border:solid 0.25em #eee;
+    }
+    
+    #activity a:focus img.mediathumb,
+    #activity a:hover img.mediathumb,
+    #activity a:active img.mediathumb
+    {
+        border-color:#999;
     }
     
     /* using CSS3 multicolumns does not make any sense as long break-inside
