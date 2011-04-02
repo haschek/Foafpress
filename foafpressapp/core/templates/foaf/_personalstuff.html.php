@@ -4,9 +4,9 @@ echo '<h2>Persönliches</h2>'.PHP_EOL;
 
 // foaf:interest
 
-if (count($interests) > 1)
+if (count($interests) > 0)
 {
-    echo '<h3>Interessen</h3>'.PHP_EOL;
+    echo '<h3>Interests</h3>'.PHP_EOL;
     echo '<ul class="inline">'.PHP_EOL;
     foreach ($interests as $interest)
     {
@@ -27,9 +27,9 @@ if (count($interests) > 1)
 
 // foaf:[current|past]Project
 
-if (count($projects) > 1)
+if (count($projects) > 0)
 {
-    echo '<h3>Projekte</h3>'.PHP_EOL;
+    echo '<h3>Projects</h3>'.PHP_EOL;
     echo '<ul class="inline">'.PHP_EOL;
     foreach ($projects as $project)
     {

@@ -1,6 +1,6 @@
 <?php
 
-    echo '<h2>Interessen</h2>'.PHP_EOL;
+    echo '<h2>Interests</h2>'.PHP_EOL;
     echo '<div class="section" id="interests">'.PHP_EOL;
     echo '<ul>'.PHP_EOL;
     foreach ($interests as $interest)

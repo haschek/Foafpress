@@ -1,6 +1,6 @@
 <?php
 
-    echo '<h2>Netzwerk</h2>'.PHP_EOL;
+    echo '<h2>Network</h2>'.PHP_EOL;
     echo '<div class="section" id="network">';
     echo '<ul>'.PHP_EOL;
     foreach ($persons as $person)

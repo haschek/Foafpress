@@ -2,7 +2,7 @@
 
 if (isset($activity['stream']) && is_array($activity['stream']) && count($activity['stream']) > 0)
 {
-    echo '<h2>Feeds/Activity</h2>'.PHP_EOL;
+    echo '<h2>Activity</h2>'.PHP_EOL;
     echo '<div class="section" id="activity">'.PHP_EOL;
     echo '<ul class="big-icons">'.PHP_EOL;
 
