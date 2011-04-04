@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:air="http://www.daml.org/2001/10/html/airport-ont#"
+	xmlns:con="http://www.w3.org/2000/10/swap/pim/contact#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#"
+	xmlns:sioc="http://rdfs.org/sioc/ns#"
+	xmlns:bio="http://purl.org/vocab/bio/0.1/"
+	xmlns:admin="http://webns.net/mvcb/"
+	xmlns:rss="http://purl.org/rss/1.0/"
+	xmlns:rel="http://purl.org/vocab/relationship/"
+	xmlns:cert="http://www.w3.org/ns/auth/cert#"
+	xmlns:rsa="http://www.w3.org/ns/auth/rsa#">
+
+<foaf:PersonalProfileDocument rdf:about="">
+    <dc:title>John Doe, ACME (FOAF Profile)</dc:title>
+    <dc:description>
+        Lifestream, Interests, Projects, Network
+    </dc:description>
+    <foaf:maker rdf:resource="http://michael.haschke.biz/"/>
+    <foaf:primaryTopic rdf:resource="http://localhost/foafpress/test/johndoe"/>
+    <admin:errorReportsTo rdf:resource="http://bitbucket.org/haschek/foafpress/issues"/>
+	<dc:date>2011-04-02 17:06:20 +0100 </dc:date>
+</foaf:PersonalProfileDocument>
+
+<!-- Me ____________________________________________________________________ -->
+
+<foaf:Person rdf:about="http://localhost/foafpress/test/johndoe">
+
+    <!-- owl:sameAs rdf:resource="" / -->
+
+    <foaf:name>John Doe</foaf:name>
+    <foaf:firstName>John</foaf:firstName>
+    <foaf:surname>Doe</foaf:surname>
+    <foaf:gender>male</foaf:gender>
+
+    <foaf:birthday>07-26</foaf:birthday>
+	<bio:event>
+		<bio:Birth>
+			<bio:date>1959-07-26</bio:date>
+			<bio:place>South Orange, New Jersey, United States</bio:place>
+		</bio:Birth>
+	</bio:event>
+
+	<bio:olb xml:lang="en">serial killer from an unidentified city of near-constant rain and urban decay, interested in books related to the deadly sins</bio:olb>
+	<bio:olb xml:lang="de">Serienmörder aus einer verregneten Stadt mit Interesse an Büchern über die 7 Todsünden</bio:olb>
+	<bio:keywords>serial killer, deadly sins</bio:keywords>
+
+	<foaf:interest rdf:resource="http://dbpedia.org/resource/Seven_deadly_sins"/>
+	<foaf:interest rdf:resource="http://dbpedia.org/resource/Religion"/>
+	<!-- foaf:interest rdf:resource="http://dbpedia.org/resource/ -->
+
+    <foaf:depiction dc:description="John Doe" rdf:resource="http://monsterbook.co.uk/wp-content/uploads/John-Doe.jpg"/>
+
+    <foaf:homepage>
+        <foaf:Document rdf:about="http://en.wikipedia.org/wiki/Seven_%28film%29"> 
+            <dc:title>Portfolio @ Wikipedia</dc:title>
+            <rdfs:seeAlso> 
+                <rss:channel rdf:about="http://en.wikipedia.org/w/index.php?title=Seven_%28film%29&amp;feed=atom&amp;action=history">
+                    <dc:title>Seven (Film) Revision History</dc:title>
+                </rss:channel>
+            </rdfs:seeAlso> 
+        </foaf:Document> 
+    </foaf:homepage>
+    
+	<!-- foaf:phone rdf:resource="tel:" rdfs:label="mobile phone (private and work)" / -->
+
+    <!-- Online Accounts SNS _______________________________________________ -->
+
+    <foaf:holdsAccount>
+    	<foaf:OnlineAccount>
+            <foaf:accountServiceHomepage rdf:resource="http://facebook.com/"/>
+            <foaf:accountName>JohnDoe</foaf:accountName>
+            <foaf:homepage rdf:resource="http://facebook.com/JohnDoeFromSevenDoesNotExistHere" rdfs:label="Facebook"/>
+        </foaf:OnlineAccount>
+    </foaf:holdsAccount>
+
+    <foaf:holdsAccount>
+    	<foaf:OnlineAccount>
+            <foaf:accountServiceHomepage rdf:resource="http://twitter.com/"/>
+            <foaf:accountName>johndoe</foaf:accountName>
+            <foaf:homepage rdf:resource="http://twitter.com/JohnDoeFromSevenDoesNotExistHere" rdfs:label="Twitter"/>
+        </foaf:OnlineAccount>
+    </foaf:holdsAccount>
+    
+    <!-- Social Network ____________________________________________________ -->
+
+	<foaf:knows rdf:resource="http://localhost/foafpress/test/desirejeanette" />
+	<foaf:knows rdf:resource="http://michael.haschke.biz/" />
+
+
+    <!-- Projects __________________________________________________________ -->
+
+	<!-- foaf:currentProject rdf:resource="http://rdfohloh.wikier.org/project/foafpress" / -->
+	<foaf:pastProject rdf:resource="http://dbpedia.org/resource/Seven_%28film%29" />
+	
+    <!-- additional Feeds __________________________________________________ -->
+
+    <rdfs:seeAlso>
+        <rss:channel rdf:about="http://feeds.delicious.com/v2/rss/tag/john_doe">
+        	<dc:title>Bookmarks about me</dc:title>
+        	<dc:description>Bookmarks on Delicious tagged with #john_doe</dc:description>
+        </rss:channel>
+    </rdfs:seeAlso>
+
+    <rdfs:seeAlso>
+        <rss:channel rdf:about="http://feeds.delicious.com/v2/rss/tag/johndoe">
+        	<dc:title>Bookmarks about me</dc:title>
+        	<dc:description>Bookmarks on Delicious tagged with #johndoe</dc:description>
+        </rss:channel>
+    </rdfs:seeAlso>
+
+</foaf:Person>
+
+</rdf:RDF>

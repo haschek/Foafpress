@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:air="http://www.daml.org/2001/10/html/airport-ont#"
+	xmlns:con="http://www.w3.org/2000/10/swap/pim/contact#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+	xmlns:sioc="http://rdfs.org/sioc/ns#"
+	xmlns:bio="http://purl.org/vocab/bio/0.1/"
+	xmlns:admin="http://webns.net/mvcb/"
+	xmlns:rss="http://purl.org/rss/1.0/"
+	xmlns:rel="http://purl.org/vocab/relationship/"
+	xmlns:cert="http://www.w3.org/ns/auth/cert#"
+	xmlns:rsa="http://www.w3.org/ns/auth/rsa#"
+	xmlns:cv="http://kaste.lv/~captsolo/semweb/resume/cv.rdfs#"
+	xmlns:ov="http://open.vocab.org/terms/">
+
+<foaf:PersonalProfileDocument rdf:about="">
+    <dc:title>Desiré Jeanette, Berlin(FOAF Profile)</dc:title>
+    <dc:description>
+        Lifestream, Interests, Projects, Network
+    </dc:description>
+    <foaf:maker rdf:resource="http://michael.haschke.biz/"/>
+    <foaf:primaryTopic rdf:resource="http://localhost/foafpress/test/desirejeanette"/>
+    <admin:errorReportsTo rdf:resource="http://bitbucket.org/haschek/foafpress/issues"/>
+	<dc:date>2011-04-02 17:06:20 +0100 </dc:date>
+</foaf:PersonalProfileDocument>
+
+<!-- Me ____________________________________________________________________ -->
+
+<foaf:Person rdf:about="http://localhost/foafpress/test/desirejeanette">
+
+    <!-- owl:sameAs rdf:resource="" / -->
+
+    <foaf:name>Desiré Jeanette</foaf:name>
+    <foaf:firstName>Desiré</foaf:firstName>
+    <foaf:surname>Jeanette</foaf:surname>
+    <foaf:gender>female</foaf:gender>
+
+    <foaf:birthday>02-28</foaf:birthday>
+	<bio:event>
+		<bio:Birth>
+			<bio:date>1964-02-28</bio:date>
+			<bio:place>Bonn, Germany</bio:place>
+		</bio:Birth>
+	</bio:event>
+
+	<bio:olb xml:lang="en">placeholding speacialist and ID card model</bio:olb>
+	<bio:olb xml:lang="de">Platzhalter-Spezialistin und Führerschein-Fotomodell</bio:olb>
+	<bio:keywords>placeholder, model</bio:keywords>
+
+	<foaf:interest rdf:resource="http://dbpedia.org/resource/Bundesdruckerei"/>
+	<foaf:interest rdf:resource="http://dbpedia.org/resource/Cheque_guarantee_card"/>
+
+    <foaf:depiction dc:description="Desiré Jeanette (Picture)" rdf:resource="http://akziv.de/haupt/erika/Mustermann_Erika_geb_12.08.1964_2001.jpg"/>
+
+    <!-- foaf:homepage>
+        <foaf:Document rdf:about=""> 
+            <dc:title></dc:title>
+            <rdfs:seeAlso> 
+                <rss:channel rdf:about="">
+                    <dc:title></dc:title>
+                </rss:channel>
+            </rdfs:seeAlso> 
+        </foaf:Document> 
+    </foaf:homepage -->
+    
+    <ov:businessCard>
+        <vcard:VCard rdf:about="http://localhost/foafpress/test/desirejeanette#vcard">
+            <vcard:fn>Desiré Jeanette</vcard:fn>
+            <vcard:adr>
+              <vcard:Address>  
+                <vcard:street-address>Heidestraße 17</vcard:street-address>
+                <vcard:postal-code>10557</vcard:postal-code>
+                <vcard:locality>Berlin</vcard:locality>
+                <vcard:country-name xml:lang="en">Germany</vcard:country-name>
+                <vcard:country-name xml:lang="de">Deutschland</vcard:country-name>
+                <rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Home"/>
+              </vcard:Address>  
+            </vcard:adr>
+        </vcard:VCard>
+    </ov:businessCard>
+
+    <!-- maybe this will go to foaf as foaf:businessCard, see http://wiki.foaf-project.org/w/term_businessCard -->
+    <foaf:businessCard rdf:resource="http://localhost/foafpress/test/desirejeanette#vcard"/>
+
+    <!-- Online Accounts SNS _______________________________________________ -->
+
+    <foaf:holdsAccount>
+    	<foaf:OnlineAccount>
+            <foaf:accountServiceHomepage rdf:resource="http://xing.com/"/>
+            <foaf:accountName>Desire_Jeanette</foaf:accountName>
+            <foaf:homepage rdf:resource="http://xing.com/profile/DesireJeanetteIsNotHere" rdfs:label="Xing"/>
+        </foaf:OnlineAccount>
+    </foaf:holdsAccount>
+
+    <foaf:holdsAccount>
+    	<foaf:OnlineAccount>
+            <foaf:accountServiceHomepage rdf:resource="http://identi.ca/"/>
+            <foaf:accountName>microdaisyjay</foaf:accountName>
+            <foaf:homepage rdf:resource="http://identi.ca/DesireJeanetteIsNotHere" rdfs:label="Identica"/>
+            <rdfs:seeAlso> 
+                <rss:channel rdf:about="http://identi.ca/api/statusnet/tags/timeline/mustermann.atom">
+                    <dc:title>#Mustermann Updates</dc:title>
+                </rss:channel>
+            </rdfs:seeAlso> 
+        </foaf:OnlineAccount>
+    </foaf:holdsAccount>
+    
+    <foaf:holdsAccount>
+    	<foaf:OnlineAccount>
+            <foaf:accountServiceHomepage rdf:resource="http://flickr.com/"/>
+            <foaf:accountName>daisyjayphotography</foaf:accountName>
+            <foaf:homepage rdf:resource="http://flickr.com/people/DesireJeanetteDoesNotMakePictures" rdfs:label="Flickr"/>
+            <rdfs:seeAlso> 
+                <rss:channel rdf:about="http://api.flickr.com/services/feeds/photos_public.gne?tags=mustermann&amp;lang=de-de&amp;format=rss_200">
+                    <dc:title>#Mustermann Photograpy</dc:title>
+                </rss:channel>
+            </rdfs:seeAlso> 
+        </foaf:OnlineAccount>
+    </foaf:holdsAccount>
+    
+    <!-- Social Network ____________________________________________________ -->
+
+	<foaf:knows rdf:resource="http://localhost/foafpress/test/johndoe" />
+	<foaf:knows rdf:resource="http://dbpedia.org/resource/Jane_Doe" />
+	<foaf:knows rdf:resource="http://michael.haschke.biz/" />
+
+
+    <!-- Projects __________________________________________________________ -->
+
+	<foaf:currentProject rdf:resource="http://dbpedia.org/resource/Driver%27s_license" />
+	
+    <!-- additional Feeds __________________________________________________ -->
+
+    <rdfs:seeAlso>
+        <rss:channel rdf:about="http://feeds.delicious.com/v2/rss/tag/mustermann">
+        	<dc:title>Bookmarks about my sister</dc:title>
+        	<dc:description>Bookmarks on Delicious tagged with #mustermann</dc:description>
+        </rss:channel>
+    </rdfs:seeAlso>
+
+</foaf:Person>
+
+</rdf:RDF>
