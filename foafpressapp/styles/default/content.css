@@ -60,6 +60,8 @@
         position:absolute;
         top:0.25em; left:0.25em;
         height:3.6em; width:3.6em;
+        overflow:hidden;
+        text-align:center;
     }
 
     #network ul li div span.nodepiction
@@ -67,24 +69,34 @@
         background:url(./images/person-depiction-unknown.png) no-repeat top center transparent;
     }
     
-    #network ul li div span.depiction img
+    #network ul li div span.depiction span
     {
         display:block;
-        margin:auto;
-        height:auto;
-        max-height:100%;
-        max-width:100%;
+        width:200%;
+        height:100%;
+        position:absolute;
+        top:0;
+        left:-50%;
     }
     
-    /* Profiles */
+    #network ul li div span.depiction img
+    {
+        width:auto;
+        height:100%;
+        display:inline-block;
+    }
     
-    #profiles ul
+    /* Profiles/Websites */
+    
+    #profiles ul,
+    #websites ul
     {
         margin-left:0; margin-right:0;
         list-style:none;
     }
     
-    #profiles ul li
+    #profiles ul li,
+    #websites ul li
     {
         display:inline;
         white-space:nowrap;

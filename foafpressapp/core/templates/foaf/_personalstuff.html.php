@@ -1,6 +1,6 @@
 <?php
 
-echo '<h2>Persönliches</h2>'.PHP_EOL;
+echo '<h2>About me</h2>'.PHP_EOL;
 
 // foaf:interest
 

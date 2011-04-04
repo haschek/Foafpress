@@ -22,6 +22,28 @@ class Foaf_Person_Controller extends Foafpress_Controller
         $this->content->depiction = $this->RESOURCE->getImage();
         $this->content->short_description = $this->RESOURCE->getLiteral(array('bio_olb'));
         
+        // -- Websites/Links ---------------------------------------------------
+        
+        $list_of_website_objects = array_unique(array_merge($this->RESOURCE->homepage, $this->RESOURCE->weblog, $this->RESOURCE->workInfoHomepage));
+        $list_of_websites = array();
+        
+        foreach ($list_of_website_objects as $website_object)
+        {
+            if (is_object($website_object))
+            {
+                $list_of_websites[] = array(
+                    'source-icon-class' => $website_object->getIconLayout($website_object->uri),
+                    'url' => $website_object->uri,
+                    'label' => $website_object->getLiteral(array('rdfs_label', 'dc_titel'))
+                );
+            }
+            unset($website_object);
+        }
+        
+        $this->content->list_of_websites = $list_of_websites;
+        unset($list_of_websites);
+        unset($list_of_website_objects);
+        
         // -- Online Accounts --------------------------------------------------
         
         $list_of_account_objects = $this->RESOURCE->holdsAccount;
@@ -212,35 +234,44 @@ class Foaf_Person_Controller extends Foafpress_Controller
                 'Address' => array(), 'Phone' => array(), 'Fax' => array(), 'Email' => array()
             )
         );
+        
+        $list_of_contacts_empty = $list_of_contacts;
 
-        foreach ($list_of_VCard_objects as $VCard_object)
+        foreach ($list_of_VCard_objects as $VCard_object_id => $VCard_object)
         {
-            $list_of_contact_objects['Work']['adr'] = array_unique(array_merge(
-                                                        $list_of_contact_objects['Work']['adr'],
-                                                        $VCard_object->vcard_adr('vcard:Work')));
-            $list_of_contact_objects['Work']['tel'] = array_unique(array_merge(
-                                                        $list_of_contact_objects['Work']['tel'],
-                                                        $VCard_object->vcard_tel('vcard:Work', '-vcard:Fax')));
-            $list_of_contact_objects['Work']['fax'] = array_unique(array_merge(
-                                                        $list_of_contact_objects['Work']['fax'],
-                                                        $VCard_object->vcard_tel('vcard:Work', 'vcard:Fax', true)));
-            $list_of_contact_objects['Work']['email'] = array_unique(array_merge(
-                                                        $list_of_contact_objects['Work']['email'],
-                                                        $VCard_object->vcard_email('vcard:Work', 'vcard:Email', true) /* not valid by current Vcard model */,
-                                                        $VCard_object->vcard_workEmail));
-            $list_of_contact_objects['Home']['adr'] = array_unique(array_merge(
-                                                        $list_of_contact_objects['Home']['adr'],
-                                                        $VCard_object->vcard_adr('vcard:Home')));
-            $list_of_contact_objects['Home']['tel'] = array_unique(array_merge(
-                                                        $list_of_contact_objects['Home']['tel'],
-                                                        $VCard_object->vcard_tel('vcard:Home', '-vcard:Fax')));
-            $list_of_contact_objects['Home']['fax'] = array_unique(array_merge(
-                                                        $list_of_contact_objects['Home']['fax'],
-                                                        $VCard_object->vcard_tel('vcard:Home', 'vcard:Fax', true)));
-            $list_of_contact_objects['Home']['email'] = array_unique(array_merge(
-                                                        $list_of_contact_objects['Home']['email'],
-                                                        $VCard_object->vcard_email('vcard:Home', 'vcard:Email', true) /* not valid by current Vcard model */,
-                                                        $VCard_object->vcard_personalEmail));
+            if (!is_object($VCard_object))
+            {
+                unset($list_of_VCard_objects[$VCard_object_id]);
+            }
+            else
+            {
+                $list_of_contact_objects['Work']['adr'] = array_unique(array_merge(
+                                                            $list_of_contact_objects['Work']['adr'],
+                                                            $VCard_object->vcard_adr('vcard:Work')));
+                $list_of_contact_objects['Work']['tel'] = array_unique(array_merge(
+                                                            $list_of_contact_objects['Work']['tel'],
+                                                            $VCard_object->vcard_tel('vcard:Work', '-vcard:Fax')));
+                $list_of_contact_objects['Work']['fax'] = array_unique(array_merge(
+                                                            $list_of_contact_objects['Work']['fax'],
+                                                            $VCard_object->vcard_tel('vcard:Work', 'vcard:Fax', true)));
+                $list_of_contact_objects['Work']['email'] = array_unique(array_merge(
+                                                            $list_of_contact_objects['Work']['email'],
+                                                            $VCard_object->vcard_email('vcard:Work', 'vcard:Email', true) /* not valid by current Vcard model */,
+                                                            $VCard_object->vcard_workEmail));
+                $list_of_contact_objects['Home']['adr'] = array_unique(array_merge(
+                                                            $list_of_contact_objects['Home']['adr'],
+                                                            $VCard_object->vcard_adr('vcard:Home')));
+                $list_of_contact_objects['Home']['tel'] = array_unique(array_merge(
+                                                            $list_of_contact_objects['Home']['tel'],
+                                                            $VCard_object->vcard_tel('vcard:Home', '-vcard:Fax')));
+                $list_of_contact_objects['Home']['fax'] = array_unique(array_merge(
+                                                            $list_of_contact_objects['Home']['fax'],
+                                                            $VCard_object->vcard_tel('vcard:Home', 'vcard:Fax', true)));
+                $list_of_contact_objects['Home']['email'] = array_unique(array_merge(
+                                                            $list_of_contact_objects['Home']['email'],
+                                                            $VCard_object->vcard_email('vcard:Home', 'vcard:Email', true) /* not valid by current Vcard model */,
+                                                            $VCard_object->vcard_personalEmail));
+            }
             
             unset($VCard_object);
         }
@@ -304,7 +335,11 @@ class Foaf_Person_Controller extends Foafpress_Controller
         unset($list_of_contact_attributes);
         unset($list_of_contact_objects);
         
-        $this->content->list_of_contacts = $list_of_contacts;
+        if ($list_of_contacts_empty != $list_of_contacts)
+        {
+            $this->content->list_of_contacts = $list_of_contacts;
+        }
+        
         unset($list_of_contacts);
 
         // -- Network ----------------------------------------------------------
@@ -313,6 +348,7 @@ class Foaf_Person_Controller extends Foafpress_Controller
         $list_of_person_objects = array_unique(array_merge(
                                     $this->RESOURCE->rel_closeFriendOf,
                                     $this->RESOURCE->rel_acquaintanceOf,
+                                    $this->RESOURCE->rel_collaboratesWith,
                                     $this->RESOURCE->rel_colleagueOf,
                                     $this->RESOURCE->rel_worksWith,
                                     $this->RESOURCE->foaf_knows)/*, SORT_REGULAR*/);

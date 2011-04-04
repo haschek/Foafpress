@@ -11,7 +11,7 @@
         
         if (isset($person_link[0]) && $person_link[0])
         {
-            echo '<a href="'.$person_link[0].'">'.$person['name_or_nick'].' <span class="depiction">'.$person['depiction'].'</span></a><br/>'.PHP_EOL;
+            echo '<a href="'.$person_link[0].'">'.$person['name_or_nick'].' <span class="depiction"><span>'.$person['depiction'].'</span></span></a><br/>'.PHP_EOL;
         }
         else
         {

@@ -11,6 +11,7 @@
             echo '<h1>'.($this->content->name_or_nickname?$this->content->name_or_nickname:'No Name/Nickname found').'</h1>'.PHP_EOL;
             echo $this->content->depiction?'<div class="depiction">'.$this->content->depiction.'</div>'.PHP_EOL:null;
             echo $this->content->short_description?'<p class="tagline"><strong>'.$this->content->short_description.'</strong></p>'.PHP_EOL:null;
+            if ($this->content->list_of_websites) $this->templatePartial('foaf/_websites.html', array('list_of_websites'=>$this->content->list_of_websites));
             if ($this->content->list_of_accounts) $this->templatePartial('foaf/_accounts.html', array('list_of_accounts'=>$this->content->list_of_accounts));
             ?>
         </div>
@@ -35,16 +36,16 @@
                             
                             if (count($this->content->list_of_interests) > 0 || count($this->content->list_of_projects) > 0 || count($this->content->list_of_skills) > 0)
                             {
-                                if ($this->content->number_of_contacts > 0) echo '<div class="c50l"><div class="subcl">'.PHP_EOL;
+                                if (isset($this->content->list_of_contacts)) echo '<div class="c50l"><div class="subcl">'.PHP_EOL;
                                 $this->templatePartial('foaf/_personalstuff.html', array('interests'=>$this->content->list_of_interests,
                                                                                          'projects'=>$this->content->list_of_projects,
                                                                                          'skills'=>$this->content->list_of_skills));
-                                if ($this->content->number_of_contacts > 0) echo '</div></div>'.PHP_EOL;
+                                if (isset($this->content->list_of_contacts)) echo '</div></div>'.PHP_EOL;
                                 
                                 $personal_rendered = true;
                             }
 
-                            if ($this->content->number_of_contacts > 0)
+                            if (isset($this->content->list_of_contacts))
                             {
                                 if ($personal_rendered) echo '<div class="c50r"><div class="subcr">'.PHP_EOL;
                                 $this->templatePartial('vcard/VCard.html', array('contacts'=>$this->content->list_of_contacts));

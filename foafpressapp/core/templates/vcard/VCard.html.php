@@ -10,44 +10,48 @@ foreach ($contacts as $cplace => $cinfo)
     {
         $adrparts_counter = $adrparts_counter + count($info_elements);
     }
-    if ($adrparts_counter == 0) break;
-
-    echo '<h3>'.$cplace.'</h3>'.PHP_EOL;
-    echo '<dl>'.PHP_EOL;
-
-    foreach ($cinfo as $type => $content_array)
+    
+    if ($adrparts_counter > 0)
     {
-        if ($type == 'Address')
+        echo '<h3>'.$cplace.'</h3>'.PHP_EOL;
+        echo '<dl>'.PHP_EOL;
+
+        foreach ($cinfo as $type => $content_array)
         {
-            echo '<dt>'.$type.'</dt>'.PHP_EOL;
-        }
-        else
-        {
-            echo '<dt class="inline">'.$type.'</dt>'.PHP_EOL;
+            if ($type == 'Address' && count($content_array)>0)
+            {
+                echo '<dt>'.$type.'</dt>'.PHP_EOL;
+            }
+            elseif (count($content_array)>0)
+            {
+                echo '<dt class="inline">'.$type.'</dt>'.PHP_EOL;
+            }
+
+            foreach ($content_array as $content_item)
+            {
+                if ($type == 'Address')
+                {
+                    echo '<dd>'.$content_item.'</dd>'.PHP_EOL;
+                }
+                else // Tel, Fax, Email
+                {
+                    echo '<dd class="inline"><a href="'.$content_item['link'].'">'.$content_item['label'].'</a></dd>'.PHP_EOL;
+                }
+                unset($content_item);
+            }
+
+            unset($type);
+            unset($content_array);
         }
 
-        foreach ($content_array as $content_item)
-        {
-            if ($type == 'Address')
-            {
-                echo '<dd>'.$content_item.'</dd>'.PHP_EOL;
-            }
-            else // Tel, Fax, Email
-            {
-                echo '<dd class="inline"><a href="'.$content_item['link'].'">'.$content_item['label'].'</a></dd>'.PHP_EOL;
-            }
-            unset($content_item);
-        }
-
-        unset($type);
-        unset($content);
+        echo '</dl>'.PHP_EOL;
     }
 
     unset($cplace);
     unset($cinfo);
-
-    echo '</dl>'.PHP_EOL;
 }
+
+unset($contacts);
 
 echo '</div> <!-- /#contacts -->'.PHP_EOL;
 
