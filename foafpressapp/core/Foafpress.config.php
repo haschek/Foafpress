@@ -53,7 +53,7 @@ $c['LinkedData']['cachetime'] = 7 * 24 * 60 * 60; // 7 days
 $c['LinkedData']['timeout'] = 10; // 3 sec per feed
 $c['LinkedData']['maxlevel'] = 1; // maximum of how deep should we follow resource uris
 $c['LinkedData']['maxrequests'] = 50; // maximum of how many uris should be requested
-$c['LinkedData']['useBnodes'] = false;
+$c['LinkedData']['useBnodes'] = false; // not used right now (TODO)
 $c['LinkedData']['ignoreResources'] = array(
                                             'http://example.org/resource'
                                            );

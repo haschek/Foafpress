@@ -1,21 +1,22 @@
 <?php
 /**
- * Sandbox Publisher - Example Bootstrap
+ * Foafpress Bootstrap
  *
- * @category SPCMS
- * @package  Sandbox-Core
+ * @category FOAFPRESS
+ * @package  Foafpress-Core
  *
- * @author   Michael Haschke, eye48.com
+ * @author   Michael Haschke, http://eye48.com/
  * @license  http://www.opensource.org/licenses/gpl-2.0.php The GNU General Public License (GPL)
  *
- * @version  SVN: $Id: $
+ * @link     http://foafpress.org/
  *
- * @link     http://code.google.com/p/sandbox-publisher-cms Dev Website and Issue tracker
+ * Usually it is not necessary to edit something here. You would lose your
+ * changes with the next Foafpress update. Please use fp-config.php for
+ * configuration, you can use fp-config.php-example as template.
  *
- * You may configure everything here, check the examples down below and
- * uncomment/extend it.
  **/
- 
+
+// show errors
 ini_set('display_errors', 1);
 
 // Is your Sandbox app/website in production use?

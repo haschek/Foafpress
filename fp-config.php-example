@@ -1,41 +1,192 @@
 <?php
+/**
+ * Foafpress Configuration Template
+ *
+ * @category FOAFPRESS
+ * @package  Foafpress-Configuration
+ *
+ * @author   Michael Haschke, http://eye48.com/
+ * @license  http://www.opensource.org/licenses/gpl-2.0.php The GNU General Public License (GPL)
+ *
+ * @link     http://foafpress.org/
+ *
+ * Please use this template to configure Foafpress, save your changes to
+ * fp-config.php, what is inluded automatically by Foafpress as user config file.
+ *
+ * You need to uncomment the #lines you want to change. This file give some
+ * examples and an indication about the default values.
+ *
+ **/
 
-// Is Foafpress in production use?
+
+/* -- Is Foafpress in production use? ------------------------------------------
+ *
+ * Please change this to 'true' on your running public server/webspace. Otherwise
+ * all error messages and warnings will be printed out what might be helpful on
+ * your local development machine. In development mode Foafpress addionally
+ * echoes an array with debug messages.
+ */
+ 
 # $production = true; // default: false
 
-// add my template folders
-// absolute directory names or relative to sandbox.php path
-# $c['template']['folder'][] = dirname(__FILE__).'/mytemplates/';
+/* -- Template folders ---------------------------------------------------------
+ *
+ * Add all the folders what should be checked for templates you want to use as
+ * Foafpress views (like foaf/Person.html.php). As Foafpress is technically a
+ * plugin of Sandbox Publisher CMS, all paths have to be relative to
+ * foafpressapp/libraries/spcms or you use absolute path declarations what is
+ * recommended (and used at the example below).
+ *
+ * For example if you add your 'mytemplates' folder, Foafpress would use e.g.
+ * 'mytemplates/foaf/Person.html.php' for foaf:Person resources. If Foafpress
+ * cannot find the linked template it will fall back to its own default
+ * templates.
+ *
+ * You can add more than one template folder, they will be checked in order of
+ * your configuration stack.
+ */
 
-// set my global layout
+# $c['template']['folder'][] = dirname(__FILE__).'/mytemplates/'; // absolute path names or relative to sandbox.php path
+# $c['template']['folder'][] = dirname(__FILE__).'/mytemplates2/'; // absolute path names or relative to sandbox.php path
+
+/* -- Global layout template ---------------------------------------------------
+ *
+ * This defines the template what is used to envelope all views. It must be
+ * located in one of your configured template folders. Your template file name
+ * must end with the .php extension but it will added automatically by
+ * Foafpress/SPCMS. For example, configure 'Layout.html' to use 'Layout.html.php'
+ */
+
 # $c['template']['layout'] = 'MyLayout.tpl'; // must be in your mytemplates folder
 
-// cache configuration
-# if ($production) $c['cache']['age'] = 60 * 60; // overwrite cache invalidation time, default: 60*60 (1h)
-# $c['cache']['displacement'] = 0.25; // overwrite randomized timeshift factor, default: 0.5 (0.5h to 1.5h)
-# $c['cache']['folder'] = dirname(__FILE__).'/mycache/'; // overwrite standard cache folder
+/* -- Plugin folders -----------------------------------------------------------
+ *
+ * You can define paths which Foafpress/SPCMS check for plugin files. It follows
+ * the same rules like the definitions of the template folders. They must be
+ * defined relative to the 'foafpressapp/libraries/spcms' path, or you use
+ * absolute path declarations.
+ *
+ * You also can specify the folder of your own Foafpress controllers here
+ * because technically they are just SPCMS plugins like Foafpress itself.
+ */
 
+# $c['plugin']['folder'][] = dirname(__FILE__).'/myplugins/'; // absolute directory names or relative to sandbox.php path
+# $c['plugin']['folder'][] = dirname(__FILE__).'/myplugins2/subfolder/'; // absolute directory names or relative to sandbox.php path
 
-// add plugin folders
-// absolute directory names or relative to sandbox.php path
-# $c['plugin']['folder'][] = dirname(__FILE__).'/mytemplates1/';
-# $c['plugin']['folder'][] = dirname(__FILE__).'/mytemplates2/';
+/* -- Plugin loader ------------------------------------------------------------
+ *
+ * All plugins of this configuration stack are instanciated automatically with
+ * the start of Foafpress/SPCMS. Location definitions must be plugin file
+ * location without the .php file extension, and they must be relative to one of
+ * the defined plugin folders.
+ *
+ * For example your 'myplugins/renderer/Markdown.php' plugin must be declared
+ * here as './renderer/Markdown'.
+ */
 
-// load plugins at start
 # $c['plugin']['load'][] = './MyPlugin';
 # $c['plugin']['load'][] = './subfolder/My2ndPlugin';
 
-// Overwrite Foafpress standard configuration
-# $c['Foafpress']['DirectoryIndex'] = 'index resource'; // extension will be added from supported file types
+/* -- Caching ------------------------------------------------------------------
+ *
+ * Foafpress uses the Cache API from SPCMS, and it is recommended to use caching
+ * because Foafpress is gathering a lot of data in the background via linked data
+ * and it needs a lot of time for all the requests. Answering requests can be
+ * speeded up by saving outputs and data (see below) for a defined amount of
+ * time.
+ *
+ * This configuration of the cache invalidation time is the global SPCMS cache
+ * definition, used by Foafpress to invalidate saved outputs rendered before
+ * within Foafpress views/templates.
+ *
+ * As for the cache folder the same rules like for template and plugin folders
+ * are applied here. It's recommended to use absolute path definitions. The cache
+ * folder must be readable and writeable by user what is used to run your server,
+ * so you must grant read/write access for the cache folder to this user or
+ * its usergroup.
+ *
+ * Cache invalidation times must be defined in seconds, with following special
+ * cases: 0 = do not cache, -1 = cache it once and use it forever as long as the
+ * cache file exists.
+ *
+ * Configuration for data caches is below at the Foafpress plugin configuration.
+ */
+
+# if ($production) $c['cache']['age'] = 60 * 60; // cache invalidation time in seconds, default: 60*60 (1h)
+# $c['cache']['displacement'] = 0.25; // timeshift factor to randomize range of invalidation time, default: 0.5 (with 1h cache it means 0.5h to 1.5h)
+# $c['cache']['folder'] = dirname(__FILE__).'/mycache/'; // overwrite standard cache folder, default: cache/
+
+
+/* == Overwrite Foafpress standard configuration ============================ */
+
+/* You can overwrite all default values of the Foafpress configuration found in
+   'foafpressapp/core/Foafpress.config.php'. Just prefix the array ids by
+   ['Foafpress'], e.g. $c['types'] becomes to $c['Foafpress']['types']. */
+
+/* -- Foafpress index files ----------------------------------------------------
+ *
+ * Apache's DirectoryIndex (what you can define via .htaccess) configuration
+ * only works with existing files what conflicts with the .htaccess server
+ * configuration of Foafpress. So we need to 'fake' it, e.g. to describe the
+ * resource 'http://localhost/foafpress/resource/' in 'http://localhost/foafpress/resource/index.rdf'
+ *
+ * You may need this to use Foafpress with your resource 'http://your.example.name/'
+ * what may be desribed in 'http://your.example.name/me.rdf'
+ *
+ * Like Apache, Foafpress is checking for existing files by combining the index
+ * name with useable file extensions (like .rdf, .nt, .tt).
+ */
+ 
+# $c['Foafpress']['DirectoryIndex'] = 'myindex'; // default: 'index', extension will be added from supported file types
+
+/* -- Foafpress data caches ----------------------------------------------------
+ *
+ * Beside caching the rendered outputs, its recommended to cache data what is
+ * aggregated by Foafpress via Linked Data. Foafpress uses two different cache
+ * invalidation times, one for Linked Data resource, and one for RSS/Atom feeds.
+ *
+ * It's recommended to keep Linked Data caches valid for a long time, we just
+ * assume here that those data is stable for longer periods and not often
+ * changed. Foafpress comes with a default invalidation time of 7 days, you may
+ * change this to longer periods or even to a one time cache (-1) for
+ * performance issues.
+ *
+ * The RSS/Atom feed describe your activities (or updates of other resources),
+ * they should be checked frequently. Foafpress comes with a default value of
+ * 6 hours what means around 4 times a day. You may add other PHP code, e.g. to
+ * define different invalidation time for the day and the night.
+ *
+ * Both cache invalidation times, for Linked Data and the Activity, using the
+ * SPCMS displacement factor what is configured above at the SPCMS standard
+ * cache, e.g. if you define a displacement of 0.5 and 6 days for Linked Data,
+ * your cache invalidation time may be between 3 and 9 days.
+ */
+
 # $c['Foafpress']['LinkedData']['cachetime'] = -1; // one time cache, no invalidation, default: 7 days
 # $c['Foafpress']['Activity']['cachetime'] = 2 * 60 * 60;  // 2 hours, default: 6 hours
-# $c['Foafpress']['LinkedData']['useBnodes'] = true; // default: false
+
+/* -- Ignore resources ---------------------------------------------------------
+ *
+ * You may want Foafpress to ignore some resources because you want to use them
+ * in your RDF but don't want data gathering via Foafpress. This may have
+ * several reasons like bad or too big data, or using distinctly rendered
+ * Foafpress views of sameAs resources (e.g. using two different resources to
+ * describe you as private and business person).
+ */
+
 # $c['Foafpress']['LinkedData']['ignoreResources'] = array(
 #                                                         'http://example.org/user/name',
 #                                                         'http://example.org/projects/name'
 #                                                        );
 
-// Overwrite standard configuration of I18N LanguageChecker plugin
+/* == Overwrite LanguageChecker standard configuration ====================== */
+
+/* The I18N LanguageChacker is another SPCMS plugin what is used in Foafpress by
+   default to check language preferences of the user agent, as well as to define
+   an own stack of supported languages. E.g. Foafpress takes the language stack
+   to check what literals should been used if they available in different
+   languages. */
+
 # $c['LanguageChecker']['enabled'] = array('en', 'de');
 
 ?>
