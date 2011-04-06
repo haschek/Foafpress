@@ -23,24 +23,24 @@
  *
  * Please change this to 'true' on your running public server/webspace. Otherwise
  * all error messages and warnings will be printed out what might be helpful on
- * your local development machine. In development mode Foafpress addionally
- * echoes an array with debug messages.
+ * your local development machine. In development mode Foafpress additionally
+ * echoes an array with debug log messages.
  */
  
 # $production = true; // default: false
 
 /* -- Template folders ---------------------------------------------------------
  *
- * Add all the folders what should be checked for templates you want to use as
- * Foafpress views (like foaf/Person.html.php). As Foafpress is technically a
- * plugin of Sandbox Publisher CMS, all paths have to be relative to
- * foafpressapp/libraries/spcms or you use absolute path declarations what is
+ * Add all the folders which should be checked for template files you want to
+ * use as Foafpress views (like foaf/Person.html.php). As Foafpress is
+ * technically a plugin of Sandbox Publisher CMS, all paths have to be relative
+ * to foafpressapp/libraries/spcms or you use absolute path declarations what is
  * recommended (and used at the example below).
  *
- * For example if you add your 'mytemplates' folder, Foafpress would use e.g.
+ * For example if you add your 'mytemplates' folder, Foafpress would use
  * 'mytemplates/foaf/Person.html.php' for foaf:Person resources. If Foafpress
- * cannot find the linked template it will fall back to its own default
- * templates.
+ * cannot find the necessary template in your personal template folders it will
+ * fall back to its own default templates.
  *
  * You can add more than one template folder, they will be checked in order of
  * your configuration stack.
@@ -61,7 +61,7 @@
 
 /* -- Plugin folders -----------------------------------------------------------
  *
- * You can define paths which Foafpress/SPCMS check for plugin files. It follows
+ * You can define paths which should be checked for plugin files. It follows
  * the same rules like the definitions of the template folders. They must be
  * defined relative to the 'foafpressapp/libraries/spcms' path, or you use
  * absolute path declarations.
@@ -76,11 +76,11 @@
 /* -- Plugin loader ------------------------------------------------------------
  *
  * All plugins of this configuration stack are instanciated automatically with
- * the start of Foafpress/SPCMS. Location definitions must be plugin file
+ * the start of Foafpress/SPCMS. Path declarations must be the plugin file
  * location without the .php file extension, and they must be relative to one of
  * the defined plugin folders.
  *
- * For example your 'myplugins/renderer/Markdown.php' plugin must be declared
+ * For example your 'myplugins/renderer/Markdown.php' plugin should be declared
  * here as './renderer/Markdown'.
  */
 
@@ -90,26 +90,25 @@
 /* -- Caching ------------------------------------------------------------------
  *
  * Foafpress uses the Cache API from SPCMS, and it is recommended to use caching
- * because Foafpress is gathering a lot of data in the background via linked data
- * and it needs a lot of time for all the requests. Answering requests can be
- * speeded up by saving outputs and data (see below) for a defined amount of
- * time.
+ * because Foafpress is gathering a lot of data in the background via Linked Data
+ * and it needs a lot of time for all the requests. Foafpress can be speeded up
+ * by saving outputs and data (see below) for a defined amount of time.
  *
  * This configuration of the cache invalidation time is the global SPCMS cache
  * definition, used by Foafpress to invalidate saved outputs rendered before
  * within Foafpress views/templates.
  *
  * As for the cache folder the same rules like for template and plugin folders
- * are applied here. It's recommended to use absolute path definitions. The cache
- * folder must be readable and writeable by user what is used to run your server,
+ * are applied. It's recommended to use absolute path definitions. The cache
+ * folder must be readable and writeable by the user what runs your server,
  * so you must grant read/write access for the cache folder to this user or
  * its usergroup.
  *
  * Cache invalidation times must be defined in seconds, with following special
- * cases: 0 = do not cache, -1 = cache it once and use it forever as long as the
- * cache file exists.
+ * cases: 0 = do not cache anything, -1 = cache it once and use it forever as
+ * long as the cache file exists.
  *
- * Configuration for data caches is below at the Foafpress plugin configuration.
+ * Configuration of the data cache is below at the Foafpress plugin configuration.
  */
 
 # if ($production) $c['cache']['age'] = 60 * 60; // cache invalidation time in seconds, default: 60*60 (1h)
@@ -120,7 +119,7 @@
 /* == Overwrite Foafpress standard configuration ============================ */
 
 /* You can overwrite all default values of the Foafpress configuration found in
-   'foafpressapp/core/Foafpress.config.php'. Just prefix the array ids by
+   'foafpressapp/core/Foafpress.config.php'. Just prefix the array IDs by
    ['Foafpress'], e.g. $c['types'] becomes to $c['Foafpress']['types']. */
 
 /* -- Foafpress index files ----------------------------------------------------
@@ -134,7 +133,7 @@
  * what may be desribed in 'http://your.example.name/me.rdf'
  *
  * Like Apache, Foafpress is checking for existing files by combining the index
- * name with useable file extensions (like .rdf, .nt, .tt).
+ * name with the allowed file extensions (like .rdf, .nt, .tt).
  */
  
 # $c['Foafpress']['DirectoryIndex'] = 'myindex'; // default: 'index', extension will be added from supported file types
@@ -143,23 +142,24 @@
  *
  * Beside caching the rendered outputs, its recommended to cache data what is
  * aggregated by Foafpress via Linked Data. Foafpress uses two different cache
- * invalidation times, one for Linked Data resource, and one for RSS/Atom feeds.
+ * invalidation times, one for Linked Data resources, and one for RSS/Atom feeds.
  *
  * It's recommended to keep Linked Data caches valid for a long time, we just
- * assume here that those data is stable for longer periods and not often
+ * assume here that those data is stable for longer periods and it's not often
  * changed. Foafpress comes with a default invalidation time of 7 days, you may
  * change this to longer periods or even to a one time cache (-1) for
  * performance issues.
  *
- * The RSS/Atom feed describe your activities (or updates of other resources),
+ * The RSS/Atom feeds describe your activities (or updates of other resources),
  * they should be checked frequently. Foafpress comes with a default value of
- * 6 hours what means around 4 times a day. You may add other PHP code, e.g. to
- * define different invalidation time for the day and the night.
+ * 6 hours what means to check them around 4 times a day. You may add other PHP
+ * code, e.g. to define different invalidation times for the day/night.
  *
- * Both cache invalidation times, for Linked Data and the Activity, using the
- * SPCMS displacement factor what is configured above at the SPCMS standard
- * cache, e.g. if you define a displacement of 0.5 and 6 days for Linked Data,
- * your cache invalidation time may be between 3 and 9 days.
+ * On both cache invalidation times, for Linked Data and the Activity, are
+ * randomized in range defined by the SPCMS displacement factor what is
+ * configured above at the SPCMS standard cache, e.g. if you define a
+ * displacement of 0.5 and 6 days for Linked Data, your cache invalidation time
+ * may be between 3 and 9 days.
  */
 
 # $c['Foafpress']['LinkedData']['cachetime'] = -1; // one time cache, no invalidation, default: 7 days
