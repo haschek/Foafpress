@@ -29,14 +29,15 @@ class Foaf_Person_Controller extends Foafpress_Controller
         
         foreach ($list_of_website_objects as $website_object)
         {
-            if (is_object($website_object))
+            if (is_object($website_object) && ($label = $website_object->getLiteral(array('rdfs_label', 'dc_title'))))
             {
                 $list_of_websites[] = array(
                     'source-icon-class' => $website_object->getIconLayout($website_object->uri),
                     'url' => $website_object->uri,
-                    'label' => $website_object->getLiteral(array('rdfs_label', 'dc_titel'))
+                    'label' => $label
                 );
             }
+            unset($label);
             unset($website_object);
         }
         
@@ -56,7 +57,7 @@ class Foaf_Person_Controller extends Foafpress_Controller
                 $list_of_accounts[] = array(
                     'source-icon-class' => $account_object->getIconLayout($account_object->homepage[0]->uri),
                     'homepage-url' => $account_object->homepage[0]->uri,
-                    'homepage-label' => $account_object->homepage[0]->getLiteral(array('rdfs_label', 'dc_titel'))
+                    'homepage-label' => $account_object->homepage[0]->getLiteral(array('rdfs_label', 'dc_title'))
                 );
             }
             unset($account_object);
