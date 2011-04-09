@@ -137,8 +137,8 @@ class Foafpress_Resource_Arc2File extends ARC2File_Template_Object
             // get preferenced laguage stack from LanguageChecker plugin
             $languages = array_unique(
                             array_merge(
-                                $this->spcms_pm->LanguageChecker->getLanguageStack(),
-                                $this->spcms_pm->LanguageChecker->getUserPreferences()
+                                $this->spcms_pm->LanguageChecker->getUserPreferences(),
+                                $this->spcms_pm->LanguageChecker->getLanguageStack()
                             )
                          );
         }

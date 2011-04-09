@@ -89,8 +89,8 @@ class Foafpress extends SandboxPlugin
         {
             $this->languageStackPreferences = array_unique(
                             array_merge(
-                                $this->pm->LanguageChecker->getLanguageStack(),
-                                $this->pm->LanguageChecker->getUserPreferences()
+                                $this->pm->LanguageChecker->getUserPreferences(),
+                                $this->pm->LanguageChecker->getLanguageStack()
                             )
                          );
         }
