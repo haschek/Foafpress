@@ -61,6 +61,19 @@ if (!$this->cache->getOutput($this->file.serialize($this->pm->Foafpress->languag
             <a href="http://www.yaml.de/">YAML</a>,
             <a href="http://jquery.com/">jQuery</a>
             and <a href="http://www.komodomedia.com/download/#social-network-icon-pack">Komodo SNIP</a>.</p>
+            <?php
+                if ($this->content->ALLOW_RDF_DOWNLOAD)
+                {
+                    echo '<p>Show resource as ';
+                    $alt_rdf_downloads = array();
+                    foreach ($meta_alternate_links as $alternate_link)
+                    {
+                        $alt_rdf_downloads[] = '<a href="'.$alternate_link['href'].'">'.$alternate_link['type'].'</a>';
+                    }
+                    echo implode(', ', $alt_rdf_downloads);
+                    echo '</p>'.PHP_EOL;
+                }
+            ?>
         </div>
     </div> <!-- /#footer -->
 

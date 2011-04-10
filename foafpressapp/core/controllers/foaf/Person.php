@@ -22,6 +22,7 @@ class Foaf_Person_Controller extends Foafpress_Controller
         $document_uri = $this->pm->load('Foafpress')->URI_Document;
         $document_extensiontype = $this->pm->load('Foafpress')->extensiontype;
         $application_types = $this->pm->load('Foafpress')->config['types'];
+        $this->content->ALLOW_RDF_DOWNLOAD = $this->pm->load('Foafpress')->config['extensiontoexport'];
 
         foreach ($application_types as $type=>$ext)
         {

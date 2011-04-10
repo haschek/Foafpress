@@ -55,26 +55,27 @@
 
     #header .page_margins > *
     {
-        width:70%;
+        margin-right:30%;
+        padding-right:2em;
     }
 
     #header .depiction
     {
         display:block;
         position:absolute;
-        width:30%; height:80%;
-        right:0; top:10%;
+        width:26%; height:80%;
+        left:70%; top:10%;
+        margin:0 0 0 -2em;
+        padding:0 2%;
+        overflow:hidden;
     }
     
     #header .depiction img
     {
         display:block;
         margin:0 auto;
-        max-width:90%;
+        max-width:100%;
         max-height:100%;
-        position:absolute;
-        top:0;
-        left:50%; margin-left:-45%;
     }
     
     #main
