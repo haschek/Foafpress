@@ -3,7 +3,7 @@
 class Foaf_Person_Controller extends Foafpress_Controller
 {
     public function get_request()
-    {
+    {//die(print_r($this->sandbox,true));
         // -- Layout class -----------------------------------------------------
         
         $this->content->body_css_class = $this->RESOURCE->cssGetType();
@@ -15,6 +15,34 @@ class Foaf_Person_Controller extends Foafpress_Controller
         $this->content->META_TITLE = $this->RESOURCE->getLiteral(array('rdfs_label', 'dc_title'));
         $this->content->META_DESCRIPTION = $this->RESOURCE->getLiteral(array('rdfs_comment', 'dc_description'));
         $this->RESOURCE->uri = $resource_uri; // restore uri of resource
+
+        // -- Alternate meta links to RDF data ---------------------------------
+
+        $alternate_meta_links = array();
+        $document_uri = $this->pm->load('Foafpress')->URI_Document;
+        $document_extensiontype = $this->pm->load('Foafpress')->extensiontype;
+        $application_types = $this->pm->load('Foafpress')->config['types'];
+
+        foreach ($application_types as $type=>$ext)
+        {
+            if ($document_extensiontype !== $type)
+            {
+                $alternate_meta_links[] = array(
+                    'type'=> $type,
+                    'href'=> substr($document_uri, 0, -1*strlen($application_types[$document_extensiontype])).$ext
+                );
+            }
+            unset($type);
+            unset($ext);
+        }
+
+        $this->content->META_ALTERNATE_LINKS = $alternate_meta_links;
+
+        unset($alternate_meta_links);
+        unset($application_types);
+        unset($document_uri);
+        unset($document_extensiontype);
+
         
         // -- Basics - Name, Info, Depiction -----------------------------------
         
@@ -52,14 +80,15 @@ class Foaf_Person_Controller extends Foafpress_Controller
         
         foreach ($list_of_account_objects as $account_object)
         {
-            if (is_object($account_object) && $account_object->homepage)
+            if (is_object($account_object) && $account_object->homepage && ($label = $account_object->homepage[0]->getLiteral(array('rdfs_label', 'dc_title'))))
             {
                 $list_of_accounts[] = array(
                     'source-icon-class' => $account_object->getIconLayout($account_object->homepage[0]->uri),
                     'homepage-url' => $account_object->homepage[0]->uri,
-                    'homepage-label' => $account_object->homepage[0]->getLiteral(array('rdfs_label', 'dc_title'))
+                    'homepage-label' => $label
                 );
             }
+            unset($label);
             unset($account_object);
         }
         

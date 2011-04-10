@@ -8,7 +8,6 @@ if (!$this->cache->getOutput($this->file.serialize($this->pm->Foafpress->languag
     <?php
         // add some folder uris
         $this->content->FPTPLURL = str_replace(BASEDIR, BASEURL, realpath(dirname(__FILE__)).'/../../styles');
-
     ?>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <!-- meta http-equiv="content-language" content="de" / -->
@@ -36,7 +35,16 @@ if (!$this->cache->getOutput($this->file.serialize($this->pm->Foafpress->languag
         <link href="<?php echo $this->content->FPTPLURL; ?>/default/patches/ie6.css" rel="stylesheet" type="text/css" media="all" />
     <![endif]-->
 
-    <!-- link rel="alternate" type="application/rss+xml" title="ttt" href="#" / -->
+    <?php
+        // @see http://www4.wiwiss.fu-berlin.de/bizer/pub/LinkedDataTutorial/#discovery
+
+        $meta_alternate_links = $this->content->META_ALTERNATE_LINKS;
+
+        foreach ($meta_alternate_links as $alternate_link)
+        {
+            echo '<link rel="alternate" type="'.$alternate_link['type'].'" href="'.$alternate_link['href'].'" />'.PHP_EOL;
+        }
+    ?>
     
     <!-- script type="text/javascript" src="<?php echo $this->content->FPLIBURL; ?>/jquery/jquery-1.4.min.js"></script -->
     <!-- script type="text/javascript" src="<?php echo BASEURL; ?>app/libs/jquery/index.js"></script -->
