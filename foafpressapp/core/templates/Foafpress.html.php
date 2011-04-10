@@ -25,7 +25,7 @@ if (!$this->cache->getOutput($this->file.serialize($this->pm->Foafpress->languag
     <!-- link rel="shortcut icon" href="<?php echo BASEURL; ?>favicon.ico" / -->
 
     <link href="<?php echo $this->content->FPLIBURL; ?>/yaml/core/slim_base.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="<?php echo $this->content->FPTPLURL; ?>/default/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="<?php echo $this->content->FPTPLURL; ?>/default/all.css" rel="stylesheet" type="text/css" media="all" />
     <link href="<?php echo $this->content->FPTPLURL; ?>/default/icons.css" rel="stylesheet" type="text/css" media="all" />
 
     <!--[if lte IE 7]>

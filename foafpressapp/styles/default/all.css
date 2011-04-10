@@ -1,0 +1,451 @@
+@charset "UTF-8";
+
+/*! Stylesheet for Foafpress Default Layout
+ *
+ *  @since    0.0
+ *  @category FOAFPRESS
+ *  @package  Foafpress-Core
+ *
+ *  @author   Michael Haschke, http://48augen.de/
+ *  @license  http://www.opensource.org/licenses/gpl-2.0.php The GNU General Public License (GPL)
+ *
+ *  @link     http://foafpress.org/
+ *
+ *
+ *  - contains styles for screen/projection and print
+ *  - contains styles for global layout, typography and all content types
+ *
+ *  Outline:
+ *
+ *  1) imports
+ *  2) styles for all medias
+ *  3) additional styles for print media
+ *  4) customization on special media types
+ */
+
+@media all
+{
+    /* == CONTENT ==============================================================
+
+        1. Layout global
+            1.1. Header
+            1.2. Page
+            1.3. Footer
+            1.4. Helper
+        2. Typography
+            2.1. Text Elements
+        3. Media
+        4. Content Types
+            4.1. foaf:interest & foaf:project
+            4.2. foaf:knows
+            4.3. foaf:holdsAccount & foaf:homepage
+            4.4. Activity stream
+
+    ------------------------------------------------------------------------- */
+
+    /* ====================================================================== */
+    /* ---------------------------------------------------------------------- */
+
+    /* == 1. Layout global ================================================== */
+
+    body
+    {
+        color:#333;
+        background-color:#fff;
+    }
+
+    /* -- 1.1. Header ------------------------------------------------------- */
+
+    #header
+    {
+        color:#000;
+        background-color:#f6f6f6;
+        border-bottom:solid 1px #e6e6e6;
+        padding:1em 0;
+    }
+
+    body.foafPerson #header .page_margins
+    {
+        position:relative;
+    }
+
+    #header .page_margins > *
+    {
+        margin-right:30%;
+        padding-right:2em;
+    }
+
+    #header .depiction
+    {
+        display:block;
+        position:absolute;
+        width:26%; height:80%;
+        left:70%; top:10%;
+        margin:0 0 0 -2em;
+        padding:0 2%;
+        overflow:hidden;
+    }
+
+    #header .depiction img
+    {
+        display:block;
+        margin:0 auto;
+        max-width:100%;
+        max-height:100%;
+    }
+
+    /* -- 1.2. Page --------------------------------------------------------- */
+
+    div.page
+    {
+        background-color:#fff;
+        padding:1em; margin:1em auto;
+        position:relative;
+    }
+
+    .page_margins
+    {
+        width: auto;
+        min-width: 740px;
+        max-width: 65em;
+        margin: auto;
+        padding:1em 2em;
+    }
+
+    body.foafPerson .page_margins
+    {
+        min-width:inherit;
+        max-width:84em;
+    }
+
+    #main
+    {
+    }
+
+    /* -- 1.3. Footer ------------------------------------------------------- */
+
+    #footer
+    {
+        color:#fff;
+        background-color:#333;
+        width:100%;
+        border-top:solid 1px #000;
+    }
+
+    #footer a { color: #fff; }
+    #footer p { padding:0.5em 0; margin:0; font-size:0.8em; }
+
+    /* -- 1.4. Helper ------------------------------------------------------- */
+
+    .subc, .subcl, .subcr
+    {
+        padding-bottom:1em;
+        overflow:hidden;
+    }
+
+    .subc
+    {
+        padding-left:1em;
+        padding-right:1em;
+    }
+
+    .highlighted
+    {
+        background-color:#eee;
+        color:#000;
+    }
+
+    .highlighted a
+    {
+    }
+
+    a
+    {
+        text-decoration:underline;
+        color:#000;
+    }
+
+    a:focus, a:hover, a:active
+    {
+        text-decoration:none;
+    }
+
+
+    /* == 2. Typography ===================================================== */
+
+    body
+    {
+        font-family:serif;
+        font-size:100.1%;
+    }
+
+    .page_margins
+    {
+        font-size:0.9em;
+        line-height:1.8;
+    }
+
+    .sidecontent
+    {
+        font-family:sans-serif;
+        font-size:0.8em;
+    }
+
+    /* -- 2.1. Text elements ------------------------------------------------ */
+
+    h1, h2, h3, h4
+    {
+        font-family:sans-serif;
+        font-weight:bold;
+        margin:0;
+        color:#000;
+    }
+
+    h1 { font-size:2.5em; line-height:1.44em; margin:0.18em 0; text-shadow:1px 1px 2px #fff;}
+    h2 { font-size:1.25em; line-height:1.44; /* padding:0.3375em 0; */ /*margin:0.675em 0;*/ margin-bottom:0.72em; }
+    h3 { font-size:1.125em; line-height:1.333; /*margin:0.8em 0;*/ margin-bottom:0.8em; border-bottom:solid 1px #eee; }
+    h4 { font-size:1em; line-height:1.8; /* margin:0.9em 0;*/ margin-bottom:0.9em; }
+
+    #main h3 { color:#333; }
+    #main h4 { color:#111; }
+
+    h2 a { text-decoration:none; }
+
+    p, ul, ol, blockquote, dl, table
+    {
+        margin-bottom:0.9em;
+    }
+
+    .tagline
+    {
+        font-size:1.5em; line-height:1.2; margin-bottom:0.6em;
+        text-shadow:1px 1px 2px #fff;
+        color:#000;
+    }
+
+    .tagline strong
+    {
+        font-weight:500;
+    }
+
+
+    ul, ol, dl
+    {
+       font-size:1em;
+       margin:0 0 0.9em 1.25em; padding:0;
+       line-height:inherit;
+    }
+
+    ul
+    {
+    }
+
+    ol
+    {
+        margin-left:2em;
+    }
+
+    li
+    {
+        margin:0; padding:0;
+        line-height:inherit;
+    }
+
+    dl
+    {
+        margin-left:0;
+    }
+
+    dt, dd
+    {
+        margin:0; padding:0;
+    }
+
+    dd
+    {
+        list-style:square;
+        margin-left:1.25em;
+        display:list-item;
+    }
+
+    dt.inline:after
+    {
+        content:':';
+    }
+
+    dd.inline + dt.inline:before
+    {
+    }
+
+    dd.inline
+    {
+        white-space:nowrap;
+    }
+
+    dd.inline:after, li.inline:after
+    {
+        content:',';
+    }
+
+    dd:last-child.inline:after, li:last-child.inline:after
+    {
+        content:'';
+    }
+
+    .inline
+    {
+        display:inline;
+        list-style-type:none;
+        margin-left:0; padding-left:0;
+        margin-right:0; padding-right:0;
+    }
+
+    ul.inline, ol.inline
+    {
+        display:inline-block;
+    }
+
+    /* == 3. Media ========================================================== */
+
+    img
+    {
+        vertical-align:middle;
+    }
+
+    /* == 4. Content Types ================================================== */
+
+    /* -- 4.1. foaf:interest & foaf:project --------------------------------- */
+
+    #interests ul,
+    #projects ul
+    {
+        list-style:none;
+        margin-left:0; margin-right:0;
+    }
+
+    /* -- 4.2. foaf:knows --------------------------------------------------- */
+
+    #network ul
+    {
+        list-style:none;
+        margin-left:0; margin-right:0;
+        overflow:hidden;
+    }
+
+    #network ul li
+    {
+        padding-left:0;
+        float:left;
+        width:14.75em;
+        height:4.3em;
+        padding:0;
+        margin:0 0.45em 0.45em 0;
+        white-space:nowrap;
+    }
+
+    #network ul li img
+    {
+        height:1em;
+    }
+
+    #network ul li div
+    {
+        padding:0.25em 0.25em 0.25em 4.1em;
+        position:relative;
+        margin:1px;
+        overflow:hidden;
+        color:#000;
+        background-color:#f6f6f6;
+        margin:0;
+        border:solid 1px #e6e6e6;
+    }
+
+    #network ul li div span.depiction,
+    #network ul li div span.nodepiction
+    {
+        position:absolute;
+        top:0.25em; left:0.25em;
+        height:3.6em; width:3.6em;
+        overflow:hidden;
+        text-align:center;
+    }
+
+    #network ul li div span.nodepiction
+    {
+        background:url(./images/person-depiction-unknown.png) no-repeat top center transparent;
+    }
+
+    #network ul li div span.depiction span
+    {
+        display:block;
+        width:200%;
+        height:100%;
+        position:absolute;
+        top:0;
+        left:-50%;
+    }
+
+    #network ul li div span.depiction img
+    {
+        width:auto;
+        height:100%;
+        display:inline-block;
+    }
+
+    /* -- 4.3. foaf:holdsAccount & foaf:homepage ---------------------------- */
+
+    #profiles ul,
+    #websites ul
+    {
+        margin-left:0; margin-right:0;
+        list-style:none;
+    }
+
+    #profiles ul li,
+    #websites ul li
+    {
+        display:inline;
+        white-space:nowrap;
+        margin-right:1em;
+    }
+
+    /* -- 4.4. Activity stream ---------------------------------------------- */
+
+    #activity ul
+    {
+        margin-left:0; margin-right:0;
+        list-style:none;
+    }
+
+    #activity ul li
+    {
+        margin:0;
+        padding-top:0.4em;
+        padding-bottom:0.4em;
+        border-bottom:dotted 1px #eee;
+        background-position:left 0.5em;
+        overflow:hidden;
+    }
+
+    #activity img.mediathumb
+    {
+        display:block;
+        float:left;
+        margin-right:0.5em;
+        border:solid 0.25em #eee;
+    }
+
+    #activity a:focus img.mediathumb,
+    #activity a:hover img.mediathumb,
+    #activity a:active img.mediathumb
+    {
+        border-color:#999;
+    }
+
+    /* ---------------------------------------------------------------------- */
+}
+
+@media print
+{
+    /* TODO */
+}
