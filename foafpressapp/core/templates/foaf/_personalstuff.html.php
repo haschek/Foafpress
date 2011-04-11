@@ -8,7 +8,7 @@ if (count($interests) > 0)
 {
     echo '<h3>Interests</h3>'.PHP_EOL;
     echo '<ul class="inline">'.PHP_EOL;
-    foreach ($interests as $interest)
+    foreach ($interests as $iid => $interest)
     {
         if (count($interest) > 1 && isset($interest['description']))
         {
@@ -17,11 +17,14 @@ if (count($interests) > 0)
         else
         {
             echo '<li class="inline">'.$interest['label'].'</li>'.PHP_EOL;
+            unset($interests[$iid]);
         }
 
+        unset($iid);
         unset($interest);
     }
     echo '</ul>'.PHP_EOL;
+    $this->content->list_of_interests = $interests;
     unset($interests);
 }
 
@@ -31,7 +34,7 @@ if (count($projects) > 0)
 {
     echo '<h3>Projects</h3>'.PHP_EOL;
     echo '<ul class="inline">'.PHP_EOL;
-    foreach ($projects as $project)
+    foreach ($projects as $pid => $project)
     {
         if (count($project) > 1 && isset($project['description']))
         {
@@ -40,11 +43,14 @@ if (count($projects) > 0)
         else
         {
             echo '<li class="inline">'.$project['label'].'</li>'.PHP_EOL;
+            unset($projects[$pid]);
         }
 
+        unset($pid);
         unset($project);
     }
     echo '</ul>'.PHP_EOL;
+    $this->content->list_of_projects = $projects;
     unset($projects);
 }
 

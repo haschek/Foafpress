@@ -3,7 +3,7 @@
 class Foaf_Person_Controller extends Foafpress_Controller
 {
     public function get_request()
-    {//die(print_r($this->sandbox,true));
+    {
         // -- Layout class -----------------------------------------------------
         
         $this->content->body_css_class = $this->RESOURCE->cssGetType();
@@ -12,6 +12,7 @@ class Foaf_Person_Controller extends Foafpress_Controller
 
         $resource_uri = $this->RESOURCE->uri; // save uri of shown resource
         $this->RESOURCE->uri = $this->pm->load('Foafpress')->URI_Document; // use uri of resource container
+        // TODO: problems if URI_Document != xml:base in RDF file
         $this->content->META_TITLE = $this->RESOURCE->getLiteral(array('rdfs_label', 'dc_title'));
         $this->content->META_DESCRIPTION = $this->RESOURCE->getLiteral(array('rdfs_comment', 'dc_description'));
         $this->RESOURCE->uri = $resource_uri; // restore uri of resource
@@ -81,15 +82,17 @@ class Foaf_Person_Controller extends Foafpress_Controller
         
         foreach ($list_of_account_objects as $account_object)
         {
-            if (is_object($account_object) && $account_object->homepage && ($label = $account_object->homepage[0]->getLiteral(array('rdfs_label', 'dc_title'))))
+            if (is_object($account_object) &&
+                ($account_page = array_merge($account_object->homepage, $account_object->accountProfilePage)) &&
+                ($account_label = $account_page[0]->getLiteral(array('rdfs_label', 'dc_title'))))
             {
                 $list_of_accounts[] = array(
-                    'source-icon-class' => $account_object->getIconLayout($account_object->homepage[0]->uri),
-                    'homepage-url' => $account_object->homepage[0]->uri,
-                    'homepage-label' => $label
+                    'source-icon-class' => $account_object->getIconLayout($account_page[0]->uri),
+                    'homepage-url' => $account_page[0]->uri,
+                    'homepage-label' => $account_label
                 );
             }
-            unset($label);
+            unset($account_label);
             unset($account_object);
         }
         

@@ -287,9 +287,9 @@
         content:',';
     }
 
-    dd:last-child.inline:after, li:last-child.inline:after
+    dd.inline:last-child:after, li.inline:last-child:after
     {
-        content:'';
+        content:'' !important;
     }
 
     .inline
