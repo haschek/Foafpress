@@ -84,6 +84,7 @@ class Foaf_Person_Controller extends Foafpress_Controller
         {
             if (is_object($account_object) &&
                 ($account_page = array_merge($account_object->homepage, $account_object->accountProfilePage)) &&
+                is_object($account_page[0]) &&
                 ($account_label = $account_page[0]->getLiteral(array('rdfs_label', 'dc_title'))))
             {
                 $list_of_accounts[] = array(
