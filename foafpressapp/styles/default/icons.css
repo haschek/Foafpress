@@ -27,26 +27,95 @@
 
 /* Icons from Komodo Social Network Icons package */
 
+.to-bebo_com, .from-bebo_com { background-image:url(./../../libraries/komodo/bebo_16.png); }
+.big-icons .to-bebo_com, .big-icons .from-bebo_com { background-image:url(./../../libraries/komodo/bebo_32.png); }
+
+.to-blogger_com, .from-blogger_com { background-image:url(./../../libraries/komodo/blogger_16.png); }
+.big-icons .to-blogger_com, .big-icons .from-blogger_com { background-image:url(./../../libraries/komodo/blogger_32.png); }
+
+.to-brightkite_com, .from-brightkite_com { background-image:url(./../../libraries/komodo/brightkite_16.png); }
+.big-icons .to-brightkite_com, .big-icons .from-brightkite_com { background-image:url(./../../libraries/komodo/brightkite_32.png); }
+
 .to-delicious_com, .from-delicious_com { background-image:url(./../../libraries/komodo/delicious_16.png); }
 .big-icons .to-delicious_com, .big-icons .from-delicious_com { background-image:url(./../../libraries/komodo/delicious_32.png); }
+
+.to-designfloat_com, .from-designfloat_com { background-image:url(./../../libraries/komodo/designfloat_16.png); }
+.big-icons .to-designfloat_com, .big-icons .from-designfloat_com { background-image:url(./../../libraries/komodo/designfloat_32.png); }
+
+.to-deviantart_com, .from-deviantart_com { background-image:url(./../../libraries/komodo/deviantart_16.png); }
+.big-icons .to-deviantart_com, .big-icons .from-deviantart_com { background-image:url(./../../libraries/komodo/deviantart_32.png); }
+
+.to-digg_com, .from-digg_com { background-image:url(./../../libraries/komodo/digg_16.png); }
+.big-icons .to-digg_com, .big-icons .from-digg_com { background-image:url(./../../libraries/komodo/digg_32.png); }
+
+.to-dopplr_com, .from-dopplr_com { background-image:url(./../../libraries/komodo/dopplr_16.png); }
+.big-icons .to-dopplr_com, .big-icons .from-dopplr_com { background-image:url(./../../libraries/komodo/dopplr_32.png); }
+
+.to-emberapp_com, .from-emberapp_com { background-image:url(./../../libraries/komodo/ember_16.png); }
+.big-icons .to-emberapp_com, .big-icons .from-emberapp_com { background-image:url(./../../libraries/komodo/ember_32.png); }
+
+.to-dribbble_com, .from-dribbble_com { background-image:url(./../../libraries/komodo/dribbble_16.png); }
+.big-icons .to-dribbble_com, .big-icons .from-dribbble_com { background-image:url(./../../libraries/komodo/dribbble_32.png); }
 
 .to-facebook_com, .from-facebook_com { background-image:url(./../../libraries/komodo/facebook_16.png); }
 .big-icons .to-facebook_com, .big-icons .from-facebook_com { background-image:url(./../../libraries/komodo/facebook_32.png); }
 
 .to-flickr_com, .from-flickr_com { background-image:url(./../../libraries/komodo/flickr_16.png); }
-.big-icons .to-flickry_com, .big-icons .from-flickr_com { background-image:url(./../../libraries/komodo/flickr_32.png); }
+.big-icons .to-flickr_com, .big-icons .from-flickr_com { background-image:url(./../../libraries/komodo/flickr_32.png); }
+
+.to-forrst_me, .from-forrst_me { background-image:url(./../../libraries/komodo/forrst_16.png); }
+.big-icons .to-forrst_me, .big-icons .from-forrst_me { background-image:url(./../../libraries/komodo/forrst_32.png); }
+
+.to-friendfeed_com, .from-friendfeed_com { background-image:url(./../../libraries/komodo/friendfeed_16.png); }
+.big-icons .to-friendfeed_com, .big-icons .from-friendfeed_com { background-image:url(./../../libraries/komodo/friendfeed_32.png); }
 
 .to-google_com, .from-google_com { background-image:url(./../../libraries/komodo/google_16.png); }
 .big-icons .to-google_com, .big-icons .from-google_com { background-image:url(./../../libraries/komodo/google_32.png); }
 
-.to-twitter_com, .from-twitter_com { background-image:url(./../../libraries/komodo/twitter_16.png); }
-.big-icons .to-twitter_com, .big-icons .from-twitter_com { background-image:url(./../../libraries/komodo/twitter_32.png); }
+.to-gowalla_com, .from-gowalla_com { background-image:url(./../../libraries/komodo/gowalla_16.png); }
+.big-icons .to-gowalla_com, .big-icons .from-gowalla_com { background-image:url(./../../libraries/komodo/gowalla_32.png); }
+
+.to-ilike_com, .from-ilike_com { background-image:url(./../../libraries/komodo/ilike_16.png); }
+.big-icons .to-ilike_com, .big-icons .from-ilike_com { background-image:url(./../../libraries/komodo/ilike_32.png); }
 
 .to-linkedin_com, .from-linkedin_com { background-image:url(./../../libraries/komodo/linkedin_16.png); }
 .big-icons .to-linkedin_com, .big-icons .from-linkedin_com { background-image:url(./../../libraries/komodo/linkedin_32.png); }
 
+.to-mynameise_com, .from-mynameise_com { background-image:url(./../../libraries/komodo/mynameise_16.png); }
+.big-icons .to-mynameise_com, .big-icons .from-mynameise_com { background-image:url(./../../libraries/komodo/mynameise_32.png); }
+
+.to-myspace_com, .from-myspace_com { background-image:url(./../../libraries/komodo/myspace_16.png); }
+.big-icons .to-myspace_com, .big-icons .from-myspace_com { background-image:url(./../../libraries/komodo/myspace_32.png); }
+
+.to-posterous_com, .from-posterous_com { background-image:url(./../../libraries/komodo/posterous_16.png); }
+.big-icons .to-posterous_com, .big-icons .from-posterous_com { background-image:url(./../../libraries/komodo/posterous_32.png); }
+
+.to-reddit_com, .from-reddit_com { background-image:url(./../../libraries/komodo/reddit_16.png); }
+.big-icons .to-reddit_com, .big-icons .from-reddit_com { background-image:url(./../../libraries/komodo/reddit_32.png); }
+
+.to-stumbleupon_com, .from-stumbleupon_com { background-image:url(./../../libraries/komodo/stumbleupon_16.png); }
+.big-icons .to-stumbleupon_com, .big-icons .from-stumbleupon_com { background-image:url(./../../libraries/komodo/stumbleupon_32.png); }
+
+.to-tumblr_com, .from-tumblr_com { background-image:url(./../../libraries/komodo/tumblr_16.png); }
+.big-icons .to-tumblr_com, .big-icons .from-tumblr_com { background-image:url(./../../libraries/komodo/tumblr_32.png); }
+
+.to-twitter_com, .from-twitter_com { background-image:url(./../../libraries/komodo/twitter_16.png); }
+.big-icons .to-twitter_com, .big-icons .from-twitter_com { background-image:url(./../../libraries/komodo/twitter_32.png); }
+
+.to-viddler_com, .from-viddler_com { background-image:url(./../../libraries/komodo/viddler_16.png); }
+.big-icons .to-viddler_com, .big-icons .from-viddler_com { background-image:url(./../../libraries/komodo/viddler_32.png); }
+
+.to-vimeo_com, .from-vimeo_com { background-image:url(./../../libraries/komodo/vimeo_16.png); }
+.big-icons .to-vimeo_com, .big-icons .from-vimeo_com { background-image:url(./../../libraries/komodo/vimeo_32.png); }
+
+.to-wordpress_com, .from-wordpress_com { background-image:url(./../../libraries/komodo/wordpress_16.png); }
+.big-icons .to-wordpress_com, .big-icons .from-wordpress_com { background-image:url(./../../libraries/komodo/wordpress_32.png); }
+
 .to-xing_com, .from-xing_com { background-image:url(./../../libraries/komodo/xing_16.png); }
 .big-icons .to-xing_com, .big-icons .from-xing_com { background-image:url(./../../libraries/komodo/xing_32.png); }
+
+.to-youtube_com, .from-youtube_com { background-image:url(./../../libraries/komodo/youtube_16.png); }
+.big-icons .to-youtube_com, .big-icons .from-youtube_com { background-image:url(./../../libraries/komodo/youtube_32.png); }
 
 /* Extension for Komodo */
 
