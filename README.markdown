@@ -78,7 +78,7 @@ templates/layout you can ignore options for templates and plugins. It is
 recommended to configure caching and the language stack. If you decide to use
 Foafpress on your public server please configure the production mode.
 
-=== 4. Run Foafpress ===
+### 4. Run Foafpress
 
 Now Foafpress should work. Please run one of the test resources what are located
 in the `test` folder. E.g. if you have installed Foafpress on your local machine
