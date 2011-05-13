@@ -52,6 +52,7 @@
     {
         color:#333;
         background-color:#fff;
+        min-width:800px;
     }
 
     /* -- 1.1. Header ------------------------------------------------------- */
@@ -114,7 +115,6 @@
 
     body.foaf_Person .page_margins
     {
-        min-width:inherit;
         max-width:84em;
     }
 
