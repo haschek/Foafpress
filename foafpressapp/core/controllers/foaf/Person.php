@@ -10,6 +10,7 @@ class Foaf_Person_Controller extends Foafpress_Controller
 
         // -- Document Meta Data (for HTML Head) -------------------------------
 
+        // TODO: put this in its own foaf:Document controller
         $resource_uri = $this->RESOURCE->uri; // save uri of shown resource
         $this->RESOURCE->uri = $this->pm->load('Foafpress')->URI_Document; // use uri of resource container
         // TODO: problems if URI_Document != xml:base in RDF file
@@ -19,6 +20,7 @@ class Foaf_Person_Controller extends Foafpress_Controller
 
         // -- Alternate meta links to RDF data ---------------------------------
 
+        // TODO: move this to a global parent controller
         $alternate_meta_links = array();
         $document_uri = $this->pm->load('Foafpress')->URI_Document;
         $document_extensiontype = $this->pm->load('Foafpress')->extensiontype;
@@ -48,13 +50,70 @@ class Foaf_Person_Controller extends Foafpress_Controller
         
         // -- Basics - Name, Info, Depiction -----------------------------------
         
-        $this->content->name_or_nickname = $this->RESOURCE->getLiteral(array('name', 'nick'));
-        $this->content->depiction = $this->RESOURCE->getImage();
-        $this->content->short_description = $this->RESOURCE->getLiteral(array('bio_olb'));
-        
+        $this->read_basic_info();
+                
         // -- Websites/Links ---------------------------------------------------
         
-        $list_of_website_objects = array_unique(array_merge($this->RESOURCE->homepage, $this->RESOURCE->weblog, $this->RESOURCE->workInfoHomepage));
+        $this->read_links();
+                
+        // -- Online Accounts --------------------------------------------------
+        
+        $this->read_accounts();
+        
+        // -- Activity / Feeds -------------------------------------------------
+        
+        $this->read_activity_stream();
+        
+        // -- Interests --------------------------------------------------------
+        
+        $this->read_interests();
+        
+        // -- Projects ---------------------------------------------------------
+        
+        $this->read_projects();
+        
+        // -- Skills -----------------------------------------------------------
+        
+        $this->read_skills();
+        
+        // -- VCards -----------------------------------------------------------
+        
+        $this->read_contacts();
+        
+        // -- Network ----------------------------------------------------------
+        
+        $this->read_network();
+                
+        // -- Debug log --------------------------------------------------------
+        
+        // TODO: move this to parent controller
+        $this->content->debug_log = $this->RESOURCE->logUsage;
+
+        return;
+                                    
+    }
+    
+    public function read_basic_info($resource = null)
+    {
+
+        // -- Basics - Name, Info, Depiction -----------------------------------
+        
+        if (!$resource) $resource = $this->RESOURCE;
+        
+        $this->content->name_or_nickname = $resource->getLiteral(array('name', 'nick'));
+        $this->content->depiction = $resource->getImage();
+        $this->content->short_description = $resource->getLiteral(array('bio_olb'));
+    
+    }
+    
+    public function read_links($resource = null)
+    {
+
+        // -- Websites/Links ---------------------------------------------------
+        
+        if (!$resource) $resource = $this->RESOURCE;
+        
+        $list_of_website_objects = array_unique(array_merge($resource->homepage, $resource->weblog, $resource->workInfoHomepage));
         $list_of_websites = array();
         
         foreach ($list_of_website_objects as $website_object)
@@ -74,10 +133,17 @@ class Foaf_Person_Controller extends Foafpress_Controller
         $this->content->list_of_websites = $list_of_websites;
         unset($list_of_websites);
         unset($list_of_website_objects);
-        
+            
+    }
+    
+    public function read_accounts($resource = null)
+    {
+
         // -- Online Accounts --------------------------------------------------
         
-        $list_of_account_objects = $this->RESOURCE->holdsAccount;
+        if (!$resource) $resource = $this->RESOURCE;
+        
+        $list_of_account_objects = $resource->holdsAccount;
         $list_of_accounts = array();
         
         foreach ($list_of_account_objects as $account_object)
@@ -100,16 +166,30 @@ class Foaf_Person_Controller extends Foafpress_Controller
         $this->content->list_of_accounts = $list_of_accounts;
         unset($list_of_accounts);
         unset($list_of_account_objects);
-        
+    
+    }
+    
+    public function read_activity_stream($resource = null)
+    {
+
         // -- Activity / Feeds -------------------------------------------------
         
-        $activity = $this->RESOURCE->listActivity();
+        if (!$resource) $resource = $this->RESOURCE;
+        
+        $activity = $resource->listActivity();
         if (isset($activity['stream'])) $this->content->activity = $activity;
         unset($activity);
-        
+    
+    }
+    
+    public function read_interests($resource = null)
+    {
+    
         // -- Interests --------------------------------------------------------
         
-        $list_of_interest_objects = $this->RESOURCE->interest;
+        if (!$resource) $resource = $this->RESOURCE;
+        
+        $list_of_interest_objects = $resource->interest;
         $list_of_interests = array();
         
         foreach ($list_of_interest_objects as $interest_object)
@@ -160,9 +240,16 @@ class Foaf_Person_Controller extends Foafpress_Controller
         $this->content->list_of_interests = $list_of_interests;
         unset($list_of_interests);
 
+    }
+    
+    public function read_projects($resource = null)
+    {
+
         // -- Projects ---------------------------------------------------------
         
-        $list_of_project_objects = array_unique(array_merge($this->RESOURCE->currentProject, $this->RESOURCE->pastProject)/*, SORT_REGULAR*/);;
+        if (!$resource) $resource = $this->RESOURCE;
+        
+        $list_of_project_objects = array_unique(array_merge($resource->currentProject, $resource->pastProject)/*, SORT_REGULAR*/);;
         $list_of_projects = array();
         
         foreach ($list_of_project_objects as $project_object)
@@ -212,10 +299,17 @@ class Foaf_Person_Controller extends Foafpress_Controller
         
         $this->content->list_of_projects = $list_of_projects;
         unset($list_of_projects);
-
+    
+    }
+    
+    public function read_skills($resource = null)
+    {
+    
         // -- Skills -----------------------------------------------------------
         
-        $list_of_resume_objects = $this->RESOURCE->rdfs_seeAlso('cv:CV');
+        if (!$resource) $resource = $this->RESOURCE;
+        
+        $list_of_resume_objects = $resource->rdfs_seeAlso('cv:CV');
         $list_of_skill_objects = array();
         
         if (is_array($list_of_resume_objects))
@@ -248,9 +342,16 @@ class Foaf_Person_Controller extends Foafpress_Controller
         unset($list_of_skill_objects);
         unset($list_of_skills);
 
+    }
+    
+    public function read_contacts($resource = null)
+    {
+    
         // -- VCards -----------------------------------------------------------
         
-        $list_of_VCard_objects = array_unique(array_merge($this->RESOURCE->ov_businessCard, $this->RESOURCE->foaf_businessCard));
+        if (!$resource) $resource = $this->RESOURCE;
+        
+        $list_of_VCard_objects = array_unique(array_merge($resource->ov_businessCard, $resource->foaf_businessCard));
         
         $list_of_contact_objects = array(
             'Work' => array(
@@ -377,16 +478,23 @@ class Foaf_Person_Controller extends Foafpress_Controller
         
         unset($list_of_contacts);
 
+    }
+    
+    public function read_network($resource = null)
+    {
+    
         // -- Network ----------------------------------------------------------
+        
+        if (!$resource) $resource = $this->RESOURCE;
         
         $list_of_known_persons = array();
         $list_of_person_objects = array_unique(array_merge(
-                                    $this->RESOURCE->rel_closeFriendOf,
-                                    $this->RESOURCE->rel_acquaintanceOf,
-                                    $this->RESOURCE->rel_collaboratesWith,
-                                    $this->RESOURCE->rel_colleagueOf,
-                                    $this->RESOURCE->rel_worksWith,
-                                    $this->RESOURCE->foaf_knows)/*, SORT_REGULAR*/);
+                                    $resource->rel_closeFriendOf,
+                                    $resource->rel_acquaintanceOf,
+                                    $resource->rel_collaboratesWith,
+                                    $resource->rel_colleagueOf,
+                                    $resource->rel_worksWith,
+                                    $resource->foaf_knows)/*, SORT_REGULAR*/);
         
         
         if ($list_of_person_objects)
@@ -443,15 +551,6 @@ class Foaf_Person_Controller extends Foafpress_Controller
         
         $this->content->list_of_known_persons = $list_of_known_persons;
         unset($list_of_known_persons);
-        
-        // -- Debug log --------------------------------------------------------
-        
-        $this->content->debug_log = $this->RESOURCE->logUsage;
 
-        // -- Fallback for older Foafpress version without controller level ----
-        // $this->content->FP = $this->RESOURCE;
-        
-        return;
-                                    
     }
 }
