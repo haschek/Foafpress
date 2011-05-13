@@ -51,7 +51,7 @@ if (!$this->cache->getOutput($this->file.serialize($this->pm->Foafpress->languag
 
     <?php $this->pm->publish('sandbox_end_of_template_header'); // let this here (e.g. for DebugLog plugin) ?>
 </head>
-<body class="<?php echo $this->content->body_css_class; ?>">
+<body class="<?php echo $this->content->resource_type_info['css']; ?>">
     <?php $this->output(); ?>
     <div id="footer">
         <div class="page_margins">

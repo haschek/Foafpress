@@ -64,7 +64,7 @@
         padding:1em 0;
     }
 
-    body.foafPerson #header .page_margins
+    body.foaf_Person #header .page_margins
     {
         position:relative;
     }
@@ -112,7 +112,7 @@
         padding:1em 2em;
     }
 
-    body.foafPerson .page_margins
+    body.foaf_Person .page_margins
     {
         min-width:inherit;
         max-width:84em;

@@ -6,7 +6,7 @@ class Foaf_Person_Controller extends Foafpress_Controller
     {
         // -- Layout class -----------------------------------------------------
         
-        $this->content->body_css_class = $this->RESOURCE->cssGetType();
+        $this->content->resource_type_info = $this->get_resource_type_info();
 
         // -- Document Meta Data (for HTML Head) -------------------------------
 

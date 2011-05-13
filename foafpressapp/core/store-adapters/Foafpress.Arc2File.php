@@ -170,22 +170,6 @@ class Foafpress_Resource_Arc2File extends ARC2File_Template_Object
         $this->spcms_pm->publish('sandbox_add_log_message', $msg);
         return true;
     }
-    /**
-     * Get Resource Type
-     *
-     * @return string $type modelns:concept
-     */
-    public function cssGetType()
-    {
-        $type = 'typeunknown';
-        
-        if (isset($this->resource->index[$this->uri]['http://www.w3.org/1999/02/22-rdf-syntax-ns#type']))
-        {
-            $type = str_replace($this->resource->ns, array_keys($this->resource->ns), $this->resource->index[$this->uri]['http://www.w3.org/1999/02/22-rdf-syntax-ns#type'][0]['value']);
-        }
-        
-        return $type;
-    }
     
 }
 
