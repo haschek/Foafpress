@@ -55,12 +55,14 @@ if (!$this->cache->getOutput($this->file.serialize($this->pm->Foafpress->languag
     <?php $this->output(); ?>
     <div id="footer">
         <div class="page_margins">
-            <p><strong>powered by <a href="http://foafpress.org/">Foafpress</a></strong>,
+            <p><strong>This is a <a href="<?php echo $this->content->resource_type_info['uri']; ?>"><?php echo $this->content->resource_type_info['short']; ?></a>
+            rendered by <a href="http://foafpress.org/">Foafpress</a></strong>,
             using <a href="http://code.google.com/p/sandbox-publisher-cms/">SPCMS</a>,
             <a href="http://arc.semsol.org/">ARC 2</a>,
-            <a href="http://www.yaml.de/">YAML</a>,
-            <a href="http://jquery.com/">jQuery</a>
-            and <a href="http://www.komodomedia.com/download/#social-network-icon-pack">Komodo SNIP</a>.</p>
+            <a href="http://www.yaml.de/">YAML</a><!--,
+            <a href="http://jquery.com/">jQuery</a> -->
+            and <a href="http://www.komodomedia.com/download/#social-network-icon-pack">Komodo SNIP</a>.
+            <a id="jointhesemweblogo" href="http://www.w3.org/2001/sw/" title="W3C Semantic Web Logo (Join the Semantic Web!)"><span class="hideme">Join the Semantic Web!</span></a></p>
             <?php
                 if ($this->content->ALLOW_RDF_DOWNLOAD)
                 {

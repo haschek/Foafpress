@@ -131,9 +131,24 @@
         width:100%;
         border-top:solid 1px #000;
     }
+    
+    #footer .page_margins
+    {
+        position:relative;
+        min-height:96px;
+    }
 
     #footer a { color: #fff; }
     #footer p { padding:0.5em 0; margin:0; font-size:0.8em; }
+    
+    #jointhesemweblogo
+    {
+        display:block;
+        width:82px; height:96px;
+        background:url(./images/logo-semantic-web-cube.png) no-repeat center transparent;
+        position:absolute;
+        top:1.25em; right:2.5em;
+    }
 
     /* -- 1.4. Helper ------------------------------------------------------- */
 
