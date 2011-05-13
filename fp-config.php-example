@@ -179,6 +179,15 @@
 #                                                         'http://example.org/projects/name'
 #                                                        );
 
+/* -- Show support ribbon ------------------------------------------------------
+ *
+ * You can turn this off if you want. Otherwise a small ribbon will is shown
+ * at the top right edge of the viewport, showing the currently shown resource
+ * type and some Semantic Web pride.
+ */
+
+# $c['Foafpress']['Ribbon'] = false; // default: true
+
 /* == Overwrite LanguageChecker standard configuration ====================== */
 
 /* The I18N LanguageChacker is another SPCMS plugin what is used in Foafpress by

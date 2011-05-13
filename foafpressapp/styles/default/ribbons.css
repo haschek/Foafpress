@@ -1,0 +1,25 @@
+@charset "UTF-8";
+/**
+ * @author Michael Haschke, http://eye48.com/
+ *
+ */
+
+@media screen, projection
+{
+
+    .ribbon
+    {
+        position:absolute;
+        width:149px; height:149px;
+        top:0; right:0;
+        background:url(./ribbons/blanko_undefined.png) no-repeat center transparent;
+        visibility:hidden;
+    }
+    
+    #ribbon_foaf_Person
+    {
+        background-image:url(./ribbons/foaf_Person.png);
+        visibility:visible;
+    }
+
+}

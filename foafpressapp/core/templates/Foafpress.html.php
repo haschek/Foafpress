@@ -27,6 +27,12 @@ if (!$this->cache->getOutput($this->file.serialize($this->pm->Foafpress->languag
     <link href="<?php echo $this->content->FPLIBURL; ?>/yaml/core/slim_base.css" rel="stylesheet" type="text/css" media="all" />
     <link href="<?php echo $this->content->FPTPLURL; ?>/default/all.css" rel="stylesheet" type="text/css" media="all" />
     <link href="<?php echo $this->content->FPTPLURL; ?>/default/icons.css" rel="stylesheet" type="text/css" media="all" />
+    <?php
+        if ($this->pm->Foafpress->config['Ribbon'])
+        {
+            echo '<link href="'.$this->content->FPTPLURL.'/default/ribbons.css" rel="stylesheet" type="text/css" media="all" />'.PHP_EOL;
+        }
+    ?>
 
     <!--[if lte IE 7]>
         <link href="<?php echo $this->content->FPTPLURL; ?>/default/patches/ie7.css" rel="stylesheet" type="text/css" media="all" />
@@ -54,6 +60,12 @@ if (!$this->cache->getOutput($this->file.serialize($this->pm->Foafpress->languag
 <body class="<?php echo $this->content->resource_type_info['css']; ?>">
     <?php $this->output(); ?>
     <div id="footer">
+        <?php
+            if ($this->pm->Foafpress->config['Ribbon'])
+            {
+                echo '<a href="#footer" class="ribbon" id="ribbon_'.$this->content->resource_type_info['css'].'" title="This is a '.$this->content->resource_type_info['short'].'">&nbsp;</a>'.PHP_EOL;
+            }
+        ?>
         <div class="page_margins">
             <p><strong>This is a <a href="<?php echo $this->content->resource_type_info['uri']; ?>"><?php echo $this->content->resource_type_info['short']; ?></a>
             rendered by <a href="http://foafpress.org/">Foafpress</a></strong>,

@@ -65,6 +65,10 @@ $c['LinkedData']['followSameas'] = true;
 $c['Activity']['cachetime'] = 6 * 60 * 60; // 6 hours
 $c['Activity']['timeout'] = 2; // 3 sec per feed
 
+// -- Support Ribbon -----------------------------------------------------------
+
+$c['Ribbon'] = true;
+
 // -- TODO: Future Plans -------------------------------------------------------
 
 
