@@ -78,6 +78,9 @@
 .to-ilike_com, .from-ilike_com { background-image:url(./../../libraries/komodo/ilike_16.png); }
 .big-icons .to-ilike_com, .big-icons .from-ilike_com { background-image:url(./../../libraries/komodo/ilike_32.png); }
 
+.to-last_fm, .from-last_fm { background-image:url(./../../libraries/komodo/lastfm_16.png); }
+.big-icons .to-last_fm, .big-icons .from-last_fm { background-image:url(./../../libraries/komodo/lastfm_32.png); }
+
 .to-linkedin_com, .from-linkedin_com { background-image:url(./../../libraries/komodo/linkedin_16.png); }
 .big-icons .to-linkedin_com, .big-icons .from-linkedin_com { background-image:url(./../../libraries/komodo/linkedin_32.png); }
 
