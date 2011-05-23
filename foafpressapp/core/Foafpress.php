@@ -112,6 +112,8 @@ class Foafpress extends SandboxPlugin
                      http requests. To overcome this problem we could echo an
                      old output cache and process then the data aggregation to
                      create an updated cache for the next request.
+                @see http://www.brandonchecketts.com/archives/performing-post-output-script-processing-in-php
+                @see http://de2.php.net/manual/en/features.connection-handling.php#93441
             */
             ob_end_clean();
             header("Connection: close");
