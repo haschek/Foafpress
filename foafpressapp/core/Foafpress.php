@@ -101,10 +101,21 @@ class Foafpress extends SandboxPlugin
             $this->languageStackPreferences = null;
         }
 
-        // check cache before doing anything
-        if ($lastCachedOutput = $this->cache->getVar($filename.serialize($this->languageStackPreferences), null, -1))
-        {
+        $cacheOutput = false;
 
+        // check cache before doing anything
+        if ($validCachedOutput = $this->cache->getVar($filename.serialize($this->languageStackPreferences)))
+        {
+            $cachedOutput = $validCachedOutput;
+            $this->pm->subscribe('sandbox_flush_start', $this, 'PreventDoubleOutput'); // only to be safe not to echo two times "the same"
+        }
+        else
+        {
+            $cachedOutput = $this->cache->getVar($filename.serialize($this->languageStackPreferences), null, -1);
+        }
+
+        if ($cachedOutput)
+        {
             /*
                 experimental enabling of post output processing
                 why: aggregating feeds and linked data is a performance issue
@@ -120,7 +131,7 @@ class Foafpress extends SandboxPlugin
             header("Content-Encoding: none");
             ignore_user_abort(true); // optional
             ob_start();
-            echo $lastCachedOutput;
+            echo $cachedOutput;
             $size = ob_get_length();
             header("Content-Length: $size");
             ob_end_flush();     // Strange behaviour, will not work
@@ -128,9 +139,8 @@ class Foafpress extends SandboxPlugin
             ob_end_clean();
 
             //do post output processing here
-            // die();
-            $this->pm->subscribe('sandbox_flush_start', $this, 'PreventDoubleOutput'); // only to be safe not to echo two times "the same"
         }
+
     }
     
     // event listener for "sandbox_flush_start"
