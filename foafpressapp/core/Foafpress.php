@@ -59,8 +59,9 @@ class Foafpress extends SandboxPlugin
         $this->sandbox->pm->addFolder($this->path.'controllers/');
         
         // Foafpress event handlers for SPCMS
-        $this->pm->subscribe('sandbox_parse_failed', $this, 'CheckCache');
-        $this->pm->subscribe('sandbox_parse_end', $this, 'CheckCache');
+        $this->pm->subscribe('sandbox_parse_start', $this, 'CheckCache');
+        //$this->pm->subscribe('sandbox_parse_failed', $this, 'CheckCache');
+        //$this->pm->subscribe('sandbox_parse_end', $this, 'CheckCache');
         $this->pm->subscribe('sandbox_parse_failed', $this, 'FindResource'); // parameters: event name, class name or instance, event handler method
         $this->pm->subscribe('sandbox_parse_end', $this, 'LoadResourceFromFile'); // parameters: event name, class name or instance, event handler method
         
@@ -82,7 +83,8 @@ class Foafpress extends SandboxPlugin
         
     }
     
-    public function CheckCache()
+    // event listener for "sandbox_parse_start"
+    public function CheckCache($filename)
     {
         // get preferenced laguage stack from LanguageChecker plugin
         if ($this->pm->isActive('LanguageChecker'))
@@ -100,10 +102,39 @@ class Foafpress extends SandboxPlugin
         }
 
         // check cache before doing anything
-        if ($this->cache->getOutput($this->sandbox->file.serialize($this->languageStackPreferences)))
+        if ($lastCachedOutput = $this->cache->getVar($filename.serialize($this->languageStackPreferences), null, -1))
         {
-            die();
+
+            /*
+                experimental enabling of post output processing
+                why: aggregating feeds and linked data is a performance issue
+                     because the app needs to wait for a response to all the
+                     http requests. To overcome this problem we could echo an
+                     old output cache and process then the data aggregation to
+                     create an updated cache for the next request.
+            */
+            ob_end_clean();
+            header("Connection: close");
+            header("Content-Encoding: none");
+            ignore_user_abort(true); // optional
+            ob_start();
+            echo $lastCachedOutput;
+            $size = ob_get_length();
+            header("Content-Length: $size");
+            ob_end_flush();     // Strange behaviour, will not work
+            flush();            // Unless both are called !
+            ob_end_clean();
+
+            //do post output processing here
+            // die();
+            $this->pm->subscribe('sandbox_flush_start', $this, 'PreventDoubleOutput'); // only to be safe not to echo two times "the same"
         }
+    }
+    
+    // event listener for "sandbox_flush_start"
+    public function PreventDoubleOutput()
+    {
+        die();
     }
     
     public function FindResource($file)
