@@ -59,7 +59,10 @@ class Foafpress extends SandboxPlugin
         $this->sandbox->pm->addFolder($this->path.'controllers/');
         
         // Foafpress event handlers for SPCMS
-        $this->pm->subscribe('sandbox_parse_start', $this, 'CheckCache');
+        if (defined('IS_PRODUCTION_INSTANCE') && IS_PRODUCTION_INSTANCE === true)
+        {
+            $this->pm->subscribe('sandbox_parse_start', $this, 'CheckCache');
+        }
         //$this->pm->subscribe('sandbox_parse_failed', $this, 'CheckCache');
         //$this->pm->subscribe('sandbox_parse_end', $this, 'CheckCache');
         $this->pm->subscribe('sandbox_parse_failed', $this, 'FindResource'); // parameters: event name, class name or instance, event handler method
