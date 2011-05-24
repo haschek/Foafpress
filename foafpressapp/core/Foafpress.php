@@ -24,8 +24,26 @@ class Foafpress extends SandboxPlugin
 
     protected function init()
     {
-        // error_reporting(E_ALL); // set_time_limit(0);
+        $this->LoadConfiguration();
+
+        // add foafpress templates to template configuration
+        $this->sandbox->templateAddFolder($this->path.'templates/');
         
+        // add foafpress controllers to plugin configuration
+        $this->sandbox->pm->addFolder($this->path.'controllers/');
+
+        $this->SubscribeEventHandlers();
+
+        $this->LoadLibrariesAndIncludes();
+        
+        // write libraries folder to view
+        $this->content->FPLIBURL = str_replace(BASEDIR, BASEURL, dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'libraries');
+
+        return;
+    }
+
+    protected function LoadConfiguration()
+    {
         // check user configuration of namespaces
         if (!isset($this->config['ns']))
         {
@@ -47,43 +65,37 @@ class Foafpress extends SandboxPlugin
                     $this->config[$c_key] = $c_value;
                 }
             }
-            //$this->print_r($this->config);
         }
-        
-        // $this->print_r($this->config);
-        
-        // add foafpress templates to template configuration
-        $this->sandbox->templateAddFolder($this->path.'templates/');
-        
-        // add foafpress controllers to plugin configuration
-        $this->sandbox->pm->addFolder($this->path.'controllers/');
-        
-        // Foafpress event handlers for SPCMS
+
+        return;
+    }
+
+    // Foafpress event handlers for SPCMS
+    protected function SubscribeEventHandlers()
+    {
         if (defined('IS_PRODUCTION_INSTANCE') && IS_PRODUCTION_INSTANCE === true)
         {
             $this->pm->subscribe('sandbox_parse_start', $this, 'CheckCache');
         }
-        //$this->pm->subscribe('sandbox_parse_failed', $this, 'CheckCache');
-        //$this->pm->subscribe('sandbox_parse_end', $this, 'CheckCache');
-        $this->pm->subscribe('sandbox_parse_failed', $this, 'FindResource'); // parameters: event name, class name or instance, event handler method
-        $this->pm->subscribe('sandbox_parse_end', $this, 'LoadResourceFromFile'); // parameters: event name, class name or instance, event handler method
-        
+        $this->pm->subscribe('sandbox_parse_failed', $this, 'FindResource');
+        $this->pm->subscribe('sandbox_parse_end', $this, 'LoadResourceFromFile');
+
+        return;
+    }
+
+    protected function LoadLibrariesAndIncludes()
+    {
         // load ARC2
         $this->pm->need('./arc2/ARC2');
-        
+
         // load ARC2 Template Object
         $this->pm->need('./rdfto/rdfto.arc2');
-        
+
         // load Foafpress includes
         $this->pm->need(dirname(__FILE__).'/Foafpress.inc');
         $this->pm->need(dirname(__FILE__).'/store-adapters/Foafpress.Arc2File');
-        
-        // libaries folder for templates
-        $this->content->FPLIBURL = str_replace(BASEDIR, BASEURL, dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'libraries');
 
-        
         return;
-        
     }
     
     // event listener for "sandbox_parse_start"
