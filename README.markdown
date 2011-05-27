@@ -27,10 +27,12 @@ If installation does not work please report bugs, errors and your
 suggestions how to improve Foafpress as well as this document, thank
 you!
 
-**Requirements:** Apache web server with `mod_negotiaten`, `mod_dir` and
+**Requirements:** Apache web server with `mod_negotiation`, `mod_dir` and
 `mod_rewrite`, PHP 5.3 or newer. You can enable the required modules by
 starting:
+
     sudo make enable-modules
+
 in your foafpress root directory (after cloning, see next step)
 
 **Note:** All code examples are valid for a standard installation of
@@ -44,7 +46,9 @@ Debian packages. Please clone it via Mercurial or git:
 
     $ cd /var/www/
     $ git clone https://github.com/haschek/Foafpress.git foafpress
+
 or
+
     $ cd /var/www/
     $ hg clone http://bitbucket.org/haschek/foafpress foafpress
 
@@ -86,8 +90,10 @@ mode.
 ### 4. Run Foafpress
 
 Now Foafpress should work. Please check out one of the test resources
-which are located in the `test` folder. E.g. if you have installed
-Foafpress on your local machine under `/var/www/foafpress/` then run
+which are located in the `test` sub folder.
+
+For instance, if you have installed Foafpress on your
+local machine under `/var/www/foafpress/` then run
 `http://localhost/foafpress/test/desirejeanette` in your web browser. If
 Foafpress is working properly you should see something like this:
 
