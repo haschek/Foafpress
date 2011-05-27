@@ -73,10 +73,8 @@ class Foafpress extends SandboxPlugin
     // Foafpress event handlers for SPCMS
     protected function SubscribeEventHandlers()
     {
-        if (defined('IS_PRODUCTION_INSTANCE') && IS_PRODUCTION_INSTANCE === true)
-        {
-            $this->pm->subscribe('sandbox_parse_start', $this, 'CheckCache');
-        }
+        
+        $this->pm->subscribe('sandbox_parse_start', $this, 'CheckCache');
         $this->pm->subscribe('sandbox_parse_failed', $this, 'FindResource');
         $this->pm->subscribe('sandbox_parse_end', $this, 'LoadResourceFromFile');
 
@@ -116,7 +114,7 @@ class Foafpress extends SandboxPlugin
             $this->languageStackPreferences = null;
         }
 
-        $cacheOutput = false;
+        $cachedOutput = false;
 
         // check cache before doing anything
         if ($validCachedOutput = $this->cache->getVar($filename.serialize($this->languageStackPreferences)))
@@ -124,7 +122,7 @@ class Foafpress extends SandboxPlugin
             $cachedOutput = $validCachedOutput;
             $this->pm->subscribe('sandbox_flush_start', $this, 'PreventDoubleOutput'); // only to be safe not to echo two times "the same"
         }
-        else
+        elseif (defined('IS_PRODUCTION_INSTANCE') && IS_PRODUCTION_INSTANCE === true)
         {
             $cachedOutput = $this->cache->getVar($filename.serialize($this->languageStackPreferences), null, -1);
         }
@@ -155,6 +153,8 @@ class Foafpress extends SandboxPlugin
 
             //do post output processing here
         }
+        
+        return;
 
     }
     
