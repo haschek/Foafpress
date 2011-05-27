@@ -1,3 +1,6 @@
 cache/
 .htaccess
 /fp-config.php
+foafpressapp/libraries/arc2
+foafpressapp/libraries/rdfto
+foafpressapp/libraries/spcms
