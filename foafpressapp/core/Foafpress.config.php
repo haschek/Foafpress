@@ -69,6 +69,13 @@ $c['Activity']['timeout'] = 2; // 3 sec per feed
 
 $c['Ribbon'] = true;
 
+// -- Quickfix: Enable Postprocessing ------------------------------------------
+
+/* as long as the problem caching/postprocessing/contentnegotiation is not fixed
+   postprocessing is turned off default */
+
+$c['enableOutputPostprocessing'] = false;
+
 // -- TODO: Future Plans -------------------------------------------------------
 
 

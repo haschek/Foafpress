@@ -74,7 +74,10 @@ class Foafpress extends SandboxPlugin
     protected function SubscribeEventHandlers()
     {
         
-        $this->pm->subscribe('sandbox_parse_start', $this, 'CheckCache');
+        if (isset($this->config['enableOutputPostprocessing']) && $this->config['enableOutputPostprocessing'] === true)
+        {
+            $this->pm->subscribe('sandbox_parse_start', $this, 'CheckCache');
+        }
         $this->pm->subscribe('sandbox_parse_failed', $this, 'FindResource');
         $this->pm->subscribe('sandbox_parse_end', $this, 'LoadResourceFromFile');
 
