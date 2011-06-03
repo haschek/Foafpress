@@ -24,6 +24,8 @@ class Foafpress extends SandboxPlugin
 
     protected function init()
     {
+        $this->addLogMessage('Init Foafpress plugin');
+        
         $this->LoadConfiguration();
 
         // add foafpress templates to template configuration
@@ -44,6 +46,8 @@ class Foafpress extends SandboxPlugin
 
     protected function LoadConfiguration()
     {
+        $this->addLogMessage('Load Foafpress configuration');
+
         // check user configuration of namespaces
         if (!isset($this->config['ns']))
         {
@@ -73,12 +77,13 @@ class Foafpress extends SandboxPlugin
     // Foafpress event handlers for SPCMS
     protected function SubscribeEventHandlers()
     {
-        
+        $this->addLogMessage('Subscribe Foafpress event handlers');
+
+        $this->pm->subscribe('sandbox_parse_failed', $this, 'FindResource');
         if (isset($this->config['enableOutputPostprocessing']) && $this->config['enableOutputPostprocessing'] === true)
         {
             $this->pm->subscribe('sandbox_parse_start', $this, 'CheckCache');
         }
-        $this->pm->subscribe('sandbox_parse_failed', $this, 'FindResource');
         $this->pm->subscribe('sandbox_parse_end', $this, 'LoadResourceFromFile');
 
         return;
@@ -86,6 +91,8 @@ class Foafpress extends SandboxPlugin
 
     protected function LoadLibrariesAndIncludes()
     {
+        $this->addLogMessage('Load Arc2, RDFTO, Foafpress includes/adapters');
+
         // load ARC2
         $this->pm->need('./arc2/ARC2');
 
@@ -102,6 +109,8 @@ class Foafpress extends SandboxPlugin
     // event listener for "sandbox_parse_start"
     public function CheckCache($filename)
     {
+        $this->addLogMessage('Check cache for '.$filename);
+
         // get preferenced laguage stack from LanguageChecker plugin
         if ($this->pm->isActive('LanguageChecker'))
         {
@@ -123,11 +132,16 @@ class Foafpress extends SandboxPlugin
         if ($validCachedOutput = $this->cache->getVar($filename.serialize($this->languageStackPreferences)))
         {
             $cachedOutput = $validCachedOutput;
+            $this->addLogMessage('Found valid cache.');
             $this->pm->subscribe('sandbox_flush_start', $this, 'PreventDoubleOutput'); // only to be safe not to echo two times "the same"
         }
         elseif (defined('IS_PRODUCTION_INSTANCE') && IS_PRODUCTION_INSTANCE === true)
         {
             $cachedOutput = $this->cache->getVar($filename.serialize($this->languageStackPreferences), null, -1);
+            if ($cachedOutput)
+            {
+                $this->addLogMessage('Use invalid cache.');
+            }
         }
 
         if ($cachedOutput)
@@ -155,6 +169,7 @@ class Foafpress extends SandboxPlugin
             ob_end_clean();
 
             //do post output processing here
+            $this->addLogMessage('Start post output processing.');
         }
         
         return;
@@ -168,6 +183,37 @@ class Foafpress extends SandboxPlugin
     }
     
     public function FindResource($file)
+    {
+        $this->addLogMessage('Try to find something for '.$file);
+
+        $extensions = $this->config['types'];
+
+        $file = $this->FindFileByDirectoryIndexCheck($file);
+        
+        $this->URI_Request = 'http://'.$_SERVER['SERVER_NAME'].str_replace(BASEDIR, BASEURL, $file);
+        $this->addLogMessage('Update var URI_Request='.$this->URI_Request);
+
+        $file = $this->CheckForApplicationTypeRequestByFileExtension($file);
+        $this->addLogMessage('Found request for: '.($this->extensiontype?$this->extensiontype:'unresolved!'));
+
+        $this->RedirectToUrlByContentNegotiation();
+
+        if ($file_rdf = $this->GetAppropriateRdfFile($file))
+        {
+                $this->addLogMessage('Found appropriate RDF file: '.$file_rdf);
+                $this->set_URI_Document($file_rdf);
+                $this->sandbox->parse($file_rdf);
+                // LoadResourceFromFile method will be triggered automatically by event dispatcher
+                return;
+        }
+
+        // TODO: send 404 if no file/resource is available
+        die($file.' is not found!');
+        
+        return;
+    }
+
+    public function FindFileByDirectoryIndexCheck($file)
     {
         $extensions = $this->config['types'];
 
@@ -194,12 +240,17 @@ class Foafpress extends SandboxPlugin
                 }
             }
         }
-        
-        $this->URI_Request = 'http://'.$_SERVER['SERVER_NAME'].str_replace(BASEDIR, BASEURL, $file);
-        
-        // check for request type by file extension
-        
-        //*
+
+        return $file;
+
+    }
+
+    public function CheckForApplicationTypeRequestByFileExtension($file)
+    {
+        $this->addLogMessage('Check for requested application type by file extension.');
+
+        $extensions = $this->config['types'];
+
         foreach ($extensions as $type=>$ext)
         {
             if (substr($file, -1*strlen($ext)) == $ext)
@@ -209,38 +260,30 @@ class Foafpress extends SandboxPlugin
                 break;
             }
         }
-        //*/
-        
-        //die($this->URI_Request);
-        
-        // check for existing files
-        
+
+        return $file;
+    }
+
+    public function GetAppropriateRdfFile($file)
+    {
+        $this->addLogMessage('Check for an existing RDF file.');
+
+        $extensions = $this->config['types'];
+
         foreach ($extensions as $ext)
         {
             if (is_readable($file.$ext))
             {
-                $this->sandbox->parse($file.$ext);
-                // LoadResourceFromFile method will be triggered automatically by event dispatcher
-                
-                return;
+                return $file.$ext;
             }
         }
-    
-        // TODO: send 404 if no file/resource is available
-        die($file.' is not found!');
-        
-        return;
+
+        return false;
     }
     
     public function LoadResourceFromFile($file)
     {
-        // get url of rdf document
-        $this->URI_Document = 'http://'.$_SERVER['SERVER_NAME'].str_replace(BASEDIR, BASEURL, $file);
-        
-        if ($this->URI_Request && $this->extensiontype)
-            $this->URI_Document = $this->URI_Request;
-        
-        //die($this->URI_Document);
+        $this->set_URI_Document($file);
         
         if (false === ($index = $this->cache->getVar($this->URI_Document, 'Foafpress', time()-filectime($file), 0)))
         {
@@ -370,6 +413,21 @@ class Foafpress extends SandboxPlugin
         
         return;
     }
+
+    public function set_URI_Document($file)
+    {
+        // get url of rdf document
+        $this->URI_Document = 'http://'.$_SERVER['SERVER_NAME'].str_replace(BASEDIR, BASEURL, $file);
+
+        if ($this->URI_Request && $this->extensiontype)
+        {
+            $this->URI_Document = $this->URI_Request;
+        }
+
+        $this->addLogMessage('Set URI for document to: '.$this->URI_Document);
+
+        return;
+    }
     
     /**
      * Resolve best resource from request
@@ -429,15 +487,9 @@ class Foafpress extends SandboxPlugin
     
     protected function isExportRequest()
     {
-        // if one of the RDF types is requested with q=1 then forward location to file
-        if ($this->URI_Request && !$this->extensiontype && $type = $this->isRequestType(array_keys($this->config['types'])))
-        {
-            //die($this->URI_Request.' '.$type.' '.$this->URI_Request.$this->config['types'][$type]);
-            //die('Location: '.$this->URI_Request.$this->config['types'][$type]);
-            //header('Location: '.$this->URI_Document, true, 301); exit();
-            header('Location: '.$this->URI_Request.$this->config['types'][$type], true, 301); exit();
-        }
-        
+        // if one of the application types is requested with q=1 then forward location to file
+        $this->RedirectToUrlByContentNegotiation();
+
         // if RDF file is requested directly and the client can work with the
         // application type (or file extensions imply export, see Foafpress
         // config) then set export=true
@@ -475,6 +527,17 @@ class Foafpress extends SandboxPlugin
         
         return false;
        
+    }
+
+    public function RedirectToUrlByContentNegotiation()
+    {
+        // if one of the application types is requested with q=1 then forward location to file
+        if ($this->URI_Request && !$this->extensiontype && $type = $this->isRequestType(array_keys($this->config['types'])))
+        {
+            header('Location: '.$this->URI_Request.$this->config['types'][$type], true, 301); exit();
+        }
+
+        return;
     }
     
     protected function isRequestType(Array $types, $soft = false)
@@ -572,6 +635,13 @@ class Foafpress extends SandboxPlugin
         echo $this->arc2_resource->$exportfunction[$requesttype]($this->arc2_resource->index);
         exit();
 
+    }
+
+    public function addLogMessage($msg)
+    {
+        $msg = $msg.' -- memory '.intval(memory_get_usage(true)/1024).'kb';
+        $this->sandbox->pm->publish('sandbox_add_log_message', $msg);
+        return;
     }
 
     public function print_r($array)

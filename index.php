@@ -39,13 +39,13 @@ $c['plugin']['folder'][] = './../../../libraries/';
 $c['plugin']['folder'][] = './../../../core/';
 
 // load plugins at start
+$c['plugin']['load'][] = './i18n/LanguageChecker';
+$c['plugin']['load'][] = './debug/DebugLog';
 $c['plugin']['load'][] = './Foafpress';
 $c['plugin']['load'][] = './hooks/ActivityFlickr';
 $c['plugin']['load'][] = './hooks/ActivityIdentica';
 $c['plugin']['load'][] = './hooks/ActivityTwitter';
 $c['plugin']['load'][] = './hooks/ActivityGoogle';
-$c['plugin']['load'][] = './i18n/LanguageChecker';
-$c['plugin']['load'][] = './debug/DebugLog';
 
 // caching
 if ($production) if (!@$c['cache']['age']) $c['cache']['age'] = 60 * 60; // cache time in seconds
