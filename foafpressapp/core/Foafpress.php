@@ -207,8 +207,7 @@ class Foafpress extends SandboxPlugin
                 return;
         }
 
-        // TODO: send 404 if no file/resource is available
-        die($file.' is not found!');
+        $this->dieWithHttpErrorCode($this->URI_Request.' is not found', 404);
         
         return;
     }
@@ -357,8 +356,8 @@ class Foafpress extends SandboxPlugin
         }
         else
         {
-            // TODO: throw exception
-            die('Foafpress'.$template_type.'.php not found!');
+            // TODO: line?
+            $this->dieWithException('Foafpress'.$template_type.'.php not found!');
         }
 
         // use ns:concept to set template and controller
@@ -375,8 +374,8 @@ class Foafpress extends SandboxPlugin
             }
             else
             {
-                // TODO: throw exception
-                die($FP->ns_prefix.DIRECTORY_SEPARATOR.$concept.$template_type.'.php not found!');
+                // TODO: line?
+                $this->dieWithException($FP->ns_prefix.DIRECTORY_SEPARATOR.$concept.$template_type.'.php not found!');
             }
             
             // try to set controller
@@ -387,7 +386,7 @@ class Foafpress extends SandboxPlugin
                 
                 if (!isset($_SERVER['REQUEST_METHOD']) || !$_SERVER['REQUEST_METHOD'])
                 {
-                    throw new Exception('Empty request method!'); // TODO http error code
+                    $this->dieWithHttpErrorCode('Empty request method!', 503); // TODO is 503 right?
                 }
                 elseif (in_array($_SERVER['REQUEST_METHOD'], $this->config['supportedmethods']))
                 {
@@ -401,7 +400,7 @@ class Foafpress extends SandboxPlugin
                 }
                 else
                 {
-                    throw new Exception($_SERVER['REQUEST_METHOD'].' is not supported here!'); // TODO http error code
+                    $this->dieWithHttpErrorCode($_SERVER['REQUEST_METHOD'].' is not supported here!', 503); // TODO is 503 right?
                 }
             }
             catch(Exception $e)
@@ -634,6 +633,29 @@ class Foafpress extends SandboxPlugin
         header('Content-Type: '.$requesttype, true, 200);
         echo $this->arc2_resource->$exportfunction[$requesttype]($this->arc2_resource->index);
         exit();
+
+    }
+
+    public function dieWithHttpErrorCode($message = null, $http_error_code = 0)
+    {
+        if (!$message || !$http_error_code)
+        {
+            throw new Exception('Need status message and HTTP error code! Message: '.$message.' / Code: '.$http_error_code);
+        }
+
+        header("HTTP/1.0 ".$http_error_code, true, $http_error_code);
+        die('<h1>'.$message.'</h1>');
+
+    }
+
+    public function dieWithException($message = null)
+    {
+        if (!$message)
+        {
+            throw new Exception('Need error message! Message: '.$message);
+        }
+
+        throw new Exception($message); // TODO insert line where the exception was triggered
 
     }
 
