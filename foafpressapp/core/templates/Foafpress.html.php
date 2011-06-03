@@ -96,6 +96,6 @@
 </html>
 <?php
 
-$this->cache->saveOutput($this->file.serialize($this->pm->Foafpress->languageStackPreferences));
+$this->cache->saveOutput($this->file.serialize($this->pm->Foafpress->languageStackPreferences).$this->pm->Foafpress->extensiontype);
 
 ?>
