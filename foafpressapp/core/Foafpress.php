@@ -533,6 +533,7 @@ class Foafpress extends SandboxPlugin
         // if one of the application types is requested with q=1 then forward location to file
         if ($this->URI_Request && !$this->extensiontype && $type = $this->isRequestType(array_keys($this->config['types'])))
         {
+            header('Content-Type: '.$type, true, 301);
             header('Location: '.$this->URI_Request.$this->config['types'][$type], true, 301); exit();
         }
 
