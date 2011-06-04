@@ -533,8 +533,13 @@ class Foafpress extends SandboxPlugin
         // if one of the application types is requested with q=1 then forward location to file
         if ($this->URI_Request && !$this->extensiontype && $type = $this->isRequestType(array_keys($this->config['types'])))
         {
-            header('Content-Type: '.$type, true, 301);
-            header('Location: '.$this->URI_Request.$this->config['types'][$type], true, 301); exit();
+            // change from 301 to 303, @see http://www4.wiwiss.fu-berlin.de/bizer/pub/LinkedDataTutorial/#Terminology
+            header('Content-Type: '.$type, true, 303);
+            // using the vary header because Foafpress can deliver different stuff for a resource
+            // @see http://www4.wiwiss.fu-berlin.de/bizer/pub/LinkedDataTutorial/#ExampleHTTP
+            header('Vary: Accept', true, 303);
+            // set the location where the redirect leads to
+            header('Location: '.$this->URI_Request.$this->config['types'][$type], true, 303); exit();
         }
 
         return;
