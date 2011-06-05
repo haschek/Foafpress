@@ -109,6 +109,14 @@ class Foafpress extends SandboxPlugin
     // event listener for "sandbox_parse_start"
     public function CheckCache($filename)
     {
+        // only do this, if the requested apptype is know
+        if (!isset($this->extensiontype)) return;
+
+        $apptypes_with_store_exporters = $this->arc2_exportfunctions;
+        // do not doing this cache before post processing stuff, if the triple
+        // store api is doing its own output serialization
+        if (isset($apptypes_with_store_exporters[$this->arc2_exportfunctions])) return;
+
         $this->addLogMessage('Check cache for '.$filename);
 
         // get preferenced laguage stack from LanguageChecker plugin
