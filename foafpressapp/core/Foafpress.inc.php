@@ -92,11 +92,11 @@ class Foafpress_Controller extends SandboxPlugin
             'css' => 'unknown_Unknown'
         );
         
-        if (isset($this->RESOURCE->resource->index[$this->RESOURCE->uri]['http://www.w3.org/1999/02/22-rdf-syntax-ns#type']))
+        if (isset($resource->resource->index[$resource->uri]['http://www.w3.org/1999/02/22-rdf-syntax-ns#type']))
         {
-            $type['uri'] = $this->RESOURCE->resource->index[$this->RESOURCE->uri]['http://www.w3.org/1999/02/22-rdf-syntax-ns#type'][0]['value'];
+            $type['uri'] = $resource->resource->index[$resource->uri]['http://www.w3.org/1999/02/22-rdf-syntax-ns#type'][0]['value'];
             $add_colon = create_function('$namespace', 'return $namespace.":";');
-            $type['short'] = str_replace($this->RESOURCE->resource->ns, array_map($add_colon, array_keys($this->RESOURCE->resource->ns)), $type['uri']);
+            $type['short'] = str_replace($resource->resource->ns, array_map($add_colon, array_keys($resource->resource->ns)), $type['uri']);
             $type['css'] = str_replace(':', '_', $type['short']);
         }
         
