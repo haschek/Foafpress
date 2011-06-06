@@ -115,7 +115,7 @@ class Foafpress extends SandboxPlugin
         $apptypes_with_store_exporters = $this->arc2_exportfunctions;
         // do not doing this cache before post processing stuff, if the triple
         // store api is doing its own output serialization
-        if (isset($apptypes_with_store_exporters[$this->arc2_exportfunctions])) return;
+        if (isset($apptypes_with_store_exporters[$this->extensiontype])) return;
 
         $this->addLogMessage('Check cache for '.$filename);
 
