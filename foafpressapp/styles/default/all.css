@@ -65,7 +65,8 @@
         padding:1em 0;
     }
 
-    body.foaf_Person #header .page_margins
+    body.foaf_Person #header .page_margins,
+    body.foaf_Group #header .page_margins
     {
         position:relative;
     }
@@ -113,7 +114,8 @@
         padding:1em 2em;
     }
 
-    body.foaf_Person .page_margins
+    body.foaf_Person .page_margins,
+    body.foaf_Group .page_margins
     {
         max-width:84em;
     }

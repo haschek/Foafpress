@@ -22,4 +22,10 @@
         visibility:visible;
     }
 
+    #ribbon_foaf_Group
+    {
+        background-image:url(./ribbons/foaf_Group.png);
+        visibility:visible;
+    }
+
 }
