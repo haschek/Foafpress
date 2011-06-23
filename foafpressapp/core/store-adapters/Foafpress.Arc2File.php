@@ -148,7 +148,7 @@ class Foafpress_Resource_Arc2File extends ARC2File_Template_Object
     
     public function getImage(Array $predicates = array(), $useThumbnail = null)
     {
-        if (!is_array($predicates) || count($predicates) == 0) $predicates = array('foaf_depiction', 'foaf_img');
+        if (!is_array($predicates) || count($predicates) == 0) $predicates = array('foaf_depiction', 'foaf_img', 'foaf_logo');
         if ($useThumbnail == null) $useThumnail = false;
         
         //die('<pre>'.print_r(parent::getImage($predicates, $useThumbnail), true).'</pre>');
