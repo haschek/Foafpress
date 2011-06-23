@@ -165,6 +165,21 @@
 # $c['Foafpress']['LinkedData']['cachetime'] = -1; // one time cache, no invalidation, default: 7 days
 # $c['Foafpress']['Activity']['cachetime'] = 2 * 60 * 60;  // 2 hours, default: 6 hours
 
+/* -- Enable post output processing --------------------------------------------
+ *
+ * If you enable this, Faofpress will use old output caches to serve the request
+ * instantly, but keeps running to do all the time-consuming data aggregations
+ * after this output, and creating a new cache what can served to the next user.
+ * This is done for performance issues because without post output processing
+ * the user must wait until Foafpress updated all data caches.
+ *
+ * Be aware that this process experimental, usually it should work in most
+ * browsers but it could have problems with some other (older) browser clients.
+ * That is the reason why it is turned off by default.
+ */
+
+# $c['Foafpress']['enableOutputPostprocessing'] = true; // default: false
+
 /* -- Ignore resources ---------------------------------------------------------
  *
  * You may want Foafpress to ignore some resources because you want to use them

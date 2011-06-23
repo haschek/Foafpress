@@ -483,6 +483,13 @@ class Foafpress extends SandboxPlugin
         {
             return $this->arc2_resource->index[$checkTopicOfUri]['http://xmlns.com/foaf/0.1/primaryTopic'][0]['value'];
         }
+        elseif (($index_resource_uris = array_keys($this->arc2_resource->index)) &&
+                is_array($index_resource_uris) &&
+                isset($index_resource_uris[0]))
+        {
+            // fallback: return uri of the resource what is found first
+            return $index_resource_uris[0];
+        }
         else
         {
             // last fallback, use url of requested rdf document
@@ -666,7 +673,7 @@ class Foafpress extends SandboxPlugin
     {
         if (!$message)
         {
-            throw new Exception('Need error message! Message: '.$message);
+            throw new Exception('Need error message!');
         }
 
         throw new Exception($message); // TODO insert line where the exception was triggered
