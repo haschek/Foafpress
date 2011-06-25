@@ -37,7 +37,8 @@ $c['types'] = array(
         'text/turtle' => '.tt',
         /*'text/n3' => '.n3',*/
         'text/plain' => '.nt',
-        'application/xhtml+xml' => '.html'
+        'application/xhtml+xml' => '.html',
+        'application/rss+xml' => '.rss'
 );
 
 $c['typefallback'] = 'application/xhtml+xml';
