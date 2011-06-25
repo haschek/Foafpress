@@ -22,15 +22,22 @@
                 </div>
                 <div class="c60r">
                     <div class="subcr sidecontent">
+                        <?php if (isset($this->content->CONTENT)) : ?>
+                        <div class="subcolumns">
+                            <h2>About</h2>
+                            <?php echo $this->content->CONTENT ?>
+                        </div>
+                        <?php endif ?>
+
                         <div class="subcolumns">
                             <?php
-                            
+
                             if (isset($this->content->list_of_contacts))
                             {
                                 $this->templatePartial('vcard/VCard.html', array('contacts'=>$this->content->list_of_contacts));
                                 unset($this->content->list_of_contacts);
                             }
-                            
+
                             ?>
                         </div>
                         <?php
