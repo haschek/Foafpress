@@ -5,7 +5,7 @@ $this->cache->recordOutput();
 echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
 
 ?>
-<rss version="2.0"
+<rss version="2.0" xmlns="http://backend.userland.com/rss2"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
 	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"

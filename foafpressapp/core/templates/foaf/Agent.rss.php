@@ -1,12 +1,12 @@
 <?php
 
 $updates = $this->content->activity;
+// die(print_r($updates, true));
 
 foreach ($updates['stream'] as $update)
 {
 
     $update = $update['contentarray_origin'];
-    // die(print_r($updates, true));
 
     echo "\t\t".'<item>'.PHP_EOL;
 
