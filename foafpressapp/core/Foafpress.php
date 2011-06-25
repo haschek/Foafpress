@@ -488,8 +488,15 @@ class Foafpress extends SandboxPlugin
                 is_array($index_resource_uris) &&
                 isset($index_resource_uris[0]))
         {
-            // fallback: return uri of the resource what is found first
-            return $index_resource_uris[0];
+            // fallback: use resource resource what is found first
+            if (isset($this->arc2_resource->index[$index_resource_uris[0]]['http://xmlns.com/foaf/0.1/primaryTopic']))
+            {
+                return $this->arc2_resource->index[$index_resource_uris[0]]['http://xmlns.com/foaf/0.1/primaryTopic'][0]['value'];
+            }
+            else
+            {
+                return $index_resource_uris[0];
+            }
         }
         else
         {
