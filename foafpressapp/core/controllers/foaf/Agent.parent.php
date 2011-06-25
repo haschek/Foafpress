@@ -16,6 +16,7 @@ class Foaf_Agent_Controller_Parent extends Foafpress_Controller
         // TODO: problems if URI_Document != xml:base in RDF file
         $this->content->META_TITLE = $this->RESOURCE->getLiteral(array('rdfs_label', 'dc_title'));
         $this->content->META_DESCRIPTION = $this->RESOURCE->getLiteral(array('rdfs_comment', 'dc_description'));
+        $this->content->CONTENT = $this->RESOURCE->getLiteral(array('content_encoded', 'sioc_content'));
         $this->RESOURCE->uri = $resource_uri; // restore uri of resource
 
         // -- Alternate meta links to RDF data ---------------------------------
@@ -177,7 +178,6 @@ class Foaf_Agent_Controller_Parent extends Foafpress_Controller
 
     public function read_interests($resource = null)
     {
-
         // -- Interests --------------------------------------------------------
 
         if (!$resource) $resource = $this->RESOURCE;
