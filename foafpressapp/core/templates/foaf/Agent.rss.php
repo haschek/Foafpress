@@ -38,7 +38,7 @@ foreach ($updates['stream'] as $update)
         echo "\t\t\t".'<sioc:has_creator>'.$update['http://rdfs.org/sioc/ns#has_creator'][0]['value'].'</sioc:has_creator>'.PHP_EOL;
 
     if (isset($update['http://purl.org/rss/1.0/modules/content/encoded']))
-        echo "\t\t\t".'<content:encoded><![CDATA['.PHP_EOL.$update['http://purl.org/rss/1.0/modules/content/encoded'][0]['value'].PHP_EOL']]></content:encoded>'.PHP_EOL;
+        echo "\t\t\t".'<content:encoded><![CDATA['.PHP_EOL.$update['http://purl.org/rss/1.0/modules/content/encoded'][0]['value'].PHP_EOL.']]></content:encoded>'.PHP_EOL;
 
     if (isset($update['http://purl.org/dc/elements/1.1/format']))
         echo "\t\t\t".'<dc:format>'.$update['http://purl.org/dc/elements/1.1/format'][0]['value'].'</dc:format>'.PHP_EOL;
