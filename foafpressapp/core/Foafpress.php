@@ -168,6 +168,7 @@ class Foafpress extends SandboxPlugin
             ob_end_clean();
             header("Connection: close");
             header("Content-Encoding: none");
+            header('Content-Type: '.$this->extensiontype.'; charset=UTF-8');
             ignore_user_abort(true); // optional
             ob_start();
             echo $cachedOutput;

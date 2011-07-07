@@ -5,7 +5,7 @@ $this->cache->recordOutput();
 echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
 
 ?>
-<rss version="2.0" xmlns="http://backend.userland.com/rss2"
+<rss version="2.0"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
 	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -15,7 +15,8 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
 
     <channel>
         <title><?php echo ($this->content->META_TITLE)?htmlspecialchars(trim($this->content->META_TITLE), ENT_COMPAT, 'UTF-8'):'No Title'; ?></title>
-        <!-- link></link -->
+        <link><?php echo substr($this->pm->Foafpress->URI_Document, 0, -1*strlen($this->pm->Foafpress->config['types'][$this->pm->Foafpress->extensiontype])); ?></link>
+        <atom:link href="<?php echo $this->pm->Foafpress->URI_Document; ?>" rel="self" type="<?php echo $this->pm->Foafpress->extensiontype; ?>" />
         <description><?php echo ($this->content->META_DESCRIPTION)?htmlspecialchars(trim($this->content->META_DESCRIPTION), ENT_QUOTES, 'UTF-8'):''; ?></description>
         <!-- pubDate></pubDate -->
         <generator>http://foafpress.org/</generator>

@@ -31,14 +31,26 @@ foreach ($updates['stream'] as $update)
     if (isset($update['http://purl.org/dc/elements/1.1/source']))
         echo "\t\t\t".'<dc:source>'.$update['http://purl.org/dc/elements/1.1/source'][0]['value'].'</dc:source>'.PHP_EOL;
 
-    if (isset($update['http://purl.org/rss/1.0/description']))
-        echo "\t\t\t".'<description>'.$update['http://purl.org/rss/1.0/description'][0]['value'].'</description>'.PHP_EOL;
-
     if (isset($update['http://rdfs.org/sioc/ns#has_creator']))
         echo "\t\t\t".'<sioc:has_creator>'.$update['http://rdfs.org/sioc/ns#has_creator'][0]['value'].'</sioc:has_creator>'.PHP_EOL;
 
+    if (isset($update['http://purl.org/rss/1.0/description']))
+    {
+        echo "\t\t\t".'<description><![CDATA['.PHP_EOL.trim(strip_tags($update['http://purl.org/rss/1.0/description'][0]['value'])).']]></description>'.PHP_EOL;
+    }
+    elseif (isset($update['http://purl.org/rss/1.0/modules/content/encoded']))
+    {
+        echo "\t\t\t".'<description><![CDATA['.PHP_EOL.trim(strip_tags($update['http://purl.org/rss/1.0/modules/content/encoded'][0]['value'])).']]></description>'.PHP_EOL;
+    }
+
     if (isset($update['http://purl.org/rss/1.0/modules/content/encoded']))
+    {
         echo "\t\t\t".'<content:encoded><![CDATA['.PHP_EOL.$update['http://purl.org/rss/1.0/modules/content/encoded'][0]['value'].PHP_EOL.']]></content:encoded>'.PHP_EOL;
+    }
+    elseif (isset($update['http://purl.org/rss/1.0/description']))
+    {
+        echo "\t\t\t".'<content:encoded><![CDATA['.PHP_EOL.$update['http://purl.org/rss/1.0/description'][0]['value'].PHP_EOL.']]></content:encoded>'.PHP_EOL;
+    }
 
     if (isset($update['http://purl.org/dc/elements/1.1/format']))
         echo "\t\t\t".'<dc:format>'.$update['http://purl.org/dc/elements/1.1/format'][0]['value'].'</dc:format>'.PHP_EOL;
@@ -47,6 +59,15 @@ foreach ($updates['stream'] as $update)
     if (isset($update['']))
         echo "\t\t\t".'<>'.$update[''][0]['value'].'</>'.PHP_EOL;
     */
+
+    if (isset($update['http://purl.org/rss/1.0/guid']))
+    {
+        echo "\t\t\t".'<guid isPermaLink="false">'.$update['http://purl.org/rss/1.0/guid'][0]['value'].'</guid>'.PHP_EOL;
+    }
+    else
+    {
+        echo "\t\t\t".'<guid isPermaLink="false">'.md5(serialize($update)).'</guid>'.PHP_EOL;
+    }
 
     echo "\t\t".'</item>'.PHP_EOL;
 
