@@ -37,11 +37,11 @@ $c['types'] = array(
         'text/turtle' => '.tt',
         /*'text/n3' => '.n3',*/
         'text/plain' => '.nt',
-        'application/xhtml+xml' => '.html',
+        'text/html' => '.html', // application/xhtml+xml
         'application/rss+xml' => '.rss'
 );
 
-$c['typefallback'] = 'application/xhtml+xml';
+$c['typefallback'] = 'text/html'; // application/xhtml+xml
 
 $c['extensiontoexport'] = true;
 
