@@ -72,6 +72,9 @@
 .to-google_com, .from-google_com { background-image:url(./../../libraries/komodo/google_16.png); }
 .big-icons .to-google_com, .big-icons .from-google_com { background-image:url(./../../libraries/komodo/google_32.png); }
 
+.to-plus_google_com, .from-plus_google_com { background-image:url(./../../libraries/komodo/google_plus_16.png); }
+.big-icons .to-plus_google_com, .big-icons .from-plus_google_com { background-image:url(./../../libraries/komodo/google_plus_32.png); }
+
 .to-gowalla_com, .from-gowalla_com { background-image:url(./../../libraries/komodo/gowalla_16.png); }
 .big-icons .to-gowalla_com, .big-icons .from-gowalla_com { background-image:url(./../../libraries/komodo/gowalla_32.png); }
 
