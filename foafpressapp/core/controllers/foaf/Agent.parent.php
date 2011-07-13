@@ -115,7 +115,7 @@ class Foaf_Agent_Controller_Parent extends Foafpress_Controller
             if (is_object($website_object) && ($label = $website_object->getLiteral(array('rdfs_label', 'dc_title'))))
             {
                 $list_of_websites[] = array(
-                    'source-icon-class' => $website_object->getIconLayout($website_object->uri),
+                    'source-icon-class' => $website_object->getIconLayout($website_object->uri, true),
                     'url' => $website_object->uri,
                     'label' => $label
                 );
@@ -148,7 +148,7 @@ class Foaf_Agent_Controller_Parent extends Foafpress_Controller
                 ($account_label = $account_page[0]->getLiteral(array('rdfs_label', 'dc_title'))))
             {
                 $list_of_accounts[] = array(
-                    'source-icon-class' => $account_object->getIconLayout($account_page[0]->uri),
+                    'source-icon-class' => $account_object->getIconLayout($account_page[0]->uri, true),
                     'homepage-url' => $account_page[0]->uri,
                     'homepage-label' => $account_label
                 );

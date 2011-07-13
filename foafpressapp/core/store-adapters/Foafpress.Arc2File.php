@@ -118,7 +118,7 @@ class Foafpress_Resource_Arc2File extends ARC2File_Template_Object
         
         foreach ($activity['stream'] as $i => $item)
         {
-            $activity['stream'][$i]['cssclass'] = 'to-from from-'.$this->getIconLayout($item['source']).' to-'.$this->getIconLayout($item['link']);
+            $activity['stream'][$i]['cssclass'] = 'to-from '.$this->getIconLayout($item['source'], true, 'from-').' '.$this->getIconLayout($item['link'], true, 'to-');
             $this->spcms_pm->publish('foafpress_activity_from_'.$this->getIconLayout($item['source']), $activity['stream'][$i]);
             $this->spcms_pm->publish('foafpress_activity_to_'.$this->getIconLayout($item['link']), $activity['stream'][$i]);
         }
@@ -155,10 +155,23 @@ class Foafpress_Resource_Arc2File extends ARC2File_Template_Object
         
         return parent::getImage($predicates, $useThumbnail);
     }
-    
-    public function getIconLayout($uri)
+
+    // TODO: replace qucikhack by clean solution
+    public function getIconLayout($uri, $incl_subdomain_quickhack = false, $direction_prefix = 'to-')
     {
-        return str_replace('.', '_', implode('.', array_slice(explode('.', parse_url($uri, PHP_URL_HOST)), -2)));
+        $classname_subdomain = str_replace('.', '_', implode('.', array_slice(explode('.', parse_url($uri, PHP_URL_HOST)), -3)));
+        $classname_domain = str_replace('.', '_', implode('.', array_slice(explode('.', parse_url($uri, PHP_URL_HOST)), -2)));
+
+        if ($incl_subdomain_quickhack)
+        {
+            if ($classname_domain != $classname_subdomain)
+            {
+                return $direction_prefix.$classname_domain.' '.$direction_prefix.$classname_subdomain;
+            }
+            return $direction_prefix.$classname_domain;
+        }
+
+        return $classname_domain;
     }
 
     /* Write message to log
