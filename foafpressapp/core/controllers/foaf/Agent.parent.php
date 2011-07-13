@@ -313,23 +313,23 @@ class Foaf_Agent_Controller_Parent extends Foafpress_Controller
         {
             foreach ($list_of_contact_objects[$VCard_place]['adr'] as $adr_object)
             {
-                if ($extended_address = $adr_object->getLiteral(array('vcard_extended-address')))
-                {
-                    $list_of_contacts[$VCard_place]['Address'][] = $extended_address;
-                }
-                else
-                {
-                    $adrparts = array();
-                    $adrparts[] = ($pobox = $adr_object->getLiteral(array('vcard_post-office-box'))) ? 'P.O.Box '.$pobox : $adr_object->getLiteral(array('vcard_street-address'));
-                    if ($postalcode = $adr_object->getLiteral(array('vcard_postal-code'))) $adrparts[] = $postalcode;
-                    if ($locality = $adr_object->getLiteral(array('vcard_locality'))) $adrparts[] = $locality;
-                    if ($region = $adr_object->getLiteral(array('vcard_region'))) $adrparts[] = $region;
-                    if ($country = $adr_object->getLiteral(array('vcard_country-name'))) $adrparts[] = $country;
 
-                    if (count($adrparts) > 0)
-                    {
-                        $list_of_contacts[$VCard_place]['Address'][] = implode(', ', $adrparts);
-                    }
+                $adrparts = array();
+
+                // addressparts	= PO Box, Extended Addr, Street, Locality, Region, Postal Code, Country Name
+                // @see http://www.imc.org/pdi/vcard-21.txt
+
+                if ($pobox = $adr_object->getLiteral(array('vcard_post-office-box'))) $adrparts[] = 'P.O.Box '.$pobox;
+                if ($extended_address = $adr_object->getLiteral(array('vcard_extended-address'))) $adrparts[] = $extended_address;
+                if ($street = $adr_object->getLiteral(array('vcard_street-address'))) $adrparts[] = $street;
+                if ($locality = $adr_object->getLiteral(array('vcard_locality'))) $adrparts[] = $locality;
+                if ($region = $adr_object->getLiteral(array('vcard_region'))) $adrparts[] = $region;
+                if ($postalcode = $adr_object->getLiteral(array('vcard_postal-code'))) $adrparts[] = $postalcode;
+                if ($country = $adr_object->getLiteral(array('vcard_country-name'))) $adrparts[] = $country;
+
+                if (count($adrparts) > 0)
+                {
+                    $list_of_contacts[$VCard_place]['Address'][] = implode(', ', $adrparts);
                 }
 
                 unset($adr_object);
