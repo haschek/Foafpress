@@ -39,8 +39,9 @@ $c['plugin']['folder'][] = './../../../libraries/';
 $c['plugin']['folder'][] = './../../../core/';
 
 // load plugins at start
-$c['plugin']['load'][] = './i18n/LanguageChecker';
 $c['plugin']['load'][] = './debug/DebugLog';
+$c['plugin']['load'][] = './i18n/LanguageChecker';
+// $c['plugin']['load'][] = './renderer/FilterBasicLiquid';
 $c['plugin']['load'][] = './Foafpress';
 $c['plugin']['load'][] = './hooks/ActivityFlickr';
 $c['plugin']['load'][] = './hooks/ActivityIdentica';

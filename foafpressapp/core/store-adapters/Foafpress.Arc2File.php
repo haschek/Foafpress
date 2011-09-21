@@ -135,12 +135,7 @@ class Foafpress_Resource_Arc2File extends ARC2File_Template_Object
         elseif (count($languages) == 0 && $this->spcms_pm->isActive('LanguageChecker'))
         {
             // get preferenced laguage stack from LanguageChecker plugin
-            $languages = array_unique(
-                            array_merge(
-                                $this->spcms_pm->LanguageChecker->getUserPreferences(),
-                                $this->spcms_pm->LanguageChecker->getLanguageStack()
-                            )
-                         );
+            $languages = $this->spcms_pm->LanguageChecker->getLanguageStackMergedFromUserAndApplication();
         }
         
         return parent::getLiteral($predicates, $languages, $strict);

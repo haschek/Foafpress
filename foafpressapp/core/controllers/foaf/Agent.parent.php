@@ -182,7 +182,7 @@ class Foaf_Agent_Controller_Parent extends Foafpress_Controller
 
         if (!$resource) $resource = $this->RESOURCE;
 
-        $list_of_interest_objects = $resource->interest;
+        $list_of_interest_objects = $resource->interest; // TODO: merge with foaf:topic_interest
         $list_of_interests = array();
 
         foreach ($list_of_interest_objects as $interest_object)

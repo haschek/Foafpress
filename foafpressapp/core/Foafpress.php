@@ -123,12 +123,7 @@ class Foafpress extends SandboxPlugin
         // get preferenced laguage stack from LanguageChecker plugin
         if ($this->pm->isActive('LanguageChecker'))
         {
-            $this->languageStackPreferences = array_unique(
-                            array_merge(
-                                $this->pm->LanguageChecker->getUserPreferences(),
-                                $this->pm->LanguageChecker->getLanguageStack()
-                            )
-                         );
+            $this->languageStackPreferences = $this->pm->LanguageChecker->getLanguageStackSimplified(true);
         }
         else
         {
@@ -138,7 +133,7 @@ class Foafpress extends SandboxPlugin
         $cachedOutput = false;
 
         // check cache before doing anything
-        if ($validCachedOutput = $this->cache->getVar($filename.serialize($this->languageStackPreferences).$this->extensiontype))
+        if ($validCachedOutput = $this->cache->getVar($filename.$this->languageStackPreferences.$this->extensiontype))
         {
             $cachedOutput = $validCachedOutput;
             $this->addLogMessage('Found valid cache.');
@@ -146,7 +141,7 @@ class Foafpress extends SandboxPlugin
         }
         elseif (defined('IS_PRODUCTION_INSTANCE') && IS_PRODUCTION_INSTANCE === true)
         {
-            $cachedOutput = $this->cache->getVar($filename.serialize($this->languageStackPreferences).$this->extensiontype, null, -1);
+            $cachedOutput = $this->cache->getVar($filename.$this->languageStackPreferences.$this->extensiontype, null, -1);
             if ($cachedOutput)
             {
                 $this->addLogMessage('Use invalid cache.');
@@ -687,13 +682,6 @@ class Foafpress extends SandboxPlugin
 
         throw new Exception($message); // TODO insert line where the exception was triggered
 
-    }
-
-    public function addLogMessage($msg)
-    {
-        $msg = $msg.' -- memory '.intval(memory_get_usage(true)/1024).'kb';
-        $this->sandbox->pm->publish('sandbox_add_log_message', $msg);
-        return;
     }
 
     public function print_r($array)
