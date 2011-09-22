@@ -1,7 +1,8 @@
 <?php
 
 $this->cache->recordOutput();
-setlocale (LC_ALL, explode(',', $this->pm->Foafpress->languageStackPreferences));
+// setlocale (LC_ALL, explode(',', $this->pm->Foafpress->languageStackPreferences));
+// die(setlocale (LC_ALL, 0));
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -11,7 +12,7 @@ setlocale (LC_ALL, explode(',', $this->pm->Foafpress->languageStackPreferences))
         $this->content->FPTPLURL = str_replace(BASEDIR, BASEURL, realpath(dirname(__FILE__)).'/../../styles');
     ?>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <!-- meta http-equiv="content-language" content="de" / -->
+    <meta http-equiv="content-language" content="<?php echo $this->content->MAINLANGUAGE; ?>" />
     <meta http-equiv="content-style-type" content="text/css" />
     <title><?php echo ($this->content->META_TITLE)?htmlspecialchars(trim($this->content->META_TITLE), ENT_COMPAT, 'UTF-8'):'No Title'; ?></title>
     <meta name="description" content="<?php echo ($this->content->META_DESCRIPTION)?htmlspecialchars(trim($this->content->META_DESCRIPTION), ENT_QUOTES, 'UTF-8'):''; ?>" />

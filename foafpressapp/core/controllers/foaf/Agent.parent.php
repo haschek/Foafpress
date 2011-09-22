@@ -17,6 +17,8 @@ class Foaf_Agent_Controller_Parent extends Foafpress_Controller
         $this->content->META_TITLE = $this->RESOURCE->getLiteral(array('rdfs_label', 'dc_title'));
         $this->content->META_DESCRIPTION = $this->RESOURCE->getLiteral(array('rdfs_comment', 'dc_description'));
         $this->content->CONTENT = $this->RESOURCE->getLiteral(array('content_encoded', 'sioc_content'));
+        $languages_user = $this->pm->LanguageChecker->getLanguageStackSimplified();
+        $this->content->MAINLANGUAGE = array_shift($languages_user);
         $this->RESOURCE->uri = $resource_uri; // restore uri of resource
 
         // -- Alternate meta links to RDF data ---------------------------------

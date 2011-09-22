@@ -11,6 +11,7 @@ if (isset($activity['stream']) && is_array($activity['stream']) && count($activi
         echo '<li class="'.$item['cssclass'].'">';
         echo '<em class="hideme">'.$activity['feeds'][$item['source']].':</em> ';
         echo $item['output'].' ('.date('Y-m-d', $item['date']).')';
+        //echo $item['output'].' ('.$this->content->filterVar($item['date'], array('date_to_long_string')).')';
         echo '</li>'.PHP_EOL;
         
         unset($item);
