@@ -133,7 +133,7 @@ class Foafpress extends SandboxPlugin
         $cachedOutput = false;
 
         // check cache before doing anything
-        if ($validCachedOutput = $this->cache->getVar($filename.$this->languageStackPreferences.$this->extensiontype))
+        if ($validCachedOutput = $this->cache->getVar($filename.$this->extensiontype, 'FoafpressOutput_'.str_replace(',', '_', $this->languageStackPreferences)))
         {
             $cachedOutput = $validCachedOutput;
             $this->addLogMessage('Found valid cache.');
@@ -141,7 +141,7 @@ class Foafpress extends SandboxPlugin
         }
         elseif (defined('IS_PRODUCTION_INSTANCE') && IS_PRODUCTION_INSTANCE === true)
         {
-            $cachedOutput = $this->cache->getVar($filename.$this->languageStackPreferences.$this->extensiontype, null, -1);
+            $cachedOutput = $this->cache->getVar($filename.$this->extensiontype, 'FoafpressOutput_'.str_replace(',', '_', $this->languageStackPreferences), -1);
             if ($cachedOutput)
             {
                 $this->addLogMessage('Use invalid cache.');

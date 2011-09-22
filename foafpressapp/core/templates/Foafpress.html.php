@@ -98,6 +98,6 @@ $this->cache->recordOutput();
 </html>
 <?php
 
-$this->cache->saveOutput($this->file.$this->pm->Foafpress->languageStackPreferences.$this->pm->Foafpress->extensiontype);
+$this->cache->saveOutput($this->pm->Foafpress->extensiontype, 'FoafpressOutput_'.str_replace(',', '_', $this->pm->Foafpress->languageStackPreferences));
 
 ?>
