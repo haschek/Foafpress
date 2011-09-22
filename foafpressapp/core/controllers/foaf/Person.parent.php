@@ -169,7 +169,7 @@ class Foaf_Person_Controller_Parent extends Foaf_Agent_Controller_Parent
                         'homepage_link' => null, 'homepage_label' => null,
                         'weblog_link' => null, 'weblog_label' => null,
                         'resource_link' => null, 'resource_label' => $person_name.' (FOAF)',
-                        'depiction' =>'<span class="nodepiction">&nbsp;</span>'
+                        'depiction' =>'<span class="nodepiction"> </span>'
                     );
 
                     if (($person_homepage = $person_object->foaf_homepage) && isset($person_homepage[0]))

@@ -1,5 +1,6 @@
     <div id="header">
         <div class="page_margins">
+            <div class="supercontent">
             <?php
             echo '<h1>'.($this->content->name_or_nickname?$this->content->name_or_nickname:'No Name/Nickname found').'</h1>'.PHP_EOL;
             echo $this->content->depiction?'<div class="depiction">'.$this->content->depiction.'</div>'.PHP_EOL:null;
@@ -7,10 +8,12 @@
             if ($this->content->list_of_websites) $this->templatePartial('foaf/_websites.html', array('list_of_websites'=>$this->content->list_of_websites));
             if ($this->content->list_of_accounts) $this->templatePartial('foaf/_accounts.html', array('list_of_accounts'=>$this->content->list_of_accounts));
             ?>
+            </div>
         </div>
     </div> <!-- /#header -->
     <div id="main">
         <div class="page_margins page">
+            <hr class="topseparation"/>
             <div class="subcolumns">
                 <div class="c40l">
                     <div class="subcl">
@@ -21,7 +24,7 @@
                     </div>
                 </div>
                 <div class="c60r">
-                    <div class="subcr sidecontent">
+                    <div class="subcr subcontent">
                         <?php if (isset($this->content->CONTENT)) : ?>
                         <div class="subcolumns">
                             <h2>About</h2>

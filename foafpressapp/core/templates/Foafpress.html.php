@@ -1,8 +1,7 @@
 <?php
 
 $this->cache->recordOutput();
-// setlocale (LC_ALL, explode(',', $this->pm->Foafpress->languageStackPreferences));
-// die(setlocale (LC_ALL, 0));
+$this->pm->LanguageChecker->setlocale(LC_ALL ^ LC_MESSAGES, array('.utf8', ''));
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -69,9 +68,10 @@ $this->cache->recordOutput();
             }
         ?>
         <div class="page_margins">
+            <div class="subcontent">
             <p><strong>This is a <a href="<?php echo $this->content->resource_type_info['uri']; ?>"><?php echo $this->content->resource_type_info['short']; ?></a>
             rendered by <a href="http://foafpress.org/">Foafpress</a></strong>,
-            using <a href="http://code.google.com/p/sandbox-publisher-cms/">SPCMS</a>,
+            using <a href="http://eye48.com/go/spcms">SPCMS</a>,
             <a href="http://arc.semsol.org/">ARC 2</a>,
             <a href="http://www.yaml.de/">YAML</a><!--,
             <a href="http://jquery.com/">jQuery</a> -->
@@ -90,6 +90,7 @@ $this->cache->recordOutput();
                     echo '</p>'.PHP_EOL;
                 }
             ?>
+            </div>
         </div>
     </div> <!-- /#footer -->
 
@@ -98,6 +99,6 @@ $this->cache->recordOutput();
 </html>
 <?php
 
-$this->cache->saveOutput($this->pm->Foafpress->extensiontype, 'FoafpressOutput_'.str_replace(',', '_', $this->pm->Foafpress->languageStackPreferences));
+$this->cache->saveOutput($this->pm->Foafpress->filename, 'FoafpressOutput_'.str_replace(',', '_', $this->pm->Foafpress->languageStackPreferences));
 
 ?>
