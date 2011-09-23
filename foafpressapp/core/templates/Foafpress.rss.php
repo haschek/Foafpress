@@ -28,5 +28,5 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
 </rss>
 
 <?php
-$this->cache->saveOutput($this->file.$this->pm->Foafpress->languageStackPreferences.$this->pm->Foafpress->extensiontype);
+$this->cache->saveOutput($this->pm->Foafpress->filename, 'FoafpressOutput_'.str_replace(',', '_', $this->pm->Foafpress->languageStackPreferences));
 ?>
