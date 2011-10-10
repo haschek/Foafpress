@@ -1,13 +1,14 @@
 default:
-	@echo "make targets:"
-	@echo " - libraries:        clone all needed libraries"
-	@echo " - cache             chmod cachdir"
-	@echo " - arc2|rdfto|spcms: clone a specific libraries"
-	@echo " - enable-modules:   enable apache modules (sudo needed)"
+	@echo "options:"
+	@echo "make install:          prepare Foafpress install (make cachedir writeable, get all libraries)"
+	@echo "make getlibs:          clone all libraries (arc2, rdfto, spcms)"
+	@echo "make caching:          make cachedir writeable"
+	@echo "make arc2|rdfto|spcms: clone a specific libraries"
+	@echo "make enable-modules:   enable apache modules (sudo needed)"
 
-install: cache libraries
+install: caching getlibs
 
-cache:
+caching:
 	chmod 777 cache
 
 libraries: arc2 rdfto spcms
