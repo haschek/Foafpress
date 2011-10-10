@@ -56,7 +56,8 @@
 	<foaf:interest rdf:resource="http://dbpedia.org/resource/Bundesdruckerei"/>
 	<foaf:interest rdf:resource="http://dbpedia.org/resource/Cheque_guarantee_card"/>
 
-    <foaf:depiction dc:description="Desiré Jeanette (Picture)" rdf:resource="http://akziv.de/haupt/erika/Mustermann_Erika_geb_12.08.1964_2001.jpg"/>
+    <!-- foaf:depiction dc:description="Desiré Jeanette (Picture)" rdf:resource="http://akziv.de/haupt/erika/Mustermann_Erika_geb_12.08.1964_2001.jpg"/ -->
+    <foaf:depiction dc:description="Picture dummy of Desiré Jeanette (by Greg Peverill-Conti)" rdf:resource="http://farm7.static.flickr.com/6163/6147167672_aaf34198d6.jpg" rdfs:seeAlso="http://www.flickr.com/photos/gregpc/6147167672"/>
 
     <!-- foaf:homepage>
         <foaf:Document rdf:about=""> 
