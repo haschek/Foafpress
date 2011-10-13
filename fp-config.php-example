@@ -175,10 +175,9 @@
  *
  * Be aware that this process experimental, usually it should work in most
  * browsers but it could have problems with some other (older) browser clients.
- * That is the reason why it is turned off by default.
  */
 
-# $c['Foafpress']['enableOutputPostprocessing'] = true; // default: false
+# $c['Foafpress']['enableOutputPostprocessing'] = false; // default: true
 
 /* -- Ignore resources ---------------------------------------------------------
  *

@@ -77,7 +77,7 @@ $c['Ribbon'] = true;
 /* as long as the problem caching/postprocessing/contentnegotiation is not fixed
    postprocessing is turned off default */
 
-$c['enableOutputPostprocessing'] = false;
+$c['enableOutputPostprocessing'] = true;
 
 // -- TODO: Future Plans -------------------------------------------------------
 
