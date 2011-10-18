@@ -218,7 +218,7 @@ h1, h2, h3, h4
 }
 
 h1 { font-size:1.6176em; line-height:1.0000; margin-bottom: 0.5000em; }
-h2 { font-size:1.2353em; line-height:1.3095; margin-bottom: 0.6547em; }
+h2 { font-size:1.2353em; line-height:1.3095; margin-bottom: 0.6547em; font-weight: normal; }
 h3 { text-transform: uppercase; }
 h3, h4
 { font-size:1.0000em; line-height:1.6176; margin-bottom: 0.8088em; }
