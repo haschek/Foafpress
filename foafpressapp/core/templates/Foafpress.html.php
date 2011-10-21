@@ -69,15 +69,7 @@ $this->pm->LanguageChecker->setlocale(LC_ALL ^ LC_MESSAGES, array('.utf8', ''));
         ?>
         <div class="page_margins">
             <div class="subcontent">
-            <p><strong>This is a <a href="<?php echo $this->content->resource_type_info['uri']; ?>"><?php echo $this->content->resource_type_info['short']; ?></a>
-            rendered by <a href="http://foafpress.org/">Foafpress</a></strong>,
-            using <a href="http://eye48.com/go/spcms">SPCMS</a>,
-            <a href="http://arc.semsol.org/">ARC 2</a>,
-            <a href="http://www.yaml.de/">YAML</a><!--,
-            <a href="http://jquery.com/">jQuery</a> -->
-            and <a href="http://www.komodomedia.com/download/#social-network-icon-pack">Komodo SNIP</a>.
-            <a id="jointhesemweblogo" href="http://www.w3.org/2001/sw/" title="W3C Semantic Web Logo (Join the Semantic Web!)"><span class="hideme">Join the Semantic Web!</span></a></p>
-            <?php
+                <?php
                 if ($this->content->ALLOW_RDF_DOWNLOAD)
                 {
                     echo '<p>Show resource as ';
@@ -89,7 +81,17 @@ $this->pm->LanguageChecker->setlocale(LC_ALL ^ LC_MESSAGES, array('.utf8', ''));
                     echo implode(', ', $alt_rdf_downloads);
                     echo '</p>'.PHP_EOL;
                 }
-            ?>
+                ?>
+                <p>
+                    <strong>This is a <a href="<?php echo $this->content->resource_type_info['uri']; ?>"><?php echo $this->content->resource_type_info['short']; ?></a>
+                    rendered by <a href="http://foafpress.org/">Foafpress</a></strong>,
+                    using <a href="http://eye48.com/go/spcms">SPCMS</a>,
+                    <a href="http://arc.semsol.org/">ARC 2</a>,
+                    <a href="http://www.yaml.de/">YAML</a><!--,
+                    <a href="http://jquery.com/">jQuery</a> -->
+                    and <a href="http://www.komodomedia.com/download/#social-network-icon-pack">Komodo SNIP</a>.
+                    <a id="jointhesemweblogo" href="http://www.w3.org/2001/sw/" title="W3C Semantic Web Logo (Join the Semantic Web!)"><span class="hideme">Join the Semantic Web!</span></a>
+                </p>
             </div>
         </div>
     </div> <!-- /#footer -->

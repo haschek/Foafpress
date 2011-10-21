@@ -143,10 +143,12 @@ body.foaf_Group .page_margins
 {
     position:relative;
     min-height:96px;
+    padding-top: 4.8528em;
+    padding-bottom: 4.8528em;
 }
 
 #footer a { color: #fff; }
-#footer p { margin: 0; padding:0.9991em 100px 0.9991em 0; }
+#footer p { margin: 0; padding:0.9991em 30% 0.9991em 0; }
 
 #jointhesemweblogo
 {
@@ -154,7 +156,8 @@ body.foaf_Group .page_margins
     width:82px; height:96px;
     background:url(./images/logo-semantic-web-cube.png) no-repeat center transparent;
     position:absolute;
-    top:1.25em; right:2.5em;
+    top:50%; right:15%;
+    margin:-48px -41px 0 0;
 }
 
 /* -- 1.4. Helper ------------------------------------------------------- */
