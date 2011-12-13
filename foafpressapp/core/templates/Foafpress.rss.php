@@ -14,10 +14,10 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
 >
 
     <channel>
-        <title><?php echo ($this->content->META_TITLE)?htmlspecialchars(trim($this->content->META_TITLE), ENT_COMPAT, 'UTF-8'):'No Title'; ?></title>
-        <link><?php echo substr($this->pm->Foafpress->URI_Document, 0, -1*strlen($this->pm->Foafpress->config['types'][$this->pm->Foafpress->extensiontype])); ?></link>
-        <atom:link href="<?php echo $this->pm->Foafpress->URI_Document; ?>" rel="self" type="<?php echo $this->pm->Foafpress->extensiontype; ?>" />
-        <description><?php echo ($this->content->META_DESCRIPTION)?htmlspecialchars(trim($this->content->META_DESCRIPTION), ENT_QUOTES, 'UTF-8'):''; ?></description>
+        <title><?php echo ($this->content->META_TITLE)?$this->content->META_TITLE('xml_escape', 'trim'):'No Title'; ?></title>
+        <link><?php echo $this->content->filterVar(substr($this->pm->Foafpress->URI_Document, 0, -1*strlen($this->pm->Foafpress->config['types'][$this->pm->Foafpress->extensiontype])), array('xml_escape', 'trim')); ?></link>
+        <atom:link href="<?php echo $this->content->filterVar($this->pm->Foafpress->URI_Document, array('xml_escape', 'trim')); ?>" rel="self" type="<?php echo $this->content->filterVar($this->pm->Foafpress->extensiontype, array('xml_escape', 'trim')); ?>" />
+        <description><?php echo ($this->content->META_DESCRIPTION)?$this->content->META_DESCRIPTION('xml_escape', 'trim'):''; ?></description>
         <!-- pubDate></pubDate -->
         <generator>http://foafpress.org/</generator>
         <!-- language></language -->
