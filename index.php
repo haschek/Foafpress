@@ -25,7 +25,7 @@ $production = false;
 // do not use predefined DOCUMENT_ROOT b/c problems on Apache servers what are
 // configured with virtual mass hosting.
 // Does it harm other server environments?
-$_SERVER['DOCUMENT_ROOT'] = str_ireplace($_SERVER['SCRIPT_NAME'], '', $_SERVER['SCRIPT_FILENAME']);
+$_SERVER['DOCUMENT_ROOT'] = str_ireplace($_SERVER['SCRIPT_NAME'], '', realpath($_SERVER['SCRIPT_FILENAME']));
 
 // include user configuration
 if (file_exists(dirname(__FILE__).'/fp-config.php') && is_readable(dirname(__FILE__).'/fp-config.php')) {

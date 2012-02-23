@@ -1,14 +1,14 @@
 <?php
 
 $this->cache->recordOutput();
-$this->pm->LanguageChecker->setlocale(LC_ALL ^ LC_MESSAGES, array('.utf8', ''));
+$this->pm->LanguageChecker->setlocale(LC_ALL, array('.utf8', '')); // ^ LC_MESSAGES array('.UTF-8', '.UTF8', '.utf-8', '.utf8', '')
 
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <?php
         // add some folder uris
-        $this->content->FPTPLURL = str_replace(BASEDIR, BASEURL, realpath(dirname(__FILE__)).'/../../styles');
+        $this->content->FPTPLURL = str_replace(BASEDIR, BASEURL, dirname(__FILE__).'/../../styles');
     ?>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="content-language" content="<?php echo $this->content->MAINLANGUAGE; ?>" />
