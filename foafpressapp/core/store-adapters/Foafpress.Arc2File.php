@@ -13,10 +13,19 @@ class Foafpress_Resource_Arc2File extends ARC2File_Template_Object
     public $FP_config = array();
     public $logUsage = array();
 
+    public $cache_space_prefix = 'Foafpress';
+
     public $templateImage = '<img src="##URL##" alt="##DESC##"/>';
     
+    public $user_agent_string = 'User-Agent: Foafpress/ARC Reader (+http://foafpress.org/botinfo.html)';
+
     public function __construct(Array $environment)
     {
+        if (defined('BASEURL') && defined('SERVER_BASE'))
+        {
+            $this->user_agent_string = 'User-Agent: Foafpress/ARC Reader (+'.rtrim(SERVER_BASE, '/').BASEURL.'botinfo.php)';
+        }
+
         $this->FP_config = $environment['FP_config'];
         $this->spcms_pm = $environment['spcms_pm'];
         $this->spcms_cache = $environment['spcms_cache'];
@@ -28,7 +37,7 @@ class Foafpress_Resource_Arc2File extends ARC2File_Template_Object
         $this->ignoreUris = $this->FP_config['LinkedData']['ignoreResources'];
 
         $this->cacheTimeActivity = $this->FP_config['Activity']['cachetime'];
-        
+
         return;
     }
     
