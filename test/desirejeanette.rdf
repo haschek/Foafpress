@@ -25,14 +25,14 @@
         Lifestream, Interests, Projects, Network
     </dc:description>
     <foaf:maker rdf:resource="http://michael.haschke.biz/"/>
-    <foaf:primaryTopic rdf:resource="http://localhost/foafpress/test/desirejeanette"/>
-    <admin:errorReportsTo rdf:resource="http://bitbucket.org/haschek/foafpress/issues"/>
+    <foaf:primaryTopic rdf:resource="#"/>
+    <admin:errorReportsTo rdf:resource="https://github.com/haschek/Foafpress/issues"/>
 	<dc:date>2011-04-02 17:06:20 +0100 </dc:date>
 </foaf:PersonalProfileDocument>
 
 <!-- Me ____________________________________________________________________ -->
 
-<foaf:Person rdf:about="http://localhost/foafpress/test/desirejeanette">
+<foaf:Person rdf:about="#">
 
     <!-- owl:sameAs rdf:resource="" / -->
 
@@ -127,8 +127,8 @@
     
     <!-- Social Network ____________________________________________________ -->
 
-	<foaf:knows rdf:resource="http://localhost/foafpress/test/johndoe" />
 	<foaf:knows rdf:resource="http://dbpedia.org/resource/Jane_Doe" />
+	<foaf:knows rdf:resource="johndoe.rdf#" />
 	<foaf:knows rdf:resource="http://michael.haschke.biz/" />
 
 
