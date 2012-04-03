@@ -125,6 +125,9 @@
 
 /* Extension for Komodo */
 
+.to-geekli_st, .from-geekli_st { background-image:url(./komodo-icon-extensions/geeklist_16.png); }
+.big-icons .to-geekli_st, .big-icons .from-geekli_st { background-image:url(./komodo-icon-extensions/geeklist_32.png); }
+
 .to-github_com, .from-github_com { background-image:url(./komodo-icon-extensions/github_16.png); }
 .big-icons .to-github_com, .big-icons .from-github_com { background-image:url(./komodo-icon-extensions/github_32.png); }
 
