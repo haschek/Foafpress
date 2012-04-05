@@ -1,6 +1,6 @@
 <?php
 
-header('Content-Type: application/rss+xml; charset=UTF-8', true);
+// header('Content-Type: application/rss+xml; charset=UTF-8', true);
 $this->cache->recordOutput();
 echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
 
