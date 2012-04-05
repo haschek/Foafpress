@@ -86,6 +86,7 @@ class Foafpress extends SandboxPlugin
             $this->pm->subscribe('sandbox_parse_start', $this, 'CheckCache');
         }
         $this->pm->subscribe('sandbox_parse_end', $this, 'LoadResourceFromFile');
+        $this->pm->subscribe('sandbox_flush_start', $this, 'sendHttpHeaders'); // called manually here
 
         return;
     }
@@ -152,6 +153,8 @@ class Foafpress extends SandboxPlugin
 
         if ($cachedOutput)
         {
+            $this->pm->unsubscribe('sandbox_flush_start', $this, 'sendHttpHeaders'); // called manually here
+
             /*
                 experimental enabling of post output processing
                 why: aggregating feeds and linked data is a performance issue
@@ -165,12 +168,13 @@ class Foafpress extends SandboxPlugin
             ob_end_clean();
             header("Connection: close");
             header("Content-Encoding: none");
-            header('Content-Type: '.$this->extensiontype.'; charset=UTF-8');
+            // header('Content-Type: '.$this->extensiontype.'; charset=UTF-8');
             ignore_user_abort(true); // optional
             ob_start();
             echo $cachedOutput;
             $size = ob_get_length();
             header("Content-Length: $size");
+            $this->sendHttpHeaders();
             ob_end_flush();     // Strange behaviour, will not work
             flush();            // Unless both are called !
             ob_end_clean();
@@ -322,7 +326,8 @@ class Foafpress extends SandboxPlugin
         {
             if (isset($this->arc2_exportfunctions[$exporttype]))
             {
-                $this->exportRdfData($exporttype);
+                // $this->exportRdfData($exporttype);
+                $this->exportRdfData();
             }
             else
             {
@@ -443,6 +448,83 @@ class Foafpress extends SandboxPlugin
      */
     protected function ResolveResourceRequest()
     {
+        /* -- new code -- */
+
+        /* Create a stack of possible URIs what may used to describe
+         * a resource in the file. Use the invers algorithm from method creating
+         * the file name. Check the file resource index for that URIs and return
+         * the first match.
+         *
+         * Example:
+         *
+         * If http://example.org/me is requested:
+         * - what leads to http://example.org/me.html (URI_Document) by content negotiation
+         * - what may be dscribed in var/www/example.org/me.nt (http://example.org/me.nt)
+         * all those URIs will be tested for availability in file resource index.
+         */
+
+        /*
+
+        $stackOfUris = array();
+
+        $stackOfUris[] = $this->URI_Document; // cannot be null
+
+        foreach ($this->config['types'] as $fileExtension)
+        {
+            if (substr($this->URI_Document, -1 * strlen($fileExtension)) == $fileExtension)
+            {
+                $URI_Document_without_extension = substr($this->URI_Document, 0, -1 * strlen($fileExtension));
+                $stackOfUris[] = $URI_Document_without_extension;
+            }
+        }
+
+        foreach ($this->config['types'] as $fileExtension)
+        {
+            $stackOfUris[] = $URI_Document_without_extension . $fileExtension;
+        }
+
+        $DirectoryIndexes = explode(' ', $this->config['DirectoryIndex']);
+
+        foreach ($DirectoryIndexes as $directoryIndex)
+        {
+            if (substr($URI_Document_without_extension, -1 * strlen($directoryIndex)) == $directoryIndex)
+            {
+                $URI_Document_without_index = substr($URI_Document_without_extension, 0, -1 * strlen($directoryIndex));
+                $stackOfUris[] = $URI_Document_without_index;
+            }
+        }
+
+        if ($this->URI_Request !== null && !$this->extensiontype)
+        {
+            // initially requested resource
+            $stackOfUris[] = $this->URI_Request;
+        }
+
+        if ($xmlbase = stripos($this->content->SANDBOX, 'xml:base="'))
+        {
+            // no statement in index, check for xml:base definition
+
+            $baseStart = substr($this->content->SANDBOX, $xmlbase+10);
+            $xmlbase = substr($baseStart, 0, strpos($baseStart, '"'));
+
+            $stackOfUris[] = $xmlbase;
+        }
+
+        $stackOfUris = array_unique($stackOfUris);
+
+        foreach ($stackOfUris as $resource)
+        {
+            if (isset($this->arc2_resource->index[$resource]))
+            {
+                return $resource;
+            }
+        }
+        // $this->print_r($stackOfUris);
+        
+        */
+
+        /* -- old code -- */
+
         $uri = $this->URI_Request;
 
         // requested URI is described in document
@@ -633,15 +715,11 @@ class Foafpress extends SandboxPlugin
 
     }
 
-    public function exportRdfData($type = null)
+    public function sendHttpHeaders()
     {
-        $exportfunction = $this->arc2_exportfunctions;
+        $requesttype = false;
 
-        if ($type)
-        {
-            $requesttype = $type;
-        }
-        elseif ($this->extensiontype)
+        if ($this->extensiontype)
         {
             $requesttype = $this->extensiontype;
         }
@@ -657,7 +735,23 @@ class Foafpress extends SandboxPlugin
             }
         }
 
-        header('Content-Type: '.$requesttype, true, 200);
+        if ($requesttype && isset($this->config['http_headers'][$requesttype]))
+        {
+            foreach ($this->config['http_headers'][$requesttype] as $header_key=>$header_value)
+            {
+                header($header_key.': '.$header_value, true);
+            }
+        }
+
+        return $requesttype;
+    }
+
+    public function exportRdfData()
+    {
+        $exportfunction = $this->arc2_exportfunctions;
+
+        // header('Content-Type: '.$requesttype, true, 200);
+        $requesttype = $this->sendHttpHeaders();
         echo $this->arc2_resource->$exportfunction[$requesttype]($this->arc2_resource->index);
         exit();
 

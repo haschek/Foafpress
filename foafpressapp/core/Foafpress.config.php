@@ -28,22 +28,56 @@ $c['ns']      = array(
 
 // -- Supported HTTP Methods ---------------------------------------------------
 
-$c['supportedmethods'] = array('GET', 'POST', 'HEAD', 'PUT', 'DELETE', 'TRACE', 'OPTIONS');
+$c['supportedmethods'] = array('GET'); // array('GET', 'POST', 'HEAD', 'PUT', 'DELETE', 'TRACE', 'OPTIONS');
 
 // -- Supported File Types -----------------------------------------------------
 
 $c['types'] = array(
-        'application/rdf+xml' => '.rdf',
-        'text/turtle' => '.tt',
-        /*'text/n3' => '.n3',*/
-        'text/plain' => '.nt',
-        'text/html' => '.html', // application/xhtml+xml
-        'application/rss+xml' => '.rss'
+    'text/html' => '.html',
+    // 'application/xhtml+xml' => '.html',
+    'application/rss+xml' => '.rss',
+    'application/rdf+xml' => '.rdf',
+    'text/turtle' => '.tt',
+    //'text/n3' => '.n3',
+    'text/plain' => '.nt',
 );
 
 $c['typefallback'] = 'text/html'; // application/xhtml+xml
 
 $c['extensiontoexport'] = true;
+
+// -- HTTP Headers in answer ---------------------------------------------------
+
+$c['http_headers'] = array(
+    'text/html' => array(
+        'Content-Type' => 'text/html; charset=UTF-8'
+    ),
+    'application/xhtml+xml' => array(
+        'Content-Type' => 'application/xhtml+xml; charset=UTF-8'
+    ),
+    'application/rss+xml' => array(
+        'Content-Type' => 'application/rss+xml; charset=UTF-8',
+        'X-Robots-Tag' => 'noindex'
+    ),
+    'application/rdf+xml' => array(
+        'Content-Type' => 'application/rdf+xml; charset=UTF-8',
+        'X-Robots-Tag' => 'noindex'
+    ),
+    'text/turtle' => array(
+        'Content-Type' => 'text/turtle; charset=UTF-8',
+        'X-Robots-Tag' => 'noindex'
+    ),
+    'text/plain' => array(
+        'Content-Type' => 'text/plain; charset=UTF-8',
+        'X-Robots-Tag' => 'noindex'
+    ),
+);
+
+// -- Store --------------------------------------------------------------------
+
+// TODO
+$c['store'] = 'Arc2File';
+$c['Arc2File']['publicdata'] = '.';
 
 // -- DirectoryIndex -----------------------------------------------------------
 
