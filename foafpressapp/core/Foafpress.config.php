@@ -4,6 +4,7 @@
 
 $c['ns']      = array(
     'admin'   => 'http://webns.net/mvcb/',
+    'atom'    =>  'http://www.w3.org/2005/Atom',
     'air'     => 'http://www.daml.org/2001/10/html/airport-ont#',
     'bio'     => 'http://purl.org/vocab/bio/0.1/',
     'cert'    => 'http://www.w3.org/ns/auth/cert#',
