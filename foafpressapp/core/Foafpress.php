@@ -360,38 +360,13 @@ class Foafpress extends SandboxPlugin
         // default namespace in Foafpress wrapper
         $concept = $FP->updateNamespacePrefix();
 
-        // set layout
-        if ($this->sandbox->templateSearch('Foafpress'.$template_type))
-        {
-            // change sandbox layout which was configured before
-            $this->sandbox->templateSetLayout('Foafpress'.$template_type);
-        }
-        else
-        {
-            // TODO: line?
-            $this->dieWithException('Foafpress'.$template_type.'.php not found!');
-        }
+        // use ns:concept to set controller, and fallbacks for layout and template
 
-        // use ns:concept to set template and controller
         if ($concept !== false && $FP->ns_prefix)
         {
 
-            // try to set template
-
-            // search for template, its name is namespace/concept.tpl
-            if ($this->sandbox->templateSearch($FP->ns_prefix.DIRECTORY_SEPARATOR.$concept.$template_type))
-            {
-                // change sandbox template which was configured before
-                $this->sandbox->templateSetName($FP->ns_prefix.DIRECTORY_SEPARATOR.$concept.$template_type);
-            }
-            else
-            {
-                // TODO: line?
-                $this->dieWithException($FP->ns_prefix.DIRECTORY_SEPARATOR.$concept.$template_type.'.php not found!');
-            }
-
             // try to set controller
-            //*
+
             try
             {
                 $action_controller_class_path = $this->pm->need($FP->ns_prefix.DIRECTORY_SEPARATOR.$concept);
@@ -408,6 +383,7 @@ class Foafpress extends SandboxPlugin
 
                     // execute controller request action with resource
                     $action_controller->add_resource_object($FP);
+                    $action_controller->set_template_extension($template_type);
                     $action_controller->$action_controller_use_method();
                 }
                 else
@@ -419,7 +395,52 @@ class Foafpress extends SandboxPlugin
             {
                 throw $e;
             }
-            // */
+
+            // set layout
+
+            if (isset($this->config['layout']))
+            {
+                $layoutfile = $this->config['layout'];
+            }
+            elseif ($this->sandbox->layoutname)
+            {
+                $layoutfile = $this->sandbox->layoutname;
+            }
+            else
+            {
+                $layoutfile = 'Foafpress';
+            }
+
+            if ($this->sandbox->templateSearch($layoutfile.$template_type))
+            {
+                // change sandbox layout which was configured before
+                $this->sandbox->templateSetLayout($layoutfile.$template_type);
+            }
+            else
+            {
+                // TODO: line?
+                $this->dieWithException($layoutfile.$template_type.'.php not found!');
+            }
+
+            // try to set template
+
+            if (!$this->sandbox->templatename)
+            {
+                // if not set then its name is namespace/concept.tpl
+                $templatefile = $FP->ns_prefix.DIRECTORY_SEPARATOR.$concept.$template_type;
+
+                if ($this->sandbox->templateSearch($templatefile))
+                {
+                    // change sandbox template which was configured before
+                    $this->sandbox->templateSetName($templatefile);
+                }
+                else
+                {
+                    // TODO: line?
+                    $this->dieWithException($templatefile.'.php not found!');
+                }
+            }
+
         }
 
         return;
@@ -448,8 +469,6 @@ class Foafpress extends SandboxPlugin
      */
     protected function ResolveResourceRequest()
     {
-        /* -- new code -- */
-
         /* Create a stack of possible URIs what may used to describe
          * a resource in the file. Use the invers algorithm from method creating
          * the file name. Check the file resource index for that URIs and return
@@ -462,8 +481,6 @@ class Foafpress extends SandboxPlugin
          * - what may be dscribed in var/www/example.org/me.nt (http://example.org/me.nt)
          * all those URIs will be tested for availability in file resource index.
          */
-
-        /*
 
         $stackOfUris = array();
 
@@ -510,6 +527,10 @@ class Foafpress extends SandboxPlugin
             $stackOfUris[] = $xmlbase;
         }
 
+        // add first uri in index stack
+        $uriStack = array_keys($this->arc2_resource->index);
+        $stackOfUris[] = array_shift($uriStack);
+
         $stackOfUris = array_unique($stackOfUris);
 
         foreach ($stackOfUris as $resource)
@@ -519,72 +540,6 @@ class Foafpress extends SandboxPlugin
                 return $resource;
             }
         }
-        // $this->print_r($stackOfUris);
-        
-        */
-
-        /* -- old code -- */
-
-        $uri = $this->URI_Request;
-
-        // requested URI is described in document
-
-        if ($uri !== null && !$this->extensiontype && isset($this->arc2_resource->index[$uri]))
-            return $uri;
-
-        // requested URI is not described, check the document to resolve resource
-
-        $uri = $this->URI_Document; // cannot be null
-
-        if (isset($this->arc2_resource->index[$uri]))
-        {
-            // we have statements about the document in the index
-
-            $checkTopicOfUri = $uri;
-        }
-        elseif ($xmlbase = stripos($this->content->SANDBOX, 'xml:base="'))
-        {
-            // no statement in index, check for xml:base definition
-
-            $baseStart = substr($this->content->SANDBOX, $xmlbase+10);
-            $xmlbase = substr($baseStart, 0, strpos($baseStart, '"'));
-
-            if (isset($this->arc2_resource->index[$xmlbase]))
-                $checkTopicOfUri = $xmlbase;
-        }
-
-        /*
-        echo '<pre>'.($xmlbase?$xmlbase:$uri)."\n".'</pre>';
-        echo '<pre>'.print_r($this->arc2_resource->index, true)."\n".'</pre>';
-        $this->print_r($this->arc2_resource->index[$checkTopicOfUri]['http://xmlns.com/foaf/0.1/primaryTopic']);
-        // */
-
-        // check base url for primaryTopic predicate
-        if (isset($checkTopicOfUri) && isset($this->arc2_resource->index[$checkTopicOfUri]['http://xmlns.com/foaf/0.1/primaryTopic']))
-        {
-            return $this->arc2_resource->index[$checkTopicOfUri]['http://xmlns.com/foaf/0.1/primaryTopic'][0]['value'];
-        }
-        elseif (($index_resource_uris = array_keys($this->arc2_resource->index)) &&
-                is_array($index_resource_uris) &&
-                isset($index_resource_uris[0]))
-        {
-            // fallback: use resource resource what is found first
-            if (isset($this->arc2_resource->index[$index_resource_uris[0]]['http://xmlns.com/foaf/0.1/primaryTopic']))
-            {
-                return $this->arc2_resource->index[$index_resource_uris[0]]['http://xmlns.com/foaf/0.1/primaryTopic'][0]['value'];
-            }
-            else
-            {
-                return $index_resource_uris[0];
-            }
-        }
-        else
-        {
-            // last fallback, use url of requested rdf document
-            return $uri;
-        }
-
-
     }
 
     protected function isExportRequest()

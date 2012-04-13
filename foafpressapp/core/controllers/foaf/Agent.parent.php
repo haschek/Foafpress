@@ -4,51 +4,15 @@ class Foaf_Agent_Controller_Parent extends Foafpress_Controller
 {
     public function get_request()
     {
+        // -- Prepare output ---------------------------------------------------
+
+        $this->write_mainlanguage_to_view();
+        $this->write_rdfmetalinks_to_view();
+        $this->set_resource_type_template();
+
         // -- Layout class -----------------------------------------------------
 
         $this->content->resource_type_info = $this->get_resource_type_info();
-
-        // -- Document Meta Data (for HTML Head) -------------------------------
-
-        // TODO: put this in its own foaf:Document controller
-        $resource_uri = $this->RESOURCE->uri; // save uri of shown resource
-        $this->RESOURCE->uri = $this->pm->load('Foafpress')->URI_Document; // use uri of resource container
-        // TODO: problems if URI_Document != xml:base in RDF file
-        $this->content->META_TITLE = $this->RESOURCE->getLiteral(array('rdfs_label', 'dc_title'));
-        $this->content->META_DESCRIPTION = $this->RESOURCE->getLiteral(array('rdfs_comment', 'dc_description'));
-        $this->content->CONTENT = $this->RESOURCE->getLiteral(array('content_encoded', 'sioc_content'));
-        $languages_user = $this->pm->LanguageChecker->getLanguageStackSimplified();
-        $this->content->MAINLANGUAGE = array_shift($languages_user);
-        $this->RESOURCE->uri = $resource_uri; // restore uri of resource
-
-        // -- Alternate meta links to RDF data ---------------------------------
-
-        // TODO: move this to a global parent controller
-        $alternate_meta_links = array();
-        $document_uri = $this->pm->load('Foafpress')->URI_Document;
-        $document_extensiontype = $this->pm->load('Foafpress')->extensiontype;
-        $application_types = $this->pm->load('Foafpress')->config['types'];
-        $this->content->ALLOW_RDF_DOWNLOAD = $this->pm->load('Foafpress')->config['extensiontoexport'];
-
-        foreach ($application_types as $type=>$ext)
-        {
-            if ($document_extensiontype !== $type)
-            {
-                $alternate_meta_links[] = array(
-                    'type'=> $type,
-                    'href'=> substr($document_uri, 0, -1*strlen($application_types[$document_extensiontype])).$ext
-                );
-            }
-            unset($type);
-            unset($ext);
-        }
-
-        $this->content->META_ALTERNATE_LINKS = $alternate_meta_links;
-
-        unset($alternate_meta_links);
-        unset($application_types);
-        unset($document_uri);
-        unset($document_extensiontype);
 
         $this->write_data_to_view();
 
@@ -86,6 +50,10 @@ class Foaf_Agent_Controller_Parent extends Foafpress_Controller
         // -- Projects ---------------------------------------------------------
 
         $this->read_contacts();
+
+        // -- Document Meta Data (for HTML Head) -------------------------------
+
+        $this->fill_document_meta();
 
     }
 
@@ -371,6 +339,19 @@ class Foaf_Agent_Controller_Parent extends Foafpress_Controller
 
         unset($list_of_contacts);
 
+    }
+
+    public function fill_document_meta()
+    {
+        if (!$this->content->META_TITLE)
+        {
+            $this->content->META_TITLE = $this->content->name_or_nickname;
+        }
+
+        if (!$this->content->META_DESCRIPTION)
+        {
+            $this->content->META_DESCRIPTION = $this->content->short_description;
+        }
     }
 
 }

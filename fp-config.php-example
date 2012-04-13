@@ -16,6 +16,8 @@
  * You need to uncomment the #lines you want to change. This file give some
  * examples and an indication about the default values.
  *
+ * You probably can directly go to the Foafpress section.
+ * 
  **/
 
 
@@ -54,7 +56,9 @@
  * This defines the template what is used to envelope all views. It must be
  * located in one of your configured template folders. Your template file name
  * must end with the .php extension but it will added automatically by
- * Foafpress/SPCMS. For example, configure 'Layout.html' to use 'Layout.html.php'
+ * Foafpress/SPCMS. Foafpress will add another suffix for the various content
+ * types: for example, configure 'Layout' to use 'Layout.html.php' or
+ * 'Layout.rss.php'
  */
 
 # $c['template']['layout'] = 'MyLayout.tpl'; // must be in your mytemplates folder
