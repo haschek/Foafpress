@@ -11,7 +11,7 @@ install: caching getlibs
 caching:
 	chmod 777 cache
 
-libraries: arc2 rdfto spcms
+getlibs: arc2 rdfto spcms
 
 enable-modules:
 	a2enmod negotiation
