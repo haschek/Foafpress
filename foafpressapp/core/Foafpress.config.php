@@ -40,7 +40,7 @@ $c['types'] = array(
     'application/rdf+xml' => '.rdf',
     'text/turtle' => '.tt',
     //'text/n3' => '.n3',
-    'text/plain' => '.nt',
+    //'text/plain' => '.nt',
 );
 
 $c['typefallback'] = 'text/html'; // application/xhtml+xml
