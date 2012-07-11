@@ -152,7 +152,13 @@ class Foaf_Agent_Controller_Parent extends Foafpress_Controller
 
         if (!$resource) $resource = $this->RESOURCE;
 
-        $list_of_interest_objects = $resource->interest; // TODO: merge with foaf:topic_interest
+        /*
+            it is strange but merging the array in inverse order seems
+            to lead to a corrumption of the foaf_topic_interests resources
+            and their properties.
+            $list_of_interest_objects = array_unique(array_merge($resource->foaf_interest, $resource->foaf_topic_interest));
+        */
+        $list_of_interest_objects = array_unique(array_merge($resource->foaf_topic_interest, $resource->foaf_interest));
         $list_of_interests = array();
 
         foreach ($list_of_interest_objects as $interest_object)
